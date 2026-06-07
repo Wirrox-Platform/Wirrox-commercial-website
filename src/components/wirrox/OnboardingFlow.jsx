@@ -113,87 +113,52 @@ export default function OnboardingFlow() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
 
-        {/* Header */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-28 items-start mb-16 lg:mb-20">
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <span style={{ width: 20, height: 1, backgroundColor: D.bronze, display: 'block' }} />
-              <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase' }}>
-                Client Onboarding
-              </span>
-            </div>
+        {/* Header — full width above */}
+        <div style={{ marginBottom: '3.5rem' }}>
+          <div className="flex items-center gap-3 mb-8">
+            <span style={{ width: 20, height: 1, backgroundColor: D.bronze, display: 'block' }} />
+            <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase' }}>
+              Client Onboarding
+            </span>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-28 items-end">
             <h2 style={{ color: D.ink, fontSize: 'clamp(1.9rem, 3.5vw, 3rem)', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.12 }}>
               From application
               <br />
               <span style={{ color: D.muted, fontWeight: 300 }}>to operational access</span>
             </h2>
-            <p style={{ color: D.muted, fontSize: '0.9375rem', lineHeight: 1.75, marginTop: '1.75rem', maxWidth: 380 }}>
+            <p style={{ color: D.muted, fontSize: '0.9375rem', lineHeight: 1.75, maxWidth: 420 }}>
               Every client follows the same structured review process. No shortcuts,
               no unreviewed access. The full journey from request to activation is
               tracked and visible at each stage.
             </p>
-
-            {/* Progress */}
-            <div style={{ marginTop: '2.5rem' }}>
-              <div style={{ height: 1, backgroundColor: D.rule, position: 'relative', overflow: 'hidden' }}>
-                <motion.div
-                  style={{ position: 'absolute', top: 0, left: 0, height: '100%', backgroundColor: D.bronze }}
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                />
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-                <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.2em', color: D.faint, textTransform: 'uppercase' }}>
-                  Progress
-                </span>
-                <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', color: D.bronze }}>
-                  {current + 1} / {steps.length}
-                </span>
-              </div>
-            </div>
           </div>
 
-          {/* Active step detail card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-              style={{
-                border: `1px solid ${D.bronze}`,
-                backgroundColor: D.bronzeSubtle,
-                padding: '2rem',
-              }}
-            >
-              <p style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
-                Step {steps[current].tag} · Active
-              </p>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: D.ink, marginBottom: 10 }}>
-                {steps[current].title}
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: D.muted, lineHeight: 1.7, marginBottom: 20 }}>
-                {steps[current].desc}
-              </p>
-              <div style={{ borderTop: `1px solid ${D.rule}`, paddingTop: 16 }}>
-                {steps[current].details.map((d) => (
-                  <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 0', borderBottom: `1px solid ${D.rule}` }}>
-                    <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.18em', color: D.faint, textTransform: 'uppercase' }}>
-                      {d.label}
-                    </span>
-                    <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', color: d.highlight ? D.green : D.muted }}>
-                      {d.val}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          {/* Progress bar */}
+          <div style={{ marginTop: '2rem' }}>
+            <div style={{ height: 1, backgroundColor: D.rule, position: 'relative', overflow: 'hidden' }}>
+              <motion.div
+                style={{ position: 'absolute', top: 0, left: 0, height: '100%', backgroundColor: D.bronze }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
+              <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.2em', color: D.faint, textTransform: 'uppercase' }}>
+                Progress
+              </span>
+              <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', color: D.bronze }}>
+                {current + 1} / {steps.length}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Step list */}
-        <div style={{ position: 'relative' }}>
+        {/* Step list + detail card side by side */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+          {/* Left — step timeline */}
+          <div style={{ position: 'relative' }}>
           {steps.map((step, i) => {
             const state = i < current ? 'done' : i === current ? 'active' : 'pending';
             return (
@@ -273,6 +238,58 @@ export default function OnboardingFlow() {
             );
           })}
         </div>
+
+          </div>{/* end left column */}
+
+          {/* Right — animated detail card */}
+          <div style={{ position: 'sticky', top: 120 }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ border: `1px solid ${D.bronze}`, backgroundColor: D.bronzeSubtle, padding: '2rem' }}
+              >
+                <p style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
+                  Step {steps[current].tag} · Active
+                </p>
+                <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: D.ink, marginBottom: 10 }}>
+                  {steps[current].title}
+                </h3>
+                <p style={{ fontSize: '0.875rem', color: D.muted, lineHeight: 1.7, marginBottom: 20 }}>
+                  {steps[current].desc}
+                </p>
+                <div style={{ borderTop: `1px solid ${D.rule}`, paddingTop: 16 }}>
+                  {steps[current].details.map((d) => (
+                    <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: `1px solid ${D.rule}` }}>
+                      <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.18em', color: D.faint, textTransform: 'uppercase' }}>
+                        {d.label}
+                      </span>
+                      <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', color: d.highlight ? D.green : D.muted }}>
+                        {d.val}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Step counter dots */}
+                <div style={{ display: 'flex', gap: 6, marginTop: 24 }}>
+                  {steps.map((_, i) => (
+                    <div key={i} onClick={() => setCurrent(i)} style={{
+                      width: i === current ? 16 : 6, height: 6,
+                      backgroundColor: i <= current ? D.bronze : D.rule,
+                      cursor: 'pointer',
+                      transition: 'all 0.3s',
+                    }} />
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>{/* end grid */}
 
         {/* Bottom note */}
         <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${D.rule}` }}>
