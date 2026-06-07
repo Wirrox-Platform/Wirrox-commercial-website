@@ -5,6 +5,7 @@ import Hero from "../components/wirrox/Hero";
 import WhatWeDo from "../components/wirrox/WhatWeDo";
 import CapabilityVisuals from "../components/wirrox/CapabilityVisuals";
 import HowItWorks from "../components/wirrox/HowItWorks";
+import OnboardingFlow from "../components/wirrox/OnboardingFlow";
 import WhyWirrox from "../components/wirrox/WhyWirrox";
 import Compliance from "../components/wirrox/Compliance";
 import UseCases from "../components/wirrox/UseCases";
@@ -22,6 +23,7 @@ export default function Home() {
         <WhatWeDo />
         <CapabilityVisuals />
         <HowItWorks />
+        <OnboardingFlow />
         <WhyWirrox />
         <Compliance />
         <UseCases />
