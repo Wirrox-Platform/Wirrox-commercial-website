@@ -5,10 +5,12 @@ import Security from './pages/Security';
 import About from './pages/About';
 import ForBusinesses from './pages/ForBusinesses';
 import PageNotFound from './lib/PageNotFound';
+import ScrollToTop from './components/wirrox/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/capabilities" element={<Capabilities />} />
