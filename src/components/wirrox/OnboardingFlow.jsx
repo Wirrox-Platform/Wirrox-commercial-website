@@ -237,8 +237,6 @@ export default function OnboardingFlow() {
               </div>
             );
           })}
-        </div>
-
           </div>{/* end left column */}
 
           {/* Right — animated detail card */}
