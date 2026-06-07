@@ -79,9 +79,9 @@ function PayoutFlowDiagram() {
           <polyline points="4,6 10,26 16,15 22,26 28,6"
             fill="none" stroke="currentColor" strokeWidth="2.4"
             strokeLinejoin="round" strokeLinecap="round" />
-          <line x1="9" y1="6" x2="23" y2="26"
+          <line x1="10" y1="6" x2="22" y2="26"
             stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
-          <line x1="23" y1="6" x2="9" y2="26"
+          <line x1="22" y1="6" x2="10" y2="26"
             stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
           <circle cx="16" cy="16" r="2" fill="currentColor" opacity="0.95" />
         </g>
