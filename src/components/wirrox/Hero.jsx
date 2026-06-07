@@ -42,7 +42,7 @@ export default function Hero() {
         <div className="absolute right-48 top-1/4 w-px h-48 bg-gradient-to-b from-transparent via-bronze/10 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-32 pb-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 pt-28 sm:pt-32 pb-20 sm:pb-24">
 
         {/* Eyebrow */}
         <motion.p
@@ -104,7 +104,7 @@ export default function Hero() {
 
         {/* Trust points */}
         <motion.div
-          className="mt-16 flex flex-wrap gap-x-8 gap-y-4"
+          className="mt-10 sm:mt-16 flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-3"
           {...fadeUp(0.75)}
         >
           {[
@@ -124,7 +124,7 @@ export default function Hero() {
 
         {/* Stats row */}
         <motion.div
-          className="mt-20 pt-10 border-t border-rule grid grid-cols-3 gap-8 max-w-xl"
+          className="mt-16 pt-8 border-t border-rule grid grid-cols-3 gap-4 sm:gap-8 max-w-xl"
           {...fadeUp(0.85)}
         >
           {[

@@ -111,6 +111,7 @@ export default function Compliance() {
               className="group p-7 lg:p-8 border-r border-b border-rule hover:bg-canvas transition-colors duration-400"
               style={{
                 borderRight: (i + 1) % 3 === 0 ? "none" : undefined,
+                borderBottom: i >= 3 ? "none" : undefined,
               }}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}

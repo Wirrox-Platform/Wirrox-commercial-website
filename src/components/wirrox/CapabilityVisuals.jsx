@@ -41,7 +41,7 @@ function PayoutFlowDiagram() {
   return (
     <div className="w-full overflow-x-auto">
       <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
-        className="w-full" style={{ minWidth: 560, maxHeight: 360 }}>
+        className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
 
         {/* ── SOURCE BOX ── */}
         <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104}
@@ -123,6 +123,53 @@ function PayoutFlowDiagram() {
           );
         })}
       </svg>
+    </div>
+  );
+}
+
+/* ─── Mobile Payout Flow (stacked) ──────────────────────────────── */
+function MobilePayoutFlow() {
+  return (
+    <div className="flex flex-col items-center gap-0">
+      {/* Source */}
+      <div className="border border-rule p-4 text-center w-full max-w-xs">
+        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Funding Account</p>
+        <p className="text-2xl font-semibold text-ink">$250,000</p>
+        <p className="text-[9px] font-mono text-muted-foreground opacity-50 mt-1">USD · Available</p>
+      </div>
+
+      {/* Arrow down */}
+      <div className="flex flex-col items-center py-1">
+        <div className="w-px h-6 bg-rule" />
+        <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
+      </div>
+
+      {/* WIRROX hub */}
+      <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-0.5">Infrastructure</p>
+        <p className="text-base font-black text-ink">WIRROX</p>
+        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze mt-0.5">Routing · Compliance</p>
+      </div>
+
+      {/* Arrow down */}
+      <div className="flex flex-col items-center py-1">
+        <div className="w-px h-6 bg-rule" />
+        <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
+      </div>
+
+      {/* Destinations grid */}
+      <div className="w-full grid grid-cols-2 gap-0 border border-rule">
+        {destinations.map((dest, i) => (
+          <div key={dest.label}
+            className="p-3 border-r border-b border-rule last:border-r-0 text-center"
+            style={{ borderRight: i % 2 === 1 ? "none" : undefined }}>
+            <p className="text-[8px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-1">
+              {dest.label}
+            </p>
+            <p className="text-sm font-semibold text-ink">{dest.amount}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -239,8 +286,8 @@ function DashboardPreview() {
   return (
     <div className="border border-rule overflow-hidden flex" style={{ minHeight: 420 }}>
 
-      {/* Sidebar */}
-      <div className="w-40 flex-shrink-0 border-r border-rule bg-canvas flex flex-col">
+      {/* Sidebar — hidden on mobile */}
+      <div className="hidden sm:flex w-40 flex-shrink-0 border-r border-rule bg-canvas flex-col">
         <div className="px-4 py-5 border-b border-rule">
           <p className="text-[13px] font-black tracking-[0.12em] text-ink">WIRROX</p>
           <p className="text-[8px] font-mono uppercase tracking-[0.25em] text-bronze mt-0.5">Treasury</p>
@@ -363,16 +410,25 @@ export default function CapabilityVisuals() {
 
         {/* Payout flow — full width */}
         <motion.div
-          className="border border-rule p-8 lg:p-14 bg-canvas mb-16"
+          className="border border-rule p-6 lg:p-14 bg-canvas mb-16"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-bronze mb-10">
+          <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-bronze mb-8 lg:mb-10">
             Payout Distribution — Live Flow
           </p>
-          <PayoutFlowDiagram />
+
+          {/* Desktop SVG diagram */}
+          <div className="hidden sm:block">
+            <PayoutFlowDiagram />
+          </div>
+
+          {/* Mobile stacked version */}
+          <div className="sm:hidden">
+            <MobilePayoutFlow />
+          </div>
         </motion.div>
 
         {/* Two columns */}

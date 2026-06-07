@@ -55,8 +55,35 @@ function ArchitectureDiagram() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
+      {/* Mobile stacked version */}
+      <div className="sm:hidden flex flex-col items-center py-10 px-6 gap-0">
+        <div className="text-center">
+          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Client</p>
+          <p className="text-base font-medium text-ink">Your Business</p>
+          <p className="text-xs text-muted-foreground">WIRROX-branded journey</p>
+        </div>
+        <div className="flex flex-col items-center py-2">
+          <div className="w-px h-8 bg-rule" />
+          <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
+        </div>
+        <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center">
+          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Infrastructure</p>
+          <p className="text-base font-black text-ink">WIRROX</p>
+        </div>
+        <div className="flex flex-col items-center py-2">
+          <div className="w-px h-8 bg-rule" />
+          <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
+        </div>
+        <div className="text-center">
+          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Execution</p>
+          <p className="text-base font-medium text-ink">Licensed Providers</p>
+          <p className="text-xs text-muted-foreground">Regulated financial institutions</p>
+        </div>
+      </div>
+
+      {/* Desktop SVG version */}
       <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
-        className="w-full" style={{ minWidth: 400, maxHeight: 160 }}>
+        className="hidden sm:block w-full" style={{ maxHeight: 160 }}>
 
         {/* ── CLIENT label + text ── */}
         <text x={leftX} y={midY - 18} fontSize={8.5}
@@ -127,6 +154,7 @@ function ArchitectureDiagram() {
 }
 
 export default function HowItWorks() {
+
   return (
     <section id="how-it-works" className="py-32 lg:py-40 border-t border-rule bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-16">
