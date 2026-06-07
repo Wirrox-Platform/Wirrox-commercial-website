@@ -180,13 +180,22 @@ function MobilePayoutFlow() {
         )}
       </svg>
 
-      {/* WIRROX hub */}
-      <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center w-full">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-0.5">
+      {/* WIRROX hub — WX icon */}
+      <div className="border border-bronze bg-bronze-subtle px-8 py-4 text-center w-full flex flex-col items-center gap-2">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">
           Infrastructure
         </p>
-        <p className="text-base font-black text-ink">WIRROX</p>
-        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze mt-0.5">
+        <svg width="32" height="32" viewBox="0 0 32 32" className="wx-icon">
+          <polyline points="4,6 10,26 16,15 22,26 28,6"
+            fill="none" stroke="currentColor" strokeWidth="2.4"
+            strokeLinejoin="round" strokeLinecap="round" />
+          <line x1="10" y1="6" x2="22" y2="26"
+            stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
+          <line x1="22" y1="6" x2="10" y2="26"
+            stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
+          <circle cx="16" cy="16" r="2" fill="currentColor" opacity="0.95" />
+        </svg>
+        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze">
           Routing · Compliance
         </p>
       </div>

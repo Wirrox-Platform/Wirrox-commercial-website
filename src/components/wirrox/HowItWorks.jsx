@@ -58,9 +58,9 @@ function MobileArchDiagram({ animKey }) {
           <polyline points="3,5 9,23 14,13 19,23 25,5"
             fill="none" stroke="currentColor" strokeWidth="2.2"
             strokeLinejoin="round" strokeLinecap="round" />
-          <line x1="6" y1="5" x2="22" y2="23"
+          <line x1="9" y1="5" x2="19" y2="23"
             stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
-          <line x1="22" y1="5" x2="6" y2="23"
+          <line x1="19" y1="5" x2="9" y2="23"
             stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
           <circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.95" />
         </svg>
