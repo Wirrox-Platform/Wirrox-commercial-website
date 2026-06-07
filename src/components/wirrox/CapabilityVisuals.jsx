@@ -497,7 +497,7 @@ export default function CapabilityVisuals() {
         </motion.div>
 
         {/* Two columns */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
 
           {/* Compliance */}
           <motion.div

@@ -155,10 +155,10 @@ export default function OnboardingFlow() {
         </div>
 
         {/* Step list + detail card side by side */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-          {/* Left — step timeline */}
-          <div style={{ position: 'relative' }}>
+          {/* Left — step timeline (below card on mobile) */}
+          <div style={{ position: 'relative' }} className="order-2 lg:order-1">
           {steps.map((step, i) => {
             const state = i < current ? 'done' : i === current ? 'active' : 'pending';
             return (
@@ -239,8 +239,8 @@ export default function OnboardingFlow() {
           })}
           </div>{/* end left column */}
 
-          {/* Right — animated detail card */}
-          <div style={{ position: 'sticky', top: 120 }}>
+          {/* Right — animated detail card (above timeline on mobile) */}
+          <div className="order-1 lg:order-2 lg:sticky lg:top-28">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -250,7 +250,7 @@ export default function OnboardingFlow() {
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 style={{ border: `1px solid ${D.bronze}`, backgroundColor: D.bronzeSubtle, padding: '2rem' }}
               >
-                <p style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
+                <p style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.25em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
                   Step {steps[current].tag} · Active
                 </p>
                 <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: D.ink, marginBottom: 10 }}>
@@ -262,10 +262,10 @@ export default function OnboardingFlow() {
                 <div style={{ borderTop: `1px solid ${D.rule}`, paddingTop: 16 }}>
                   {steps[current].details.map((d) => (
                     <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: `1px solid ${D.rule}` }}>
-                      <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.18em', color: D.faint, textTransform: 'uppercase' }}>
+                      <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.12em', color: D.faint, textTransform: 'uppercase' }}>
                         {d.label}
                       </span>
-                      <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', color: d.highlight ? D.green : D.muted }}>
+                      <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: d.highlight ? D.green : D.muted }}>
                         {d.val}
                       </span>
                     </div>
