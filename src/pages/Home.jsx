@@ -3,6 +3,7 @@ import Navbar from "../components/wirrox/Navbar";
 import ScrollProgress from "../components/wirrox/ScrollProgress";
 import Hero from "../components/wirrox/Hero";
 import WhatWeDo from "../components/wirrox/WhatWeDo";
+import CapabilityVisuals from "../components/wirrox/CapabilityVisuals";
 import HowItWorks from "../components/wirrox/HowItWorks";
 import WhyWirrox from "../components/wirrox/WhyWirrox";
 import Compliance from "../components/wirrox/Compliance";
@@ -19,6 +20,7 @@ export default function Home() {
       <main>
         <Hero />
         <WhatWeDo />
+        <CapabilityVisuals />
         <HowItWorks />
         <WhyWirrox />
         <Compliance />
