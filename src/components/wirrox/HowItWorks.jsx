@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
@@ -28,6 +28,103 @@ const steps = [
       "After full approval and 2FA setup, your team gains access to accounts, payouts, FX, and reporting through the WIRROX dashboard.",
   },
 ];
+
+function ArchitectureDiagram() {
+  const [animKey, setAnimKey] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setAnimKey(k => k + 1), 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  const W = 900, H = 160;
+  const leftX = 20, rightX = W - 20;
+  const midY = H / 2;
+
+  // Box boundaries
+  const srcX2 = 220;
+  const hubX1 = 360, hubX2 = 540;
+  const dstX1 = 680;
+
+  const hubMidX = (hubX1 + hubX2) / 2;
+
+  return (
+    <motion.div
+      className="mt-24 border border-rule bg-canvas overflow-hidden"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
+        className="w-full" style={{ minWidth: 400, maxHeight: 160 }}>
+
+        {/* ── CLIENT label + text ── */}
+        <text x={leftX} y={midY - 18} fontSize={8.5}
+          fontFamily="JetBrains Mono,monospace" letterSpacing={2.5}
+          fill="var(--color-ink)" opacity={0.4}>
+          CLIENT
+        </text>
+        <text x={leftX} y={midY + 6} fontSize={15}
+          fontFamily="Inter,sans-serif" fontWeight={500} fill="var(--color-ink)">
+          Your Business
+        </text>
+        <text x={leftX} y={midY + 24} fontSize={9.5}
+          fontFamily="Inter,sans-serif" fill="var(--color-ink)" opacity={0.4}>
+          WIRROX-branded journey
+        </text>
+
+        {/* ── Line left: client → hub ── */}
+        <line x1={srcX2} y1={midY} x2={hubX1} y2={midY}
+          stroke="var(--color-rule)" strokeWidth={1} />
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur="0.55s" begin="0.1s" fill="remove" />
+          <animateMotion dur="0.55s" begin="0.1s" fill="remove"
+            path={`M ${srcX2} ${midY} L ${hubX1} ${midY}`} />
+        </circle>
+
+        {/* ── WIRROX hub box ── */}
+        <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
+          fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
+        <text x={hubMidX} y={midY - 8} textAnchor="middle"
+          fontSize={8.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+          fill="#C9A96E">
+          INFRASTRUCTURE
+        </text>
+        <text x={hubMidX} y={midY + 16} textAnchor="middle"
+          fontSize={17} fontFamily="Inter,sans-serif" fontWeight={800}
+          letterSpacing={0} fill="var(--color-ink)">
+          WIRROX
+        </text>
+
+        {/* ── Line right: hub → providers ── */}
+        <line x1={hubX2} y1={midY} x2={dstX1} y2={midY}
+          stroke="var(--color-rule)" strokeWidth={1} />
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur="0.55s" begin="0.75s" fill="remove" />
+          <animateMotion dur="0.55s" begin="0.75s" fill="remove"
+            path={`M ${hubX2} ${midY} L ${dstX1} ${midY}`} />
+        </circle>
+
+        {/* ── EXECUTION label + text ── */}
+        <text x={rightX} y={midY - 18} textAnchor="end" fontSize={8.5}
+          fontFamily="JetBrains Mono,monospace" letterSpacing={2.5}
+          fill="var(--color-ink)" opacity={0.4}>
+          EXECUTION
+        </text>
+        <text x={rightX} y={midY + 6} textAnchor="end" fontSize={15}
+          fontFamily="Inter,sans-serif" fontWeight={500} fill="var(--color-ink)">
+          Licensed Providers
+        </text>
+        <text x={rightX} y={midY + 24} textAnchor="end" fontSize={9.5}
+          fontFamily="Inter,sans-serif" fill="var(--color-ink)" opacity={0.4}>
+          Regulated financial institutions
+        </text>
+      </svg>
+    </motion.div>
+  );
+}
 
 export default function HowItWorks() {
   return (
@@ -86,33 +183,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Architecture callout */}
-        <motion.div
-          className="mt-24 border border-rule p-8 lg:p-12 bg-canvas"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="grid lg:grid-cols-3 gap-8 items-center">
-            <div>
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground mb-1.5">Client</p>
-              <p className="text-base font-medium text-ink">Your Business</p>
-              <p className="text-xs text-muted-foreground mt-1">WIRROX-branded journey</p>
-            </div>
-            <div className="text-center relative">
-              <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-rule -translate-y-1/2" />
-              <div className="relative z-10 inline-block px-7 py-4 border border-bronze bg-bronze-subtle">
-                <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-bronze mb-1">Infrastructure</p>
-                <p className="text-base font-semibold text-ink">WIRROX</p>
-              </div>
-            </div>
-            <div className="lg:text-right">
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground mb-1.5">Execution</p>
-              <p className="text-base font-medium text-ink">Licensed Providers</p>
-              <p className="text-xs text-muted-foreground mt-1">Regulated financial institutions</p>
-            </div>
-          </div>
-        </motion.div>
+        <ArchitectureDiagram />
       </div>
     </section>
   );
