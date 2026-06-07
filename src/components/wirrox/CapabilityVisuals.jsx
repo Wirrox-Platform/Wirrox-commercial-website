@@ -127,47 +127,107 @@ function PayoutFlowDiagram() {
   );
 }
 
-/* ─── Mobile Payout Flow (stacked) ──────────────────────────────── */
+/* ─── Mobile Payout Flow (stacked + animated) ───────────────────── */
 function MobilePayoutFlow() {
+  const [animKey, setAnimKey] = useState(0);
+  const [phase, setPhase] = useState(0); // 0=idle 1=dot-down 2=fan-in
+
+  useEffect(() => {
+    const run = () => {
+      setAnimKey(k => k + 1);
+      setPhase(1);
+      setTimeout(() => setPhase(2), 700);
+      setTimeout(() => setPhase(0), 1800);
+    };
+    run();
+    const id = setInterval(run, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  // SVG for the vertical connector (source → hub)
+  const lineH = 40;
+
   return (
-    <div className="flex flex-col items-center gap-0">
-      {/* Source */}
-      <div className="border border-rule p-4 text-center w-full max-w-xs">
-        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Funding Account</p>
+    <div className="flex flex-col items-center w-full">
+
+      {/* Source box */}
+      <div className="border border-rule p-4 text-center w-full">
+        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">
+          Funding Account
+        </p>
         <p className="text-2xl font-semibold text-ink">$250,000</p>
-        <p className="text-[9px] font-mono text-muted-foreground opacity-50 mt-1">USD · Available</p>
+        <p className="text-[9px] font-mono text-muted-foreground opacity-50 mt-1">
+          USD · Available
+        </p>
       </div>
 
-      {/* Arrow down */}
-      <div className="flex flex-col items-center py-1">
-        <div className="w-px h-6 bg-rule" />
-        <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
-      </div>
+      {/* Animated vertical line: source → hub */}
+      <svg key={`top-${animKey}`} width={40} height={lineH} viewBox={`0 0 40 ${lineH}`}
+        style={{ display: "block" }}>
+        <line x1={20} y1={0} x2={20} y2={lineH} stroke="var(--color-rule)" strokeWidth={1} />
+        {phase >= 1 && (
+          <circle r={3.5} fill="#C9A96E" opacity={0}>
+            <animate attributeName="opacity" values="0;1;1;0"
+              dur="0.55s" begin="0s" fill="remove" />
+            <animateMotion dur="0.55s" begin="0s" fill="remove"
+              path={`M 20 0 L 20 ${lineH}`} />
+          </circle>
+        )}
+      </svg>
 
       {/* WIRROX hub */}
-      <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-0.5">Infrastructure</p>
+      <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center w-full">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-0.5">
+          Infrastructure
+        </p>
         <p className="text-base font-black text-ink">WIRROX</p>
-        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze mt-0.5">Routing · Compliance</p>
+        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze mt-0.5">
+          Routing · Compliance
+        </p>
       </div>
 
-      {/* Arrow down */}
-      <div className="flex flex-col items-center py-1">
-        <div className="w-px h-6 bg-rule" />
-        <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
-      </div>
+      {/* Fan SVG: hub → 5 destinations */}
+      <svg key={`fan-${animKey}`} width="100%" viewBox="0 0 300 80"
+        style={{ display: "block", height: 80 }}>
+        {/* 5 lines fanning out to bottom */}
+        {destinations.map((_, i) => {
+          const destX = 30 + i * 60;
+          const path = `M 150 0 C 150 40, ${destX} 40, ${destX} 80`;
+          return (
+            <g key={i}>
+              <path d={path} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
+              {phase >= 2 && (
+                <circle r={3} fill="#C9A96E" opacity={0}>
+                  <animate attributeName="opacity" values="0;1;1;0"
+                    dur="0.65s" begin={`${i * 0.1}s`} fill="remove" />
+                  <animateMotion dur="0.65s" begin={`${i * 0.1}s`} fill="remove"
+                    path={path} />
+                </circle>
+              )}
+            </g>
+          );
+        })}
+      </svg>
 
-      {/* Destinations grid */}
-      <div className="w-full grid grid-cols-2 gap-0 border border-rule">
+      {/* Destination grid */}
+      <div className="w-full grid grid-cols-2 border border-rule" style={{ marginTop: -1 }}>
         {destinations.map((dest, i) => (
-          <div key={dest.label}
-            className="p-3 border-r border-b border-rule last:border-r-0 text-center"
-            style={{ borderRight: i % 2 === 1 ? "none" : undefined }}>
+          <motion.div
+            key={dest.label}
+            className="p-3 text-center"
+            style={{
+              borderRight: i % 2 === 0 ? "1px solid var(--color-rule)" : "none",
+              borderBottom: i < 4 ? "1px solid var(--color-rule)" : "none",
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: phase >= 2 ? 1 : 0.3 }}
+            transition={{ duration: 0.3, delay: i * 0.08 }}
+          >
             <p className="text-[8px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-1">
               {dest.label}
             </p>
             <p className="text-sm font-semibold text-ink">{dest.amount}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -29,6 +29,56 @@ const steps = [
   },
 ];
 
+function MobileArchDiagram({ animKey }) {
+  return (
+    <div className="sm:hidden flex flex-col items-center py-10 px-6">
+      {/* Client */}
+      <div className="text-center">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Client</p>
+        <p className="text-base font-medium text-ink">Your Business</p>
+        <p className="text-xs text-muted-foreground">WIRROX-branded journey</p>
+      </div>
+
+      {/* Animated line down: client → hub */}
+      <svg key={`mob-top-${animKey}`} width={40} height={48} viewBox="0 0 40 48"
+        style={{ display: "block" }}>
+        <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur="0.55s" begin="0.15s" fill="remove" />
+          <animateMotion dur="0.55s" begin="0.15s" fill="remove"
+            path="M 20 0 L 20 48" />
+        </circle>
+      </svg>
+
+      {/* WIRROX hub */}
+      <div className="border border-bronze bg-bronze-subtle px-10 py-3 text-center">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Infrastructure</p>
+        <p className="text-base font-black text-ink">WIRROX</p>
+      </div>
+
+      {/* Animated line down: hub → providers */}
+      <svg key={`mob-bot-${animKey}`} width={40} height={48} viewBox="0 0 40 48"
+        style={{ display: "block" }}>
+        <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur="0.55s" begin="0.8s" fill="remove" />
+          <animateMotion dur="0.55s" begin="0.8s" fill="remove"
+            path="M 20 0 L 20 48" />
+        </circle>
+      </svg>
+
+      {/* Providers */}
+      <div className="text-center">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Execution</p>
+        <p className="text-base font-medium text-ink">Licensed Providers</p>
+        <p className="text-xs text-muted-foreground">Regulated financial institutions</p>
+      </div>
+    </div>
+  );
+}
+
 function ArchitectureDiagram() {
   const [animKey, setAnimKey] = useState(0);
   useEffect(() => {
@@ -55,31 +105,8 @@ function ArchitectureDiagram() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      {/* Mobile stacked version */}
-      <div className="sm:hidden flex flex-col items-center py-10 px-6 gap-0">
-        <div className="text-center">
-          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Client</p>
-          <p className="text-base font-medium text-ink">Your Business</p>
-          <p className="text-xs text-muted-foreground">WIRROX-branded journey</p>
-        </div>
-        <div className="flex flex-col items-center py-2">
-          <div className="w-px h-8 bg-rule" />
-          <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
-        </div>
-        <div className="border border-bronze bg-bronze-subtle px-8 py-3 text-center">
-          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Infrastructure</p>
-          <p className="text-base font-black text-ink">WIRROX</p>
-        </div>
-        <div className="flex flex-col items-center py-2">
-          <div className="w-px h-8 bg-rule" />
-          <div className="w-2 h-2 rotate-45 border-r border-b border-bronze" />
-        </div>
-        <div className="text-center">
-          <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Execution</p>
-          <p className="text-base font-medium text-ink">Licensed Providers</p>
-          <p className="text-xs text-muted-foreground">Regulated financial institutions</p>
-        </div>
-      </div>
+      {/* Mobile stacked animated version */}
+      <MobileArchDiagram animKey={animKey} />
 
       {/* Desktop SVG version */}
       <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
