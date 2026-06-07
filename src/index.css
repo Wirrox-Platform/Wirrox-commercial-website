@@ -102,6 +102,10 @@
   background-color: #111111 !important;
 }
 
+/* WX icon — single color per mode */
+.wx-icon { color: #0F0F0F; }
+.dark .wx-icon { color: #C9A96E; }
+
 /* Scrollbar — minimal */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: #FAFAFA; }

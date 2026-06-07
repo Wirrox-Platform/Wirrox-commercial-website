@@ -54,15 +54,15 @@ function MobileArchDiagram({ animKey }) {
       {/* WIRROX hub */}
       <div className="border border-bronze bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
         <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">Infrastructure</p>
-        <svg width="28" height="28" viewBox="0 0 28 28">
+        <svg width="28" height="28" viewBox="0 0 28 28" className="wx-icon">
           <polyline points="3,5 9,23 14,13 19,23 25,5"
-            fill="none" stroke="var(--color-ink)" strokeWidth="2.2"
+            fill="none" stroke="currentColor" strokeWidth="2.2"
             strokeLinejoin="round" strokeLinecap="round" />
           <line x1="5" y1="5" x2="22" y2="23"
-            stroke="#C9A96E" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
+            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
           <line x1="22" y1="5" x2="5" y2="23"
-            stroke="#C9A96E" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
-          <circle cx="14" cy="14" r="2" fill="#C9A96E" opacity="0.95" />
+            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
+          <circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.95" />
         </svg>
       </div>
 
@@ -154,15 +154,15 @@ function ArchitectureDiagram() {
           fill="#C9A96E">
           INFRASTRUCTURE
         </text>
-        <g transform={`translate(${hubMidX - 12}, ${midY - 12})`}>
+        <g transform={`translate(${hubMidX - 12}, ${midY - 12})`} className="wx-icon">
           <polyline points="3.5,5 8.5,22 13,13 17.5,22 22.5,5"
-            fill="none" stroke="var(--color-ink)" strokeWidth="2.1"
+            fill="none" stroke="currentColor" strokeWidth="2.1"
             strokeLinejoin="round" strokeLinecap="round" />
           <line x1="7.5" y1="5" x2="19.5" y2="22"
-            stroke="#C9A96E" strokeWidth="1.7" strokeLinecap="round" opacity="0.7" />
+            stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" opacity="0.65" />
           <line x1="19.5" y1="5" x2="7.5" y2="22"
-            stroke="#C9A96E" strokeWidth="1.7" strokeLinecap="round" opacity="0.7" />
-          <circle cx="13" cy="13.5" r="1.8" fill="#C9A96E" opacity="0.95" />
+            stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" opacity="0.65" />
+          <circle cx="13" cy="13.5" r="1.8" fill="currentColor" opacity="0.95" />
         </g>
 
         {/* ── Line right: hub → providers ── */}

@@ -75,15 +75,15 @@ function PayoutFlowDiagram() {
         {/* ── WIRROX HUB BOX ── */}
         <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <g transform={`translate(${hubMidX - 14}, ${hubY - 22})`}>
+        <g transform={`translate(${hubMidX - 14}, ${hubY - 22})`} className="wx-icon">
           <polyline points="4,6 10,26 16,15 22,26 28,6"
-            fill="none" stroke="var(--color-ink)" strokeWidth="2.4"
+            fill="none" stroke="currentColor" strokeWidth="2.4"
             strokeLinejoin="round" strokeLinecap="round" />
           <line x1="9" y1="6" x2="23" y2="26"
-            stroke="#C9A96E" strokeWidth="1.9" strokeLinecap="round" opacity="0.7" />
+            stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
           <line x1="23" y1="6" x2="9" y2="26"
-            stroke="#C9A96E" strokeWidth="1.9" strokeLinecap="round" opacity="0.7" />
-          <circle cx="16" cy="16" r="2" fill="#C9A96E" opacity="0.95" />
+            stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" opacity="0.65" />
+          <circle cx="16" cy="16" r="2" fill="currentColor" opacity="0.95" />
         </g>
         <text x={hubMidX} y={hubY + 26} textAnchor="middle"
           fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
