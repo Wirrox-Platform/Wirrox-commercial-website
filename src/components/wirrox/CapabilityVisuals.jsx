@@ -77,7 +77,7 @@ function PayoutFlowDiagram() {
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
         <text x={hubMidX} y={hubY - 8} textAnchor="middle"
           fontSize={16} fontFamily="Inter,sans-serif" fontWeight={800}
-          letterSpacing={4} fill="var(--color-ink)">
+          letterSpacing={0} fill="var(--color-ink)">
           WIRROX
         </text>
         <text x={hubMidX} y={hubY + 14} textAnchor="middle"
