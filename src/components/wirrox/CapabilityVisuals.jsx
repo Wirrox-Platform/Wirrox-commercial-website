@@ -75,13 +75,18 @@ function PayoutFlowDiagram() {
         {/* ── WIRROX HUB BOX ── */}
         <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={hubY - 8} textAnchor="middle"
-          fontSize={16} fontFamily="Inter,sans-serif" fontWeight={800}
-          letterSpacing={0} fill="var(--color-ink)">
-          WIRROX
-        </text>
-        <text x={hubMidX} y={hubY + 14} textAnchor="middle"
-          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
+        <g transform={`translate(${hubMidX - 14}, ${hubY - 22})`}>
+          <polyline points="4,6 10,26 16,15 22,26 28,6"
+            fill="none" stroke="var(--color-ink)" strokeWidth="2.4"
+            strokeLinejoin="round" strokeLinecap="round" />
+          <line x1="9" y1="6" x2="23" y2="26"
+            stroke="#C9A96E" strokeWidth="1.9" strokeLinecap="round" opacity="0.7" />
+          <line x1="23" y1="6" x2="9" y2="26"
+            stroke="#C9A96E" strokeWidth="1.9" strokeLinecap="round" opacity="0.7" />
+          <circle cx="16" cy="16" r="2" fill="#C9A96E" opacity="0.95" />
+        </g>
+        <text x={hubMidX} y={hubY + 26} textAnchor="middle"
+          fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
           ROUTING · COMPLIANCE
         </text>
 

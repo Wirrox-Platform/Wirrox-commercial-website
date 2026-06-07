@@ -52,9 +52,18 @@ function MobileArchDiagram({ animKey }) {
       </svg>
 
       {/* WIRROX hub */}
-      <div className="border border-bronze bg-bronze-subtle px-10 py-3 text-center">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">Infrastructure</p>
-        <p className="text-base font-black text-ink">WIRROX</p>
+      <div className="border border-bronze bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">Infrastructure</p>
+        <svg width="28" height="28" viewBox="0 0 28 28">
+          <polyline points="3,5 9,23 14,13 19,23 25,5"
+            fill="none" stroke="var(--color-ink)" strokeWidth="2.2"
+            strokeLinejoin="round" strokeLinecap="round" />
+          <line x1="5" y1="5" x2="22" y2="23"
+            stroke="#C9A96E" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
+          <line x1="22" y1="5" x2="5" y2="23"
+            stroke="#C9A96E" strokeWidth="1.8" strokeLinecap="round" opacity="0.7" />
+          <circle cx="14" cy="14" r="2" fill="#C9A96E" opacity="0.95" />
+        </svg>
       </div>
 
       {/* Animated line down: hub → providers */}
@@ -140,16 +149,21 @@ function ArchitectureDiagram() {
         {/* ── WIRROX hub box ── */}
         <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={midY - 8} textAnchor="middle"
-          fontSize={8.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+        <text x={hubMidX} y={midY - 22} textAnchor="middle"
+          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
           fill="#C9A96E">
           INFRASTRUCTURE
         </text>
-        <text x={hubMidX} y={midY + 16} textAnchor="middle"
-          fontSize={17} fontFamily="Inter,sans-serif" fontWeight={800}
-          letterSpacing={0} fill="var(--color-ink)">
-          WIRROX
-        </text>
+        <g transform={`translate(${hubMidX - 12}, ${midY - 12})`}>
+          <polyline points="3.5,5 8.5,22 13,13 17.5,22 22.5,5"
+            fill="none" stroke="var(--color-ink)" strokeWidth="2.1"
+            strokeLinejoin="round" strokeLinecap="round" />
+          <line x1="7.5" y1="5" x2="19.5" y2="22"
+            stroke="#C9A96E" strokeWidth="1.7" strokeLinecap="round" opacity="0.7" />
+          <line x1="19.5" y1="5" x2="7.5" y2="22"
+            stroke="#C9A96E" strokeWidth="1.7" strokeLinecap="round" opacity="0.7" />
+          <circle cx="13" cy="13.5" r="1.8" fill="#C9A96E" opacity="0.95" />
+        </g>
 
         {/* ── Line right: hub → providers ── */}
         <line x1={hubX2} y1={midY} x2={dstX1} y2={midY}
