@@ -4,104 +4,125 @@ import SectionLabel from "./SectionLabel";
 
 /* ─── Payout Flow Diagram ─────────────────────────────────────────── */
 const destinations = [
-  { label: "United Kingdom", code: "GBP", amount: "£12,400"    },
-  { label: "European Union", code: "EUR", amount: "€28,750"    },
-  { label: "United States",  code: "USD", amount: "$41,200"    },
-  { label: "UAE",            code: "AED", amount: "د.إ 9,800"  },
-  { label: "Singapore",      code: "SGD", amount: "S$6,300"    },
+  { label: "United Kingdom", amount: "£12,400"   },
+  { label: "European Union", amount: "€28,750"   },
+  { label: "United States",  amount: "$41,200"   },
+  { label: "UAE",            amount: "د.إ 9,800" },
+  { label: "Singapore",      amount: "S$6,300"   },
 ];
 
 function PayoutFlowDiagram() {
-  const [tick, setTick] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 2000);
+    const id = setInterval(() => setAnimKey(k => k + 1), 3200);
     return () => clearInterval(id);
   }, []);
 
-  const ROW_H = 64;
-  const DEST_COUNT = destinations.length;
-  const SVG_H = DEST_COUNT * ROW_H;
-  const midY = SVG_H / 2;
+  // SVG coordinate constants
+  const W = 860, ROW = 68, H = destinations.length * ROW;
+  const hubY = H / 2;
+
+  // Boxes
+  const srcX1 = 10,  srcX2 = 190;  // source box
+  const hubX1 = 250, hubX2 = 420;  // wirrox box
+  const dstX1 = 530, dstX2 = 850;  // destination boxes
+
+  const srcMidX = (srcX1 + srcX2) / 2;
+  const hubMidX = (hubX1 + hubX2) / 2;
+
+  const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
+
+  // Animation timings (seconds)
+  const leftDur  = 0.55;
+  const fanDelay = 0.6;
+  const fanDur   = 0.7;
+  const dotDelay = (i) => fanDelay + i * 0.11;
 
   return (
-    <div className="w-full flex items-center gap-0 overflow-x-auto">
+    <div className="w-full overflow-x-auto">
+      <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
+        className="w-full" style={{ minWidth: 560, maxHeight: 360 }}>
 
-      {/* ── Source account ── */}
-      <div className="flex-shrink-0 border border-rule p-5 text-center w-44">
-        <p className="text-[9px] font-mono uppercase tracking-[0.25em] text-bronze mb-2">
-          Funding Account
-        </p>
-        <p className="text-2xl font-semibold text-ink tracking-tight">$250,000</p>
-        <p className="text-[9px] font-mono text-muted-foreground mt-1 opacity-60">
-          USD · Available
-        </p>
-      </div>
+        {/* ── SOURCE BOX ── */}
+        <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104}
+          fill="none" stroke="var(--color-rule)" strokeWidth={1} />
+        <text x={srcMidX} y={hubY - 26} textAnchor="middle"
+          fontSize={9} fontFamily="JetBrains Mono,monospace" letterSpacing={2.5} fill="#C9A96E">
+          FUNDING ACCOUNT
+        </text>
+        <text x={srcMidX} y={hubY + 8} textAnchor="middle"
+          fontSize={24} fontFamily="Inter,sans-serif" fontWeight={600} fill="var(--color-ink)">
+          $250,000
+        </text>
+        <text x={srcMidX} y={hubY + 30} textAnchor="middle"
+          fontSize={8.5} fontFamily="JetBrains Mono,monospace" letterSpacing={1.5}
+          fill="var(--color-ink)" opacity={0.35}>
+          USD · AVAILABLE
+        </text>
 
-      {/* ── Connector line: source → hub ── */}
-      <div className="flex-shrink-0 relative h-px w-10 bg-rule">
-        <motion.div
-          key={`left-${tick}`}
-          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-bronze"
-          initial={{ left: "0%" }}
-          animate={{ left: "100%" }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-        />
-      </div>
+        {/* ── LINE: source → hub ── */}
+        <line x1={srcX2} y1={hubY} x2={hubX1} y2={hubY}
+          stroke="var(--color-rule)" strokeWidth={1} />
 
-      {/* ── WIRROX hub ── */}
-      <div className="flex-shrink-0 border border-bronze bg-bronze-subtle px-6 py-4 text-center w-36">
-        <p className="text-base font-black tracking-[0.15em] text-ink">WIRROX</p>
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mt-1">
-          Routing
-        </p>
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">
-          Compliance
-        </p>
-      </div>
+        {/* Dot: source → hub */}
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur={`${leftDur}s`} begin="0.15s" fill="remove" />
+          <animateMotion dur={`${leftDur}s`} begin="0.15s" fill="remove"
+            path={`M ${srcX2} ${hubY} L ${hubX1} ${hubY}`} />
+        </circle>
 
-      {/* ── Fan-out SVG ── */}
-      <div className="flex-shrink-0" style={{ width: 64, height: SVG_H }}>
-        <svg width={64} height={SVG_H}>
-          {destinations.map((_, i) => {
-            const destY = ROW_H * i + ROW_H / 2;
-            const path = `M 0 ${midY} C 32 ${midY}, 32 ${destY}, 64 ${destY}`;
-            return (
-              <g key={i}>
-                <path d={path} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-                <motion.circle r={3} fill="#C9A96E"
-                  key={`fan-${i}-${tick}`}
-                  initial={{ offsetDistance: "0%", opacity: 0 }}
-                  animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
-                  transition={{ duration: 0.6, delay: i * 0.1, ease: "easeInOut" }}
-                  style={{ offsetPath: `path("${path}")`, offsetDistance: "0%" }}
-                />
-              </g>
-            );
-          })}
-        </svg>
-      </div>
+        {/* ── WIRROX HUB BOX ── */}
+        <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
+          fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
+        <text x={hubMidX} y={hubY - 8} textAnchor="middle"
+          fontSize={16} fontFamily="Inter,sans-serif" fontWeight={800}
+          letterSpacing={4} fill="var(--color-ink)">
+          WIRROX
+        </text>
+        <text x={hubMidX} y={hubY + 14} textAnchor="middle"
+          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
+          ROUTING · COMPLIANCE
+        </text>
 
-      {/* ── Destinations ── */}
-      <div className="flex-shrink-0 flex flex-col" style={{ gap: 0 }}>
-        {destinations.map((dest, i) => (
-          <motion.div
-            key={dest.code}
-            className="border border-rule px-5 flex items-center justify-between gap-8"
-            style={{ height: ROW_H, borderTop: i === 0 ? undefined : "none" }}
-            initial={{ opacity: 0, x: 8 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.07 }}
-          >
-            <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-muted-foreground w-28">
-              {dest.label}
-            </p>
-            <p className="text-base font-semibold text-ink tracking-tight">
-              {dest.amount}
-            </p>
-          </motion.div>
-        ))}
-      </div>
+        {/* ── FAN LINES + DOTS: hub → each destination ── */}
+        {destinations.map((dest, i) => {
+          const dy = destYs[i];
+          const cp1x = hubX2 + 40, cp2x = dstX1 - 40;
+          const fanPath = `M ${hubX2} ${hubY} C ${cp1x} ${hubY}, ${cp2x} ${dy}, ${dstX1} ${dy}`;
+          const begin = `${dotDelay(i)}s`;
+
+          return (
+            <g key={dest.label}>
+              {/* Static path line */}
+              <path d={fanPath} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
+
+              {/* Animated dot along the fan path */}
+              <circle r={3.5} fill="#C9A96E" opacity={0}>
+                <animate attributeName="opacity" values="0;1;1;0"
+                  dur={`${fanDur}s`} begin={begin} fill="remove" />
+                <animateMotion dur={`${fanDur}s`} begin={begin} fill="remove"
+                  path={fanPath} />
+              </circle>
+
+              {/* ── DESTINATION BOX ── */}
+              <rect x={dstX1} y={dy - 26} width={dstX2 - dstX1} height={52}
+                fill="none" stroke="var(--color-rule)" strokeWidth={1}
+                style={{ borderTop: i > 0 ? "none" : undefined }} />
+              <text x={(dstX1 + dstX2) / 2} y={dy - 8} textAnchor="middle"
+                fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+                fill="var(--color-ink)" opacity={0.4}>
+                {dest.label.toUpperCase()}
+              </text>
+              <text x={(dstX1 + dstX2) / 2} y={dy + 14} textAnchor="middle"
+                fontSize={15} fontFamily="Inter,sans-serif" fontWeight={500}
+                fill="var(--color-ink)">
+                {dest.amount}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
