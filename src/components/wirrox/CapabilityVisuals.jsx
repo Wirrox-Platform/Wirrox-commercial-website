@@ -4,112 +4,105 @@ import SectionLabel from "./SectionLabel";
 
 /* ─── Payout Flow Diagram ─────────────────────────────────────────── */
 const destinations = [
-  { label: "United Kingdom", code: "GBP", amount: "£12,400"   },
-  { label: "European Union", code: "EUR", amount: "€28,750"   },
-  { label: "United States",  code: "USD", amount: "$41,200"   },
-  { label: "UAE",            code: "AED", amount: "د.إ 9,800" },
-  { label: "Singapore",      code: "SGD", amount: "S$6,300"   },
+  { label: "United Kingdom", code: "GBP", amount: "£12,400"    },
+  { label: "European Union", code: "EUR", amount: "€28,750"    },
+  { label: "United States",  code: "USD", amount: "$41,200"    },
+  { label: "UAE",            code: "AED", amount: "د.إ 9,800"  },
+  { label: "Singapore",      code: "SGD", amount: "S$6,300"    },
 ];
-
-function Dot({ path, delay, tick }) {
-  return (
-    <motion.circle r={3.5} fill="#C9A96E"
-      key={`${tick}-${delay}`}
-      initial={{ offsetDistance: "0%", opacity: 0 }}
-      animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
-      transition={{ duration: 0.75, delay, ease: "easeInOut" }}
-      style={{ offsetPath: `path("${path}")`, offsetDistance: "0%" }}
-    />
-  );
-}
 
 function PayoutFlowDiagram() {
   const [tick, setTick] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setTick(t => t + 1), 2200);
+    const id = setInterval(() => setTick(t => t + 1), 2000);
     return () => clearInterval(id);
   }, []);
 
-  // Layout constants
-  const W = 900, H = 420;
-  const srcX = 160, srcY = H / 2;
-  const hubX = 440, hubY = H / 2;
-  const destX = 720;
-  const rowH = 60;
-  const totalH = (destinations.length - 1) * rowH;
-  const destYs = destinations.map((_, i) => H / 2 - totalH / 2 + i * rowH);
+  const ROW_H = 64;
+  const DEST_COUNT = destinations.length;
+  const SVG_H = DEST_COUNT * ROW_H;
+  const midY = SVG_H / 2;
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ maxHeight: 420 }}>
+    <div className="w-full flex items-center gap-0 overflow-x-auto">
 
       {/* ── Source account ── */}
-      <rect x={srcX - 90} y={srcY - 50} width={180} height={100} rx={0}
-        fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-      <text x={srcX} y={srcY - 24} textAnchor="middle"
-        fontSize={9} fontFamily="JetBrains Mono,monospace" letterSpacing={3} fill="#C9A96E">
-        FUNDING ACCOUNT
-      </text>
-      <text x={srcX} y={srcY + 6} textAnchor="middle"
-        fontSize={22} fontFamily="Inter,sans-serif" fontWeight={600} fill="var(--color-ink)">
-        $250,000
-      </text>
-      <text x={srcX} y={srcY + 26} textAnchor="middle"
-        fontSize={9} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
-        fill="var(--color-ink)" opacity={0.35}>
-        USD · AVAILABLE
-      </text>
+      <div className="flex-shrink-0 border border-rule p-5 text-center w-44">
+        <p className="text-[9px] font-mono uppercase tracking-[0.25em] text-bronze mb-2">
+          Funding Account
+        </p>
+        <p className="text-2xl font-semibold text-ink tracking-tight">$250,000</p>
+        <p className="text-[9px] font-mono text-muted-foreground mt-1 opacity-60">
+          USD · Available
+        </p>
+      </div>
 
-      {/* ── Line: source → hub ── */}
-      <line x1={srcX + 90} y1={srcY} x2={hubX - 56} y2={hubY}
-        stroke="var(--color-rule)" strokeWidth={1} />
-      <Dot path={`M ${srcX+90} ${srcY} L ${hubX-56} ${hubY}`} delay={0} tick={tick} />
+      {/* ── Connector line: source → hub ── */}
+      <div className="flex-shrink-0 relative h-px w-10 bg-rule">
+        <motion.div
+          key={`left-${tick}`}
+          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-bronze"
+          initial={{ left: "0%" }}
+          animate={{ left: "100%" }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        />
+      </div>
 
       {/* ── WIRROX hub ── */}
-      <rect x={hubX - 56} y={hubY - 34} width={112} height={68} rx={0}
-        fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-      <text x={hubX} y={hubY - 10} textAnchor="middle"
-        fontSize={13} fontFamily="Inter,sans-serif" fontWeight={700}
-        letterSpacing={3} fill="var(--color-ink)">
-        WIRROX
-      </text>
-      <text x={hubX} y={hubY + 10} textAnchor="middle"
-        fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
-        fill="#C9A96E">
-        ROUTING · COMPLIANCE
-      </text>
-      <text x={hubX} y={hubY + 24} textAnchor="middle"
-        fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={1}
-        fill="var(--color-ink)" opacity={0.3}>
-        PROVIDER-BACKED
-      </text>
+      <div className="flex-shrink-0 border border-bronze bg-bronze-subtle px-6 py-4 text-center w-36">
+        <p className="text-base font-black tracking-[0.15em] text-ink">WIRROX</p>
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze mt-1">
+          Routing
+        </p>
+        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">
+          Compliance
+        </p>
+      </div>
 
-      {/* ── Branches: hub → destinations ── */}
-      {destinations.map((dest, i) => {
-        const dy = destYs[i];
-        const cp1x = hubX + 80, cp2x = destX - 90;
-        const pathD = `M ${hubX+56} ${hubY} C ${cp1x} ${hubY}, ${cp2x} ${dy}, ${destX-72} ${dy}`;
-        return (
-          <g key={dest.code}>
-            <path d={pathD} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-            <Dot path={pathD} delay={i * 0.14} tick={tick} />
+      {/* ── Fan-out SVG ── */}
+      <div className="flex-shrink-0" style={{ width: 64, height: SVG_H }}>
+        <svg width={64} height={SVG_H}>
+          {destinations.map((_, i) => {
+            const destY = ROW_H * i + ROW_H / 2;
+            const path = `M 0 ${midY} C 32 ${midY}, 32 ${destY}, 64 ${destY}`;
+            return (
+              <g key={i}>
+                <path d={path} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
+                <motion.circle r={3} fill="#C9A96E"
+                  key={`fan-${i}-${tick}`}
+                  initial={{ offsetDistance: "0%", opacity: 0 }}
+                  animate={{ offsetDistance: "100%", opacity: [0, 1, 1, 0] }}
+                  transition={{ duration: 0.6, delay: i * 0.1, ease: "easeInOut" }}
+                  style={{ offsetPath: `path("${path}")`, offsetDistance: "0%" }}
+                />
+              </g>
+            );
+          })}
+        </svg>
+      </div>
 
-            {/* Destination box */}
-            <rect x={destX - 72} y={dy - 24} width={148} height={48} rx={0}
-              fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-            <text x={destX - 72 + 74} y={dy - 7} textAnchor="middle"
-              fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
-              fill="var(--color-ink)" opacity={0.4}>
-              {dest.label.toUpperCase()}
-            </text>
-            <text x={destX - 72 + 74} y={dy + 12} textAnchor="middle"
-              fontSize={14} fontFamily="Inter,sans-serif" fontWeight={500}
-              fill="var(--color-ink)">
+      {/* ── Destinations ── */}
+      <div className="flex-shrink-0 flex flex-col" style={{ gap: 0 }}>
+        {destinations.map((dest, i) => (
+          <motion.div
+            key={dest.code}
+            className="border border-rule px-5 flex items-center justify-between gap-8"
+            style={{ height: ROW_H, borderTop: i === 0 ? undefined : "none" }}
+            initial={{ opacity: 0, x: 8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.07 }}
+          >
+            <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-muted-foreground w-28">
+              {dest.label}
+            </p>
+            <p className="text-base font-semibold text-ink tracking-tight">
               {dest.amount}
-            </text>
-          </g>
-        );
-      })}
-    </svg>
+            </p>
+          </motion.div>
+        ))}
+      </div>
+    </div>
   );
 }
 
