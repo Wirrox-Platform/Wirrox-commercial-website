@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Sun, Moon } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
   const location = useLocation();
   const navigate = useNavigate();
+
+  const toggleDark = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 32);
@@ -77,6 +85,13 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="flex items-center gap-4">
+            <button
+              onClick={toggleDark}
+              className="w-8 h-8 flex items-center justify-center text-muted-foreground hover:text-ink transition-colors duration-300"
+              aria-label="Toggle dark mode"
+            >
+              {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+            </button>
             <a
               href="https://app.wirrox.com/request-access"
               target="_blank"

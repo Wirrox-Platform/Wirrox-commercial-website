@@ -10,28 +10,6 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.75, delay, ease: [0.25, 0.1, 0.25, 1] },
 });
 
-const stackItems = [
-  {
-    tag: "FRONTEND",
-    title: "Cloudflare Pages",
-    description: "The client-facing web application is hosted on Cloudflare Pages — providing edge-delivered performance, global availability, and reliable uptime.",
-  },
-  {
-    tag: "API / BACKEND",
-    title: "Railway",
-    description: "The WIRROX API layer runs on Railway, providing isolated, scalable backend infrastructure for onboarding workflows, authentication, and provider integrations.",
-  },
-  {
-    tag: "EMAIL",
-    title: "Google Workspace + Resend",
-    description: "Operational email runs on Google Workspace. Transactional emails — including onboarding notifications and status updates — are delivered via Resend.",
-  },
-  {
-    tag: "PROVIDER LAYER",
-    title: "Licensed Provider Integrations",
-    description: "Account, payment, and FX capabilities are backed by licensed financial providers. WIRROX manages the integration and coordinates provider onboarding on behalf of approved clients.",
-  },
-];
 
 export default function About() {
   return (
@@ -113,49 +91,6 @@ export default function About() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Infrastructure stack */}
-      <section className="py-32 lg:py-40 border-b border-rule bg-canvas">
-        <div className="max-w-7xl mx-auto px-6 lg:px-16">
-          <SectionLabel label="Infrastructure" />
-
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-28 items-end mb-16">
-            <h2 className="text-[clamp(1.9rem,3.5vw,3rem)] font-semibold tracking-[-0.02em] text-ink leading-[1.12]">
-              Separated layers,<br />
-              <span className="text-muted-foreground font-light">resilient by design</span>
-            </h2>
-            <p className="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
-              WIRROX separates its frontend, API, email, and provider integration layers for
-              independent resilience, security, and maintainability.
-            </p>
-          </div>
-
-          <div>
-            {stackItems.map((item, i) => (
-              <motion.div
-                key={item.tag}
-                className="group border-b border-rule py-10 last:border-b-0"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
-                  <div className="lg:col-span-2">
-                    <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-bronze">{item.tag}</p>
-                  </div>
-                  <div className="lg:col-span-4">
-                    <h3 className="text-xl font-medium text-ink">{item.title}</h3>
-                  </div>
-                  <div className="lg:col-span-6">
-                    <p className="text-[0.9375rem] text-muted-foreground leading-[1.75]">{item.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
