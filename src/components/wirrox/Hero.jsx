@@ -94,6 +94,14 @@ export default function Hero() {
             Request Access
           </a>
           <a
+            href="https://app.wirrox.com/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+          >
+            Login
+          </a>
+          <a
             href="#what-we-do"
             onClick={e => { e.preventDefault(); document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' }); }}
             className="px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"

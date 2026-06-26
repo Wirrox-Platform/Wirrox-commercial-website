@@ -93,6 +93,14 @@ export default function Navbar() {
               {dark ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
             </button>
             <a
+              href="https://app.wirrox.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:block text-[11px] font-mono uppercase tracking-[0.18em] px-5 py-2.5 border border-rule text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+            >
+              Login
+            </a>
+            <a
               href="https://app.wirrox.com/request-access"
               target="_blank"
               rel="noopener noreferrer"
@@ -145,6 +153,15 @@ export default function Navbar() {
                   </button>
                 )
               )}
+              <a
+                href="https://app.wirrox.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="block w-full text-center text-[11px] font-mono uppercase tracking-[0.18em] px-6 py-3.5 border border-rule text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+              >
+                Login
+              </a>
               <a
                 href="https://app.wirrox.com/request-access"
                 target="_blank"
