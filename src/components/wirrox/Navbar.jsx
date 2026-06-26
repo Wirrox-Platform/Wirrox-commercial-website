@@ -96,7 +96,7 @@ export default function Navbar() {
               href="https://app.wirrox.com/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:block text-[11px] font-mono uppercase tracking-[0.18em] px-5 py-2.5 border border-rule text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+              className="hidden lg:block text-[11px] font-mono uppercase tracking-[0.18em] px-5 py-2.5 border border-bronze text-bronze hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               Login
             </a>
@@ -158,7 +158,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
-                className="block w-full text-center text-[11px] font-mono uppercase tracking-[0.18em] px-6 py-3.5 border border-rule text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+                className="block w-full text-center text-[11px] font-mono uppercase tracking-[0.18em] px-6 py-3.5 border border-bronze text-bronze hover:bg-bronze hover:text-ink transition-colors duration-300"
               >
                 Login
               </a>
