@@ -134,28 +134,30 @@ function ArchitectureDiagram() {
         {/* ── Line left: client → hub ── */}
         <line x1={srcX2} y1={midY} x2={hubX1} y2={midY}
           stroke="var(--color-rule)" strokeWidth={1} />
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="0.1s" fill="remove" />
-          <animateMotion dur="0.55s" begin="0.1s" fill="remove"
-            path={`M ${srcX2} ${midY} L ${hubX1} ${midY}`} />
-        </circle>
-
-        {/* ── WIRROX hub box ── */}
-        <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
-          fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={midY - 22} textAnchor="middle"
-          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
-          fill="#C9A96E">
-          INFRASTRUCTURE
-        </text>
-        <text x={hubMidX} y={midY + 4} textAnchor="middle"
-          fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
-          className="wx-icon" fill="currentColor">W</text>
 
         {/* ── Line right: hub → providers ── */}
         <line x1={hubX2} y1={midY} x2={dstX1} y2={midY}
           stroke="var(--color-rule)" strokeWidth={1} />
+
+        {/* ── WIRROX hub box ── */}
+        <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
+          fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
+        <text x={hubMidX} y={midY - 8} textAnchor="middle"
+          fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
+          className="wx-icon" fill="currentColor">W</text>
+        <text x={hubMidX} y={midY + 30} textAnchor="middle"
+          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+          fill="#C9A96E">
+          INFRASTRUCTURE
+        </text>
+
+        {/* ── Dots rendered LAST so they appear on top of hub box ── */}
+        <circle r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            dur="0.55s" begin="0.1s" fill="remove" />
+          <animateMotion dur="0.55s" begin="0.1s" fill="remove"
+            path={`M ${srcX2} ${midY} L ${hubX2} ${midY}`} />
+        </circle>
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
             dur="0.55s" begin="0.75s" fill="remove" />
