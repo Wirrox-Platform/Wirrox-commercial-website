@@ -54,16 +54,11 @@ function MobileArchDiagram({ animKey }) {
       {/* WIRROX hub */}
       <div className="border border-bronze bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
         <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">Infrastructure</p>
-        <svg width="28" height="28" viewBox="0 0 28 28" className="wx-icon">
-          <polyline points="3,5 9,23 14,13 19,23 25,5"
-            fill="none" stroke="currentColor" strokeWidth="2.2"
-            strokeLinejoin="round" strokeLinecap="round" />
-          <line x1="9" y1="5" x2="19" y2="23"
-            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
-          <line x1="19" y1="5" x2="9" y2="23"
-            stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.65" />
-          <circle cx="14" cy="14" r="2" fill="currentColor" opacity="0.95" />
-        </svg>
+        <span className="relative inline-flex items-end">
+          <span className="wx-icon text-[28px] leading-none"
+            style={{ fontFamily: 'Arial Black, Arial, sans-serif', fontWeight: 900 }}>W</span>
+          <span className="w-2 h-2 rounded-full bg-bronze mb-0.5 ml-0.5 flex-shrink-0" />
+        </span>
       </div>
 
       {/* Animated line down: hub → providers */}
@@ -154,16 +149,10 @@ function ArchitectureDiagram() {
           fill="#C9A96E">
           INFRASTRUCTURE
         </text>
-        <g transform={`translate(${hubMidX - 12}, ${midY - 12})`} className="wx-icon">
-          <polyline points="3.5,5 8.5,22 13,13 17.5,22 22.5,5"
-            fill="none" stroke="currentColor" strokeWidth="2.1"
-            strokeLinejoin="round" strokeLinecap="round" />
-          <line x1="8.5" y1="5" x2="17.5" y2="22"
-            stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" opacity="0.65" />
-          <line x1="17.5" y1="5" x2="8.5" y2="22"
-            stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" opacity="0.65" />
-          <circle cx="13" cy="13.5" r="1.8" fill="currentColor" opacity="0.95" />
-        </g>
+        <text x={hubMidX} y={midY + 11} textAnchor="middle"
+          fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
+          className="wx-icon" fill="currentColor">W</text>
+        <circle cx={hubMidX + 15} cy={midY + 13} r={4} fill="#C9A96E" />
 
         {/* ── Line right: hub → providers ── */}
         <line x1={hubX2} y1={midY} x2={dstX1} y2={midY}
