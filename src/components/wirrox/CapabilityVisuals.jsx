@@ -78,7 +78,7 @@ function PayoutFlowDiagram() {
         <text x={hubMidX} y={hubY + 12} textAnchor="middle"
           fontSize={36} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
           className="wx-icon" fill="currentColor">W</text>
-        <circle cx={hubMidX + 16} cy={hubY + 14} r={4.5} fill="#C9A96E" />
+        <circle cx={hubMidX + 12} cy={hubY + 14} r={4.5} fill="#C9A96E" />
         <text x={hubMidX} y={hubY + 26} textAnchor="middle"
           fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
           ROUTING · COMPLIANCE

@@ -152,7 +152,7 @@ function ArchitectureDiagram() {
         <text x={hubMidX} y={midY + 11} textAnchor="middle"
           fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
           className="wx-icon" fill="currentColor">W</text>
-        <circle cx={hubMidX + 15} cy={midY + 13} r={4} fill="#C9A96E" />
+        <circle cx={hubMidX + 11} cy={midY + 13} r={4} fill="#C9A96E" />
 
         {/* ── Line right: hub → providers ── */}
         <line x1={hubX2} y1={midY} x2={dstX1} y2={midY}
