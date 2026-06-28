@@ -79,10 +79,10 @@ function PayoutFlowDiagram() {
           <animate attributeName="opacity" values="0;1;1;0"
             keyTimes="0;0.1;0.85;1" dur="0.75s" begin="0.15s" fill="remove" />
           <animateMotion dur="0.7s" begin="0.15s" fill="remove"
-            path={`M ${srcX2} ${hubY} L ${hubMidX + 16} ${hubY}`} />
+            path={`M ${srcX2} ${hubY} L ${hubMidX + 21} ${hubY}`} />
         </circle>
         {/* Step 2: dot sits at right side of W — W. logo moment */}
-        <circle cx={hubMidX + 16} cy={hubY} r={3.5} fill="#C9A96E" opacity={0}>
+        <circle cx={hubMidX + 21} cy={hubY} r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
             keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.85s" fill="remove" />
         </circle>
