@@ -142,7 +142,7 @@ function ArchitectureDiagram() {
         {/* ── WIRROX hub box ── */}
         <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={midY - 8} textAnchor="middle"
+        <text x={hubMidX} y={midY} textAnchor="middle"
           fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
           className="wx-icon" fill="currentColor">W</text>
         <text x={hubMidX} y={midY + 30} textAnchor="middle"
@@ -152,16 +152,18 @@ function ArchitectureDiagram() {
         </text>
 
         {/* ── Dots rendered LAST so they appear on top of hub box ── */}
+        {/* Dot enters from left, travels through W box to right edge */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="0.1s" fill="remove" />
-          <animateMotion dur="0.55s" begin="0.1s" fill="remove"
+            dur="0.7s" begin="0.1s" fill="remove" />
+          <animateMotion dur="0.7s" begin="0.1s" fill="remove"
             path={`M ${srcX2} ${midY} L ${hubX2} ${midY}`} />
         </circle>
+        {/* Dot pauses ~1s at right edge of W, then exits to providers */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="0.75s" fill="remove" />
-          <animateMotion dur="0.55s" begin="0.75s" fill="remove"
+            dur="0.55s" begin="1.8s" fill="remove" />
+          <animateMotion dur="0.55s" begin="1.8s" fill="remove"
             path={`M ${hubX2} ${midY} L ${dstX1} ${midY}`} />
         </circle>
 

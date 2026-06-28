@@ -33,8 +33,8 @@ function PayoutFlowDiagram() {
   const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
 
   // Animation timings (seconds)
-  const throughDur = 0.85;  // dot travels srcX2 → hubX2 (through W box)
-  const pauseAfter = 0.18;  // brief stop at right edge of W
+  const throughDur = 0.7;   // dot travels srcX2 → hubX2 (through W box)
+  const pauseAfter = 1.0;   // dot sits at right edge of W (W. logo moment)
   const fanDelay   = 0.15 + throughDur + pauseAfter;
   const fanDur     = 0.65;
   const dotDelay   = (i) => fanDelay + i * 0.1;
@@ -68,7 +68,7 @@ function PayoutFlowDiagram() {
         {/* ── WIRROX HUB BOX ── */}
         <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={hubY - 4} textAnchor="middle"
+        <text x={hubMidX} y={hubY} textAnchor="middle"
           fontSize={36} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
           className="wx-icon" fill="currentColor">W</text>
         <text x={hubMidX} y={hubY + 28} textAnchor="middle"
