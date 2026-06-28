@@ -33,10 +33,11 @@ function PayoutFlowDiagram() {
   const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
 
   // Animation timings (seconds)
-  const leftDur  = 0.55;
-  const fanDelay = 0.6;
-  const fanDur   = 0.7;
-  const dotDelay = (i) => fanDelay + i * 0.11;
+  const throughDur = 0.85;  // dot travels srcX2 → hubX2 (through W box)
+  const pauseAfter = 0.18;  // brief stop at right edge of W
+  const fanDelay   = 0.15 + throughDur + pauseAfter;
+  const fanDur     = 0.65;
+  const dotDelay   = (i) => fanDelay + i * 0.1;
 
   return (
     <div className="w-full overflow-x-auto">
@@ -64,21 +65,20 @@ function PayoutFlowDiagram() {
         <line x1={srcX2} y1={hubY} x2={hubX1} y2={hubY}
           stroke="var(--color-rule)" strokeWidth={1} />
 
-        {/* Dot: source → hub */}
+        {/* Dot: travels srcX2 → hubX2 (through the W box), then fans start */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur={`${leftDur}s`} begin="0.15s" fill="remove" />
-          <animateMotion dur={`${leftDur}s`} begin="0.15s" fill="remove"
-            path={`M ${srcX2} ${hubY} L ${hubX1} ${hubY}`} />
+            dur={`${throughDur}s`} begin="0.15s" fill="remove" />
+          <animateMotion dur={`${throughDur}s`} begin="0.15s" fill="remove"
+            path={`M ${srcX2} ${hubY} L ${hubX2} ${hubY}`} />
         </circle>
 
         {/* ── WIRROX HUB BOX ── */}
         <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={hubY + 12} textAnchor="middle"
+        <text x={hubMidX} y={hubY + 4} textAnchor="middle"
           fontSize={36} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
           className="wx-icon" fill="currentColor">W</text>
-        <circle cx={hubMidX + 12} cy={hubY + 14} r={4.5} fill="#C9A96E" />
         <text x={hubMidX} y={hubY + 26} textAnchor="middle"
           fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
           ROUTING · COMPLIANCE
