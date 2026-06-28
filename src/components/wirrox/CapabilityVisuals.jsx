@@ -33,11 +33,9 @@ function PayoutFlowDiagram() {
   const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
 
   // Animation timings (seconds)
-  const throughDur = 0.7;   // dot travels srcX2 → hubX2 (through W box)
-  const pauseAfter = 1.0;   // dot sits at right edge of W (W. logo moment)
-  const fanDelay   = 0.15 + throughDur + pauseAfter;
-  const fanDur     = 0.65;
-  const dotDelay   = (i) => fanDelay + i * 0.1;
+  const fanDelay = 1.9;   // fan starts after pause dot fades
+  const fanDur   = 0.65;
+  const dotDelay = (i) => fanDelay + i * 0.1;
 
   return (
     <div className="w-full overflow-x-auto">
@@ -76,12 +74,17 @@ function PayoutFlowDiagram() {
           ROUTING · COMPLIANCE
         </text>
 
-        {/* Dot: rendered AFTER hub box so it's visible on top — srcX2 → hubX2 */}
+        {/* Step 1: dot travels from source into W box */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur={`${throughDur}s`} begin="0.15s" fill="remove" />
-          <animateMotion dur={`${throughDur}s`} begin="0.15s" fill="remove"
+            keyTimes="0;0.1;0.85;1" dur="0.75s" begin="0.15s" fill="remove" />
+          <animateMotion dur="0.7s" begin="0.15s" fill="remove"
             path={`M ${srcX2} ${hubY} L ${hubX2} ${hubY}`} />
+        </circle>
+        {/* Step 2: dot sits visibly at right edge of W — the W. logo moment */}
+        <circle cx={hubX2} cy={hubY} r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.85s" fill="remove" />
         </circle>
 
         {/* ── FAN LINES + DOTS: hub → each destination ── */}

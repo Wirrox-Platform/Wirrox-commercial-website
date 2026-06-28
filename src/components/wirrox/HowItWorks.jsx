@@ -152,18 +152,23 @@ function ArchitectureDiagram() {
         </text>
 
         {/* ── Dots rendered LAST so they appear on top of hub box ── */}
-        {/* Dot enters from left, travels through W box to right edge */}
+        {/* Step 1: dot travels from client into W box */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.7s" begin="0.1s" fill="remove" />
+            keyTimes="0;0.1;0.85;1" dur="0.75s" begin="0.1s" fill="remove" />
           <animateMotion dur="0.7s" begin="0.1s" fill="remove"
             path={`M ${srcX2} ${midY} L ${hubX2} ${midY}`} />
         </circle>
-        {/* Dot pauses ~1s at right edge of W, then exits to providers */}
+        {/* Step 2: dot sits at right edge of W — W. logo moment */}
+        <circle cx={hubX2} cy={midY} r={3.5} fill="#C9A96E" opacity={0}>
+          <animate attributeName="opacity" values="0;1;1;0"
+            keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.8s" fill="remove" />
+        </circle>
+        {/* Step 3: dot exits to providers */}
         <circle r={3.5} fill="#C9A96E" opacity={0}>
           <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="1.8s" fill="remove" />
-          <animateMotion dur="0.55s" begin="1.8s" fill="remove"
+            dur="0.55s" begin="2.0s" fill="remove" />
+          <animateMotion dur="0.55s" begin="2.0s" fill="remove"
             path={`M ${hubX2} ${midY} L ${dstX1} ${midY}`} />
         </circle>
 
