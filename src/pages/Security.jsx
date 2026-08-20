@@ -109,7 +109,7 @@ export default function Security() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
             {controls.map((ctrl, i) => (
               <motion.div
                 key={ctrl.tag}
@@ -147,7 +147,7 @@ export default function Security() {
                 certification is part of our compliance roadmap.
               </p>
             </div>
-            <div className="border border-rule p-8 bg-white">
+            <div className="border border-rule rounded-lg p-8 bg-white shadow-panel">
               <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-bronze mb-5">
                 Key Principles
               </p>
@@ -181,7 +181,7 @@ export default function Security() {
             </p>
             <a
               href="mailto:compliance@wirrox.com"
-              className="inline-block px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.2em] hover:bg-bronze hover:text-ink transition-colors duration-300"
+              className="inline-block rounded-md px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               compliance@wirrox.com
             </a>

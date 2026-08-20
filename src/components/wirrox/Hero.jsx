@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import { RequestAccessTrigger } from "./RequestAccessContext";
+import { platformDestination } from "../../lib/platform-destination";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 22 },
@@ -85,30 +87,35 @@ export default function Hero() {
           className="mt-12 flex flex-wrap items-center gap-4"
           {...fadeUp(0.65)}
         >
-          <a
-            href="https://app.wirrox.com/request-access"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.2em] hover:bg-bronze hover:text-ink transition-colors duration-300"
+          <RequestAccessTrigger
+            className="rounded-md px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
           >
             Request Access
-          </a>
+          </RequestAccessTrigger>
           <a
-            href="https://app.wirrox.com/login"
+            href={platformDestination.loginUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+            className="rounded-md px-8 py-3.5 border border-rule bg-card text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
           >
             Login
           </a>
           <a
             href="#what-we-do"
             onClick={e => { e.preventDefault(); document.getElementById('what-we-do')?.scrollIntoView({ behavior: 'smooth' }); }}
-            className="px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+            className="rounded-md px-8 py-3.5 border border-rule bg-card text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
           >
             Explore Capabilities
           </a>
         </motion.div>
+
+        <motion.p
+          className="mt-4 flex items-center gap-2 text-xs text-muted-foreground"
+          {...fadeUp(0.7)}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
+          {platformDestination.statusLabel} · {platformDestination.hostLabel}
+        </motion.p>
 
         {/* Trust points */}
         <motion.div
@@ -122,7 +129,7 @@ export default function Hero() {
             "API-ready infrastructure",
           ].map((point) => (
             <div key={point} className="flex items-center gap-2">
-              <span className="w-[4px] h-[4px] bg-bronze flex-shrink-0" />
+              <span className="w-[4px] h-[4px] rounded-full bg-bronze flex-shrink-0" />
               <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
                 {point}
               </span>
@@ -153,7 +160,7 @@ export default function Hero() {
       {/* Scroll nudge */}
       <motion.button
         onClick={() => document.getElementById("what-we-do")?.scrollIntoView({ behavior: "smooth" })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 hover:opacity-80 transition-opacity"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-md flex flex-col items-center gap-2 p-2 opacity-40 hover:opacity-80 transition-opacity"
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
         aria-label="Scroll down"

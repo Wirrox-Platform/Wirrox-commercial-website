@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BrandWordmark from "./BrandWordmark";
+import { RequestAccessTrigger } from "./RequestAccessContext";
+import { platformDestination } from "../../lib/platform-destination";
 
 const navCols = [
   {
@@ -39,21 +42,26 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
-            <Link to="/" onClick={() => window.scrollTo(0, 0)} className="flex items-baseline gap-0 mb-4">
-              <span className="text-sm font-black tracking-[0.22em] text-ink">WIRROX</span>
-              <span className="text-sm font-black text-bronze">.</span>
+            <Link
+              to="/"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-flex rounded-md mb-4"
+              aria-label="WIRROX home"
+            >
+              <BrandWordmark className="w-[138px]" />
             </Link>
             <p className="text-sm text-muted-foreground leading-[1.7] max-w-xs mb-6">
               Compliance-first financial infrastructure for global B2B payment operations.
             </p>
-            <a
-              href="https://app.wirrox.com/request-access"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-[10px] font-mono uppercase tracking-[0.2em] px-5 py-2.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
+            <RequestAccessTrigger
+              className="inline-block rounded-md text-[10px] font-mono uppercase tracking-[0.18em] px-5 py-2.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               Request Access
-            </a>
+            </RequestAccessTrigger>
+            <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
+              {platformDestination.statusLabel}
+            </p>
           </div>
 
           {/* Nav cols */}
@@ -89,7 +97,7 @@ export default function Footer() {
         </div>
 
         {/* Compliance notice */}
-        <div className="border border-rule p-5 mb-10 bg-canvas">
+        <div className="border border-rule rounded-lg p-5 mb-10 bg-card shadow-panel">
           <p className="text-[11px] font-mono text-muted-foreground leading-[1.75]">
             <span className="text-bronze uppercase tracking-[0.18em] mr-2">Notice:</span>
             WIRROX operates as a technology infrastructure provider. It does not hold client funds,

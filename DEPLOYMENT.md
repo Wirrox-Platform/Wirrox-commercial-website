@@ -55,13 +55,25 @@ This ensures all routes (e.g. `/capabilities`, `/security`) are correctly handle
 
 ## Environment Variables
 
-No environment variables are required for the commercial website. The site is fully static.
+The site is static, but Request Access and Login destinations are environment-aware.
+
+| Variable | Values | Behavior |
+|---|---|---|
+| `VITE_WIRROX_APP_ENV` | `auto` (default), `sandbox`, `production` | Selects the WIRROX application destination |
+
+With `auto`, `wirrox.com` and `www.wirrox.com` resolve to production. Localhost,
+Cloudflare `*.pages.dev` previews, and other preview hosts resolve to sandbox.
+Set the variable explicitly when a deployment uses a custom hostname.
+
+Production Request Access remains invitation-only. This website setting only selects
+the destination; it does not enable registration or change onboarding approval gates.
 
 ## Key URLs
 
 | Purpose | URL |
 |---------|-----|
-| Request Access CTA | https://app.wirrox.com/request-access |
+| Preview / sandbox Request Access | https://sandbox.app.wirrox.com/request-access |
+| Production Request Access (invitation-only) | https://app.wirrox.com/request-access |
 | General support | support@wirrox.com |
 | Onboarding | onboarding@wirrox.com |
 | Compliance | compliance@wirrox.com |

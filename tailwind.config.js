@@ -5,13 +5,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['Inter', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'var(--radius)',
-        sm: 'var(--radius)',
+        lg: 'var(--radius-card)',
+        md: 'var(--radius-control)',
+        sm: 'var(--radius-control)',
+      },
+      boxShadow: {
+        panel: 'var(--shadow-panel)',
+        pop: 'var(--shadow-pop)',
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -20,6 +24,8 @@ module.exports = {
         /* Explicit palette — mapped to CSS vars for dark mode support */
         ink: 'var(--color-ink)',
         canvas: 'var(--color-canvas)',
+        surface: 'var(--color-surface)',
+        'surface-secondary': 'var(--color-surface-secondary)',
         bronze: {
           DEFAULT: '#C9A96E',
           deep: '#9A7A44',

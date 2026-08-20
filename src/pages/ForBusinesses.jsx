@@ -4,6 +4,8 @@ import { Building2, Users, Globe, ArrowRightLeft, Banknote, Layers, ArrowUpRight
 import Navbar from "../components/wirrox/Navbar";
 import Footer from "../components/wirrox/Footer";
 import SectionLabel from "../components/wirrox/SectionLabel";
+import { RequestAccessTrigger } from "../components/wirrox/RequestAccessContext";
+import { platformDestination } from "../lib/platform-destination";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -130,22 +132,23 @@ export default function ForBusinesses() {
             review required before any operational feature is unlocked.
           </motion.p>
           <motion.div className="flex flex-wrap gap-4" {...fadeUp(0.52)}>
-            <a
-              href="https://app.wirrox.com/request-access"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.2em] hover:bg-bronze hover:text-ink transition-colors duration-300"
+            <RequestAccessTrigger
+              className="inline-flex items-center gap-2 rounded-md px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               Request Access
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            </RequestAccessTrigger>
             <a
               href="mailto:onboarding@wirrox.com"
-              className="inline-block px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+              className="inline-block rounded-md px-8 py-3.5 border border-rule bg-card text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
             >
               Contact Onboarding
             </a>
           </motion.div>
+          <motion.p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground" {...fadeUp(0.58)}>
+            <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
+            {platformDestination.statusLabel}
+          </motion.p>
         </div>
       </section>
 
@@ -165,7 +168,7 @@ export default function ForBusinesses() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
             {segments.map((seg, i) => (
               <motion.div
                 key={seg.title}
@@ -184,7 +187,7 @@ export default function ForBusinesses() {
                 <ul className="space-y-2 pt-5 border-t border-rule">
                   {seg.requirements.map((req) => (
                     <li key={req} className="flex items-start gap-2.5">
-                      <span className="w-[4px] h-[4px] bg-bronze flex-shrink-0 mt-[7px]" />
+                      <span className="w-[4px] h-[4px] rounded-full bg-bronze flex-shrink-0 mt-[7px]" />
                       <span className="text-[11px] font-mono text-muted-foreground">{req}</span>
                     </li>
                   ))}
@@ -212,13 +215,13 @@ export default function ForBusinesses() {
               </p>
               <a
                 href="mailto:onboarding@wirrox.com"
-                className="inline-block text-[11px] font-mono uppercase tracking-[0.2em] px-8 py-3.5 border border-rule text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+                className="inline-block rounded-md text-[11px] font-mono uppercase tracking-[0.18em] px-8 py-3.5 border border-rule bg-card text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
               >
                 Onboarding enquiries
               </a>
             </div>
 
-            <div className="border border-rule p-8 lg:p-10 bg-white">
+            <div className="border border-rule rounded-lg p-8 lg:p-10 bg-white shadow-panel">
               <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-bronze mb-6">
                 Requirements
               </p>
@@ -256,22 +259,23 @@ export default function ForBusinesses() {
               application and respond within two business days.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="https://app.wirrox.com/request-access"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-10 py-4 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.2em] hover:bg-bronze hover:text-ink transition-colors duration-300"
+              <RequestAccessTrigger
+                className="inline-flex items-center gap-2 rounded-md px-10 py-4 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
               >
                 Request Access
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+              </RequestAccessTrigger>
               <a
                 href="mailto:support@wirrox.com"
-                className="inline-block px-10 py-4 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+                className="inline-block rounded-md px-10 py-4 border border-rule bg-card text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
               >
                 Contact Us
               </a>
             </div>
+            <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
+              {platformDestination.statusLabel}
+            </p>
           </motion.div>
         </div>
       </section>

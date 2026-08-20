@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { RequestAccessTrigger } from "../wirrox/RequestAccessContext";
+import { platformDestination } from "../../lib/platform-destination";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -44,22 +46,23 @@ export default function CapabilitiesHero() {
         </motion.p>
 
         <motion.div className="flex flex-wrap gap-4" {...fadeUp(0.52)}>
-          <a
-            href="https://app.wirrox.com/request-access"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.2em] hover:bg-bronze hover:text-ink transition-colors duration-300"
+          <RequestAccessTrigger
+            className="inline-flex items-center gap-2 rounded-md px-8 py-3.5 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
           >
             Request Access
             <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+          </RequestAccessTrigger>
           <a
             href="mailto:support@wirrox.com"
-            className="inline-block px-8 py-3.5 border border-rule text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
+            className="inline-block rounded-md px-8 py-3.5 border border-rule bg-card text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink hover:border-ink/20 transition-colors duration-300"
           >
             Contact Sales
           </a>
         </motion.div>
+        <motion.p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground" {...fadeUp(0.58)}>
+          <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
+          {platformDestination.statusLabel}
+        </motion.p>
       </div>
     </section>
   );

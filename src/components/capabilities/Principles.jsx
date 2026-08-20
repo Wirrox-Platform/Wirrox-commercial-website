@@ -30,7 +30,7 @@ export default function Principles() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-0 border border-rule">
+        <div className="grid md:grid-cols-3 gap-0 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
           {principles.map((p, i) => (
             <motion.div
               key={p.title}
