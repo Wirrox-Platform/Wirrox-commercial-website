@@ -104,7 +104,7 @@ export default function About() {
               { label: "Onboarding", email: "onboarding@wirrox.com" },
               { label: "Compliance", email: "compliance@wirrox.com" },
             ].map((contact) => (
-              <div key={contact.label} className="border border-rule p-8">
+              <div key={contact.label} className="border border-rule rounded-lg p-8 bg-card shadow-panel">
                 <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-bronze mb-4">
                   {contact.label}
                 </p>

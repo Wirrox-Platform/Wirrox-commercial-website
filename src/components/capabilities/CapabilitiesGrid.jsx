@@ -52,7 +52,7 @@ export default function CapabilitiesGrid() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
           {capabilities.map((cap, i) => (
             <motion.div
               key={cap.title}

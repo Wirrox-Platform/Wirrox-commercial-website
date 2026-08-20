@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
+import BrandIcon from "./BrandIcon";
 
 /* ─── Payout Flow Diagram ─────────────────────────────────────────── */
 const destinations = [
@@ -43,10 +44,10 @@ function PayoutFlowDiagram() {
         className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
 
         {/* ── SOURCE BOX ── */}
-        <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104}
+        <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104} rx={8}
           fill="none" stroke="var(--color-rule)" strokeWidth={1} />
         <text x={srcMidX} y={hubY - 26} textAnchor="middle"
-          fontSize={9} fontFamily="JetBrains Mono,monospace" letterSpacing={2.5} fill="#C9A96E">
+          fontSize={9} fontFamily="Inter,monospace" letterSpacing={2.5} fill="#C9A96E">
           FUNDING ACCOUNT
         </text>
         <text x={srcMidX} y={hubY + 8} textAnchor="middle"
@@ -54,7 +55,7 @@ function PayoutFlowDiagram() {
           $250,000
         </text>
         <text x={srcMidX} y={hubY + 30} textAnchor="middle"
-          fontSize={8.5} fontFamily="JetBrains Mono,monospace" letterSpacing={1.5}
+          fontSize={8.5} fontFamily="Inter,monospace" letterSpacing={1.5}
           fill="var(--color-ink)" opacity={0.35}>
           USD · AVAILABLE
         </text>
@@ -64,13 +65,14 @@ function PayoutFlowDiagram() {
           stroke="var(--color-rule)" strokeWidth={1} />
 
         {/* ── WIRROX HUB BOX ── */}
-        <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80}
+        <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80} rx={8}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={hubY} textAnchor="middle"
-          fontSize={36} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
-          className="wx-icon" fill="currentColor">W</text>
+        <image className="brand-svg-icon--light" href="/favicon.svg"
+          x={hubMidX - 18} y={hubY - 23} width={36} height={36} />
+        <image className="brand-svg-icon--dark" href="/brand/WIRROX_Favicon_Platform_Dark.svg"
+          x={hubMidX - 18} y={hubY - 23} width={36} height={36} />
         <text x={hubMidX} y={hubY + 28} textAnchor="middle"
-          fontSize={7.5} fontFamily="JetBrains Mono,monospace" letterSpacing={2} fill="#C9A96E">
+          fontSize={7.5} fontFamily="Inter,monospace" letterSpacing={2} fill="#C9A96E">
           ROUTING · COMPLIANCE
         </text>
 
@@ -112,7 +114,7 @@ function PayoutFlowDiagram() {
                 fill="none" stroke="var(--color-rule)" strokeWidth={1}
                 style={{ borderTop: i > 0 ? "none" : undefined }} />
               <text x={(dstX1 + dstX2) / 2} y={dy - 8} textAnchor="middle"
-                fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+                fontSize={8} fontFamily="Inter,monospace" letterSpacing={2}
                 fill="var(--color-ink)" opacity={0.4}>
                 {dest.label.toUpperCase()}
               </text>
@@ -153,7 +155,7 @@ function MobilePayoutFlow() {
     <div className="flex flex-col items-center w-full">
 
       {/* Source box */}
-      <div className="border border-rule p-4 text-center w-full">
+      <div className="border border-rule rounded-lg p-4 text-center w-full bg-card shadow-panel">
         <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">
           Funding Account
         </p>
@@ -178,15 +180,11 @@ function MobilePayoutFlow() {
       </svg>
 
       {/* WIRROX hub — WX icon */}
-      <div className="border border-bronze bg-bronze-subtle px-8 py-4 text-center w-full flex flex-col items-center gap-2">
+      <div className="border border-bronze rounded-lg bg-bronze-subtle px-8 py-4 text-center w-full flex flex-col items-center gap-2">
         <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">
           Infrastructure
         </p>
-        <span className="relative inline-flex items-end">
-          <span className="wx-icon text-[30px] leading-none"
-            style={{ fontFamily: 'Arial Black, Arial, sans-serif', fontWeight: 900 }}>W</span>
-          <span className="w-2 h-2 rounded-full bg-bronze mb-0.5 ml-0.5 flex-shrink-0" />
-        </span>
+        <BrandIcon className="h-10 w-10 rounded-md" />
         <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze">
           Routing · Compliance
         </p>
@@ -216,7 +214,7 @@ function MobilePayoutFlow() {
       </svg>
 
       {/* Destination grid */}
-      <div className="w-full grid grid-cols-2 border border-rule" style={{ marginTop: -1 }}>
+      <div className="w-full grid grid-cols-2 border border-rule rounded-lg overflow-hidden bg-card" style={{ marginTop: -1 }}>
         {destinations.map((dest, i) => (
           <motion.div
             key={dest.label}
@@ -253,7 +251,7 @@ const complianceSteps = [
 
 function ComplianceGateway() {
   return (
-    <div className="border border-rule bg-canvas overflow-hidden">
+    <div className="border border-rule rounded-lg bg-canvas overflow-hidden shadow-panel">
       {/* Header bar — matches app style */}
       <div className="px-6 py-4 border-b border-rule bg-white flex items-center justify-between">
         <div>
@@ -283,18 +281,18 @@ function ComplianceGateway() {
             <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
               {step.status === "done" && (
                 <svg viewBox="0 0 20 20" className="w-5 h-5">
-                  <rect width={20} height={20} fill="#C9A96E" opacity={0.12} />
+                  <rect width={20} height={20} rx={4} fill="#C9A96E" opacity={0.12} />
                   <path d="M5 10l3 3L15 7" stroke="#C9A96E" strokeWidth={1.5}
                     fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
               {step.status === "active" && (
-                <motion.div className="w-2.5 h-2.5 bg-bronze"
+                <motion.div className="w-2.5 h-2.5 rounded-sm bg-bronze"
                   animate={{ opacity: [1, 0.3, 1] }}
                   transition={{ duration: 1.2, repeat: Infinity }} />
               )}
               {step.status === "pending" && (
-                <div className="w-2.5 h-2.5 border border-rule" />
+                <div className="w-2.5 h-2.5 rounded-sm border border-rule" />
               )}
             </div>
             <span className={`text-[11px] font-mono tracking-[0.03em] flex-1 ${
@@ -350,12 +348,12 @@ const recentPayouts = [
 
 function DashboardPreview() {
   return (
-    <div className="border border-rule overflow-hidden flex" style={{ minHeight: 420 }}>
+    <div className="border border-rule rounded-lg overflow-hidden flex shadow-panel" style={{ minHeight: 420 }}>
 
       {/* Sidebar — hidden on mobile */}
       <div className="hidden sm:flex w-40 flex-shrink-0 border-r border-rule bg-canvas flex-col">
         <div className="px-4 py-5 border-b border-rule">
-          <p className="text-[13px] font-black tracking-[0.12em] text-ink">WIRROX</p>
+          <BrandIcon className="h-6 w-6 rounded-md" />
           <p className="text-[8px] font-mono uppercase tracking-[0.25em] text-bronze mt-0.5">Treasury</p>
         </div>
         <nav className="flex-1 py-3">
@@ -398,7 +396,7 @@ function DashboardPreview() {
 
         <div className="p-5 space-y-4">
           {/* Balance block */}
-          <div className="border border-rule p-4 bg-canvas">
+          <div className="border border-rule rounded-lg p-4 bg-canvas shadow-panel">
             <p className="text-[8px] font-mono uppercase tracking-[0.25em] text-muted-foreground mb-2">
               Available Balance
             </p>
@@ -424,7 +422,7 @@ function DashboardPreview() {
           </div>
 
           {/* Recent payouts */}
-          <div className="border border-rule">
+          <div className="border border-rule rounded-lg overflow-hidden bg-card">
             <div className="px-4 py-3 border-b border-rule">
               <p className="text-[8px] font-mono uppercase tracking-[0.25em] text-bronze">
                 Recent Payouts
@@ -439,7 +437,7 @@ function DashboardPreview() {
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-[11px] font-mono font-medium text-ink">{p.amount}</span>
-                  <span className={`text-[8px] font-mono px-2 py-0.5 ${
+                  <span className={`text-[8px] font-mono rounded-full px-2 py-0.5 ${
                     p.status === "Settled"
                       ? "bg-green-50 text-green-700"
                       : "bg-bronze/10 text-bronze"
@@ -476,7 +474,7 @@ export default function CapabilityVisuals() {
 
         {/* Payout flow — full width */}
         <motion.div
-          className="border border-rule p-6 lg:p-14 bg-canvas mb-16"
+          className="border border-rule rounded-lg p-6 lg:p-14 bg-canvas mb-16 shadow-panel"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

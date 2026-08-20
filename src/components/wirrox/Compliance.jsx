@@ -69,7 +69,7 @@ export default function Compliance() {
           </div>
 
           {/* Callout box */}
-          <div className="relative border border-rule p-8 lg:p-10 bg-canvas">
+          <div className="relative border border-rule rounded-lg p-8 lg:p-10 bg-canvas shadow-panel">
             <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-bronze mb-5">
               Compliance Notice
             </p>
@@ -104,7 +104,7 @@ export default function Compliance() {
         </div>
 
         {/* Protocol grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
           {protocols.map((protocol, i) => (
             <motion.div
               key={protocol.tag}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { platformDestination } from "../../lib/platform-destination";
 
 const steps = [
   {
@@ -7,7 +8,7 @@ const steps = [
     title: "Request Access",
     desc: "Business submits an access request through the WIRROX platform. Email verification is required to initiate the onboarding process.",
     details: [
-      { label: "Channel",        val: "app.wirrox.com",  highlight: false },
+      { label: "Channel",        val: platformDestination.hostLabel,  highlight: false },
       { label: "Email verified", val: "Required",        highlight: false },
       { label: "Status",        val: "Submitted",        highlight: false },
     ],
@@ -64,18 +65,18 @@ const steps = [
   },
 ];
 
-// Always-dark palette (ignores light/dark mode toggle)
+// Theme-aware palette shared with the commercial-site and Treasury surfaces.
 const D = {
-  bg:      "#0F0F0F",
-  card:    "#111111",
-  border:  "#1E1E1E",
-  rule:    "#2A2A2A",
+  bg:      "var(--color-canvas)",
+  card:    "var(--color-surface)",
+  border:  "var(--color-rule)",
+  rule:    "var(--color-rule)",
   bronze:  "#C9A96E",
-  bronzeSubtle: "#1A160E",
-  ink:     "#F2F2F2",
-  muted:   "#666666",
-  faint:   "#333333",
-  green:   "#4ade80",
+  bronzeSubtle: "var(--color-bronze-subtle)",
+  ink:     "var(--color-ink)",
+  muted:   "hsl(var(--muted-foreground))",
+  faint:   "hsl(var(--muted-foreground))",
+  green:   "#188659",
 };
 
 export default function OnboardingFlow() {
@@ -117,7 +118,7 @@ export default function OnboardingFlow() {
         <div style={{ marginBottom: '3.5rem' }}>
           <div className="flex items-center gap-3 mb-8">
             <span style={{ width: 20, height: 1, backgroundColor: D.bronze, display: 'block' }} />
-            <span style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase' }}>
+            <span style={{ fontSize: 10, fontFamily: 'Inter, monospace', letterSpacing: '0.3em', color: D.bronze, textTransform: 'uppercase' }}>
               Client Onboarding
             </span>
           </div>
@@ -144,10 +145,10 @@ export default function OnboardingFlow() {
               />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-              <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.2em', color: D.faint, textTransform: 'uppercase' }}>
+              <span style={{ fontSize: 9, fontFamily: 'Inter, monospace', letterSpacing: '0.2em', color: D.faint, textTransform: 'uppercase' }}>
                 Progress
               </span>
-              <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', color: D.bronze }}>
+              <span style={{ fontSize: 9, fontFamily: 'Inter, monospace', color: D.bronze }}>
                 {current + 1} / {steps.length}
               </span>
             </div>
@@ -188,6 +189,7 @@ export default function OnboardingFlow() {
                     border: `1px solid ${state === 'pending' ? D.rule : D.bronze}`,
                     backgroundColor: state === 'active' ? D.bronze : state === 'done' ? D.bronzeSubtle : D.bg,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    borderRadius: 6,
                     transition: 'all 0.3s',
                   }}>
                     {state === 'done' && (
@@ -197,13 +199,13 @@ export default function OnboardingFlow() {
                     )}
                     {state === 'active' && (
                       <motion.div
-                        style={{ width: 8, height: 8, backgroundColor: D.bg }}
+                        style={{ width: 8, height: 8, borderRadius: 999, backgroundColor: D.bg }}
                         animate={{ opacity: [1, 0.4, 1] }}
                         transition={{ duration: 1.2, repeat: Infinity }}
                       />
                     )}
                     {state === 'pending' && (
-                      <span style={{ fontSize: 9, fontFamily: 'JetBrains Mono, monospace', color: D.faint }}>
+                      <span style={{ fontSize: 9, fontFamily: 'Inter, monospace', color: D.faint }}>
                         {step.tag}
                       </span>
                     )}
@@ -212,7 +214,7 @@ export default function OnboardingFlow() {
 
                 {/* Content */}
                 <div style={{ flex: 1, paddingBottom: 28, paddingTop: 5 }}>
-                  <p style={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.25em', color: D.bronze, textTransform: 'uppercase', marginBottom: 3 }}>
+                  <p style={{ fontSize: 8, fontFamily: 'Inter, monospace', letterSpacing: '0.25em', color: D.bronze, textTransform: 'uppercase', marginBottom: 3 }}>
                     Step {step.tag}
                   </p>
                   <p style={{
@@ -229,7 +231,7 @@ export default function OnboardingFlow() {
                 {/* Done badge */}
                 {state === 'done' && (
                   <div style={{ paddingTop: 8, flexShrink: 0 }}>
-                    <span style={{ fontSize: 8, fontFamily: 'JetBrains Mono, monospace', color: D.bronze, letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.6 }}>
+                    <span style={{ fontSize: 8, fontFamily: 'Inter, monospace', color: D.bronze, letterSpacing: '0.15em', textTransform: 'uppercase', opacity: 0.6 }}>
                       Done
                     </span>
                   </div>
@@ -248,9 +250,9 @@ export default function OnboardingFlow() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{ border: `1px solid ${D.bronze}`, backgroundColor: D.bronzeSubtle, padding: '2rem' }}
+                style={{ border: `1px solid ${D.bronze}`, borderRadius: 8, backgroundColor: D.bronzeSubtle, padding: '2rem', boxShadow: 'var(--shadow-panel)' }}
               >
-                <p style={{ fontSize: 10, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.25em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
+                <p style={{ fontSize: 10, fontFamily: 'Inter, monospace', letterSpacing: '0.25em', color: D.bronze, textTransform: 'uppercase', marginBottom: 8 }}>
                   Step {steps[current].tag} · Active
                 </p>
                 <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: D.ink, marginBottom: 10 }}>
@@ -262,10 +264,10 @@ export default function OnboardingFlow() {
                 <div style={{ borderTop: `1px solid ${D.rule}`, paddingTop: 16 }}>
                   {steps[current].details.map((d) => (
                     <div key={d.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '7px 0', borderBottom: `1px solid ${D.rule}` }}>
-                      <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.12em', color: D.faint, textTransform: 'uppercase' }}>
+                      <span style={{ fontSize: 11, fontFamily: 'Inter, monospace', letterSpacing: '0.12em', color: D.faint, textTransform: 'uppercase' }}>
                         {d.label}
                       </span>
-                      <span style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: d.highlight ? D.green : D.muted }}>
+                      <span style={{ fontSize: 11, fontFamily: 'Inter, monospace', color: d.highlight ? D.green : D.muted }}>
                         {d.val}
                       </span>
                     </div>
@@ -278,6 +280,7 @@ export default function OnboardingFlow() {
                     <div key={i} onClick={() => setCurrent(i)} style={{
                       width: i === current ? 16 : 6, height: 6,
                       backgroundColor: i <= current ? D.bronze : D.rule,
+                      borderRadius: 999,
                       cursor: 'pointer',
                       transition: 'all 0.3s',
                     }} />
@@ -291,7 +294,7 @@ export default function OnboardingFlow() {
 
         {/* Bottom note */}
         <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${D.rule}` }}>
-          <p style={{ fontSize: 11, fontFamily: 'JetBrains Mono, monospace', color: D.faint, lineHeight: 1.7 }}>
+          <p style={{ fontSize: 11, fontFamily: 'Inter, monospace', color: D.faint, lineHeight: 1.7 }}>
             <span style={{ color: D.bronze, marginRight: 8 }}>Note —</span>
             WIRROX coordinates provider-side onboarding on behalf of approved clients.
             The client-facing journey remains WIRROX-branded throughout.

@@ -40,7 +40,7 @@ export default function UseCaseMapping() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-0 border border-rule">
+        <div className="grid md:grid-cols-3 gap-0 border border-rule rounded-lg overflow-hidden bg-card shadow-panel">
           {useCases.map((uc, i) => (
             <motion.div
               key={uc.title}

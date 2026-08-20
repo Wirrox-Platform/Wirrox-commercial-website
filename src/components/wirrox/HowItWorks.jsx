@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
+import BrandIcon from "./BrandIcon";
 
 const steps = [
   {
@@ -52,13 +53,9 @@ function MobileArchDiagram({ animKey }) {
       </svg>
 
       {/* WIRROX hub */}
-      <div className="border border-bronze bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
+      <div className="border border-bronze rounded-lg bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
         <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">Infrastructure</p>
-        <span className="relative inline-flex items-end">
-          <span className="wx-icon text-[28px] leading-none"
-            style={{ fontFamily: 'Arial Black, Arial, sans-serif', fontWeight: 900 }}>W</span>
-          <span className="w-2 h-2 rounded-full bg-bronze mb-0.5 ml-0.5 flex-shrink-0" />
-        </span>
+        <BrandIcon className="h-9 w-9 rounded-md" />
       </div>
 
       {/* Animated line down: hub → providers */}
@@ -103,7 +100,7 @@ function ArchitectureDiagram() {
 
   return (
     <motion.div
-      className="mt-24 border border-rule bg-canvas overflow-hidden"
+      className="mt-24 border border-rule rounded-lg bg-canvas overflow-hidden shadow-panel"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -118,7 +115,7 @@ function ArchitectureDiagram() {
 
         {/* ── CLIENT label + text ── */}
         <text x={leftX} y={midY - 18} fontSize={8.5}
-          fontFamily="JetBrains Mono,monospace" letterSpacing={2.5}
+          fontFamily="Inter,monospace" letterSpacing={2.5}
           fill="var(--color-ink)" opacity={0.4}>
           CLIENT
         </text>
@@ -140,13 +137,14 @@ function ArchitectureDiagram() {
           stroke="var(--color-rule)" strokeWidth={1} />
 
         {/* ── WIRROX hub box ── */}
-        <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76}
+        <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76} rx={8}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <text x={hubMidX} y={midY} textAnchor="middle"
-          fontSize={34} fontFamily="Arial Black, Arial, sans-serif" fontWeight={900}
-          className="wx-icon" fill="currentColor">W</text>
+        <image className="brand-svg-icon--light" href="/favicon.svg"
+          x={hubMidX - 18} y={midY - 23} width={36} height={36} />
+        <image className="brand-svg-icon--dark" href="/brand/WIRROX_Favicon_Platform_Dark.svg"
+          x={hubMidX - 18} y={midY - 23} width={36} height={36} />
         <text x={hubMidX} y={midY + 30} textAnchor="middle"
-          fontSize={8} fontFamily="JetBrains Mono,monospace" letterSpacing={2}
+          fontSize={8} fontFamily="Inter,monospace" letterSpacing={2}
           fill="#C9A96E">
           INFRASTRUCTURE
         </text>
@@ -174,7 +172,7 @@ function ArchitectureDiagram() {
 
         {/* ── EXECUTION label + text ── */}
         <text x={rightX} y={midY - 18} textAnchor="end" fontSize={8.5}
-          fontFamily="JetBrains Mono,monospace" letterSpacing={2.5}
+          fontFamily="Inter,monospace" letterSpacing={2.5}
           fill="var(--color-ink)" opacity={0.4}>
           EXECUTION
         </text>
