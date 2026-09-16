@@ -111,7 +111,7 @@ export default function Navbar() {
               href={platformDestination.loginUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden xl:block rounded-md text-[11px] font-mono uppercase tracking-[0.16em] px-5 py-2.5 border border-bronze text-bronze hover:bg-bronze hover:text-ink transition-colors duration-300"
+              className="hidden lg:block rounded-md text-[9px] xl:text-[11px] font-mono uppercase tracking-[0.12em] px-3 xl:px-5 py-2.5 border border-bronze text-bronze hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               Login
             </a>

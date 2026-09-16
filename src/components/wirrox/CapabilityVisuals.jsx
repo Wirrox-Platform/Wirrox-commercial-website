@@ -44,18 +44,18 @@ function PayoutFlowDiagram() {
       );
     };
     const out = [
-      `@keyframes wx-dot { 0% { cx:${srcX2}; r:4; opacity:1 } 17.5% { cx:${pauseX}; r:4; opacity:1 } 26% { cx:${pauseX}; r:5.6; opacity:1 } 34.9% { cx:${pauseX}; r:4; opacity:1 } 35%,100% { cx:${pauseX}; r:4; opacity:0 } }`,
+      `@keyframes wx-dot { 0% { cx:${srcX2}px; r:4px; opacity:1 } 17.5% { cx:${pauseX}px; r:4px; opacity:1 } 26% { cx:${pauseX}px; r:5.6px; opacity:1 } 34.9% { cx:${pauseX}px; r:4px; opacity:1 } 35%,100% { cx:${pauseX}px; r:4px; opacity:0 } }`,
       `@keyframes wx-halo { 0%,17.5% { opacity:0 } 26% { opacity:0.3 } 35%,100% { opacity:0 } }`,
     ];
     destYs.forEach((dy, i) => {
       const a = 35 + i * 1.4, b = a + 17.5;
       const frames = [
-        `0% { cx:${hubX2}; cy:${hubY}; opacity:0 }`,
-        `${pct(a - 0.1)} { cx:${hubX2}; cy:${hubY}; opacity:0 }`,
+        `0% { cx:${hubX2}px; cy:${hubY}px; opacity:0 }`,
+        `${pct(a - 0.1)} { cx:${hubX2}px; cy:${hubY}px; opacity:0 }`,
       ];
       for (let k = 0; k <= 10; k++) {
         const [x, y] = point(k / 10, dy);
-        frames.push(`${pct(a + (b - a) * (k / 10))} { cx:${x.toFixed(1)}; cy:${y.toFixed(1)}; opacity:1 }`);
+        frames.push(`${pct(a + (b - a) * (k / 10))} { cx:${x.toFixed(1)}px; cy:${y.toFixed(1)}px; opacity:1 }`);
       }
       frames.push(`${pct(b + 0.1)} { opacity:0 }`, `100% { opacity:0 }`);
       out.push(`@keyframes wx-fan-${i} { ${frames.join(" ")} }`);
