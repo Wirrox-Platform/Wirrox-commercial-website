@@ -233,39 +233,11 @@
   font-family: var(--font-mono);
 }
 
-/* Four-second flow timing carried over from the Claude Design homepage. */
-@keyframes architecture-entry {
-  0% { transform: translateX(0); opacity: 1; }
-  20%, 41.9% { transform: translateX(251px); opacity: 1; }
-  42%, 100% { transform: translateX(251px); opacity: 0; }
+@keyframes payout-flash {
+  0%, 85% { opacity: 0; }
+  88% { opacity: .2; }
+  98%, 100% { opacity: 0; }
 }
-@keyframes architecture-halo {
-  0%, 20% { opacity: 0; }
-  30% { opacity: 0.3; }
-  42%, 100% { opacity: 0; }
-}
-@keyframes architecture-exit {
-  0%, 43.9% { transform: translateX(0); opacity: 0; }
-  44% { transform: translateX(0); opacity: 1; }
-  60% { transform: translateX(140px); opacity: 1; }
-  60.1%, 100% { transform: translateX(140px); opacity: 0; }
-}
-@keyframes architecture-mobile-entry {
-  0% { transform: translateY(0); opacity: 1; }
-  20% { transform: translateY(48px); opacity: 1; }
-  20.1%, 100% { transform: translateY(48px); opacity: 0; }
-}
-@keyframes architecture-mobile-exit {
-  0%, 43.9% { transform: translateY(0); opacity: 0; }
-  44% { transform: translateY(0); opacity: 1; }
-  60% { transform: translateY(48px); opacity: 1; }
-  60.1%, 100% { transform: translateY(48px); opacity: 0; }
-}
-.architecture-dot { animation: architecture-entry 4s linear infinite; }
-.architecture-halo { animation: architecture-halo 4s linear infinite; }
-.architecture-exit { animation: architecture-exit 4s linear infinite; }
-.architecture-mobile-entry { animation: architecture-mobile-entry 4s linear infinite; }
-.architecture-mobile-exit { animation: architecture-mobile-exit 4s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

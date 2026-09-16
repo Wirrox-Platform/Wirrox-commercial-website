@@ -180,9 +180,6 @@ export default function Navbar() {
                 className="block w-full rounded-md text-center text-[11px] font-mono uppercase tracking-[0.16em] px-6 py-3.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
               >
                 Request Access
-                <span className="mt-1 block text-[9px] normal-case tracking-normal opacity-70">
-                  {platformDestination.statusLabel}
-                </span>
               </RequestAccessTrigger>
             </div>
           </motion.div>
