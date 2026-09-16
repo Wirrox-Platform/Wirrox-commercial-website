@@ -17,12 +17,20 @@ export default function Navbar() {
     const next = !dark;
     setDark(next);
     document.documentElement.classList.toggle("dark", next);
+    try { localStorage.setItem("wirrox-theme", next ? "dark" : "light"); } catch { /* Storage can be disabled. */ }
   };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 32);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeMenu = () => setMobileOpen(false);
+    desktop.addEventListener("change", closeMenu);
+    return () => desktop.removeEventListener("change", closeMenu);
   }, []);
 
   const scrollTo = (id) => {
@@ -44,7 +52,7 @@ export default function Navbar() {
     { label: "About", href: "/about" },
   ];
 
-  const linkClass = "text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground hover:text-ink transition-colors duration-300";
+  const linkClass = "whitespace-nowrap text-[9px] xl:text-[11px] font-mono uppercase tracking-[0.12em] xl:tracking-[0.18em] text-muted-foreground hover:text-ink transition-colors duration-300";
 
   return (
     <motion.nav
@@ -57,13 +65,13 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+      <div className="max-w-7xl mx-auto px-6 xl:px-16">
         <div className="flex items-center justify-between h-16 lg:h-20">
 
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center rounded-md focus-visible:outline-none"
+            className="flex shrink-0 items-center rounded-md focus-visible:outline-none"
             onClick={() => window.scrollTo(0, 0)}
             aria-label="WIRROX home"
           >
@@ -71,7 +79,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden xl:flex items-center gap-10">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5">
             {navLinks.map((link) =>
               link.href ? (
                 <Link
@@ -91,7 +99,7 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-2 xl:gap-3">
             <button
               onClick={toggleDark}
               className="w-8 h-8 rounded-md flex items-center justify-center text-muted-foreground hover:text-ink hover:bg-card transition-colors duration-300"
@@ -108,14 +116,14 @@ export default function Navbar() {
               Login
             </a>
             <RequestAccessTrigger
-              className="hidden xl:block rounded-md text-[11px] font-mono uppercase tracking-[0.16em] px-6 py-2.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
+              className="hidden lg:block whitespace-nowrap rounded-md text-[9px] xl:text-[11px] font-mono uppercase tracking-[0.12em] px-3 xl:px-5 py-2.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
             >
               Request Access
             </RequestAccessTrigger>
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden flex flex-col gap-[5px] rounded-md p-2"
+              className="lg:hidden flex flex-col gap-[5px] rounded-md p-2"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -135,7 +143,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="xl:hidden overflow-hidden bg-card border-b border-rule shadow-panel"
+            className="lg:hidden overflow-hidden bg-card border-b border-rule shadow-panel"
           >
             <div className="px-6 py-8 space-y-6">
               {navLinks.map((link) =>

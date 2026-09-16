@@ -13,35 +13,63 @@ const destinations = [
 ];
 
 function PayoutFlowDiagram() {
-  const [animKey, setAnimKey] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setAnimKey(k => k + 1), 3200);
-    return () => clearInterval(id);
-  }, []);
-
   // SVG coordinate constants
   const W = 860, ROW = 68, H = destinations.length * ROW;
   const hubY = H / 2;
 
-  // Boxes
   const srcX1 = 10,  srcX2 = 190;  // source box
   const hubX1 = 250, hubX2 = 420;  // wirrox box
   const dstX1 = 530, dstX2 = 850;  // destination boxes
 
   const srcMidX = (srcX1 + srcX2) / 2;
   const hubMidX = (hubX1 + hubX2) / 2;
+  const pauseX  = hubMidX + 21;    // right edge of the brand mark
 
   const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
+  const fanPath = (dy) =>
+    `M ${hubX2} ${hubY} C ${hubX2 + 40} ${hubY}, ${dstX1 - 40} ${dy}, ${dstX1} ${dy}`;
 
-  // Animation timings (seconds)
-  const fanDelay = 1.9;   // fan starts after pause dot fades
-  const fanDur   = 0.65;
-  const dotDelay = (i) => fanDelay + i * 0.1;
+  // One 4s cycle, as percentages:
+  //   0–17.5   dot travels funding account → brand mark
+  //  17.5–35   short stop at the mark (dot swells, halo pulses)
+  //  35–52.5   dot splits down every connecting line (staggered 1.4% apart)
+  //  on arrival each destination square flashes gold
+  const css = React.useMemo(() => {
+    const pct = (n) => `${Math.round(n * 1000) / 1000}%`;
+    const point = (t, dy) => {
+      const P = [[hubX2, hubY], [hubX2 + 40, hubY], [dstX1 - 40, dy], [dstX1, dy]];
+      const m = 1 - t;
+      return [0, 1].map((k) =>
+        m * m * m * P[0][k] + 3 * m * m * t * P[1][k] + 3 * m * t * t * P[2][k] + t * t * t * P[3][k]
+      );
+    };
+    const out = [
+      `@keyframes wx-dot { 0% { cx:${srcX2}; r:4; opacity:1 } 17.5% { cx:${pauseX}; r:4; opacity:1 } 26% { cx:${pauseX}; r:5.6; opacity:1 } 34.9% { cx:${pauseX}; r:4; opacity:1 } 35%,100% { cx:${pauseX}; r:4; opacity:0 } }`,
+      `@keyframes wx-halo { 0%,17.5% { opacity:0 } 26% { opacity:0.3 } 35%,100% { opacity:0 } }`,
+    ];
+    destYs.forEach((dy, i) => {
+      const a = 35 + i * 1.4, b = a + 17.5;
+      const frames = [
+        `0% { cx:${hubX2}; cy:${hubY}; opacity:0 }`,
+        `${pct(a - 0.1)} { cx:${hubX2}; cy:${hubY}; opacity:0 }`,
+      ];
+      for (let k = 0; k <= 10; k++) {
+        const [x, y] = point(k / 10, dy);
+        frames.push(`${pct(a + (b - a) * (k / 10))} { cx:${x.toFixed(1)}; cy:${y.toFixed(1)}; opacity:1 }`);
+      }
+      frames.push(`${pct(b + 0.1)} { opacity:0 }`, `100% { opacity:0 }`);
+      out.push(`@keyframes wx-fan-${i} { ${frames.join(" ")} }`);
+      out.push(`@keyframes wx-flash-${i} { 0%,${pct(b - 0.5)} { opacity:0 } ${pct(b + 1.5)} { opacity:0.22 } ${pct(b + 7)} { opacity:0.06 } ${pct(b + 12)},100% { opacity:0 } }`);
+    });
+    return out.join("\n");
+  }, []);
+
+  const loop = (name) => ({ animation: `${name} 4s linear infinite` });
 
   return (
     <div className="w-full overflow-x-auto">
-      <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
-        className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
+      <style>{css}</style>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
 
         {/* ── SOURCE BOX ── */}
         <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104} rx={8}
@@ -76,43 +104,14 @@ function PayoutFlowDiagram() {
           ROUTING · COMPLIANCE
         </text>
 
-        {/* Step 1: dot travels from source to right side of W letter */}
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            keyTimes="0;0.1;0.85;1" dur="0.75s" begin="0.15s" fill="remove" />
-          <animateMotion dur="0.7s" begin="0.15s" fill="remove"
-            path={`M ${srcX2} ${hubY} L ${hubMidX + 21} ${hubY}`} />
-        </circle>
-        {/* Step 2: dot sits at right side of W — W. logo moment */}
-        <circle cx={hubMidX + 21} cy={hubY} r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.85s" fill="remove" />
-        </circle>
-
-        {/* ── FAN LINES + DOTS: hub → each destination ── */}
+        {/* ── FAN LINES + DESTINATION BOXES ── */}
         {destinations.map((dest, i) => {
           const dy = destYs[i];
-          const cp1x = hubX2 + 40, cp2x = dstX1 - 40;
-          const fanPath = `M ${hubX2} ${hubY} C ${cp1x} ${hubY}, ${cp2x} ${dy}, ${dstX1} ${dy}`;
-          const begin = `${dotDelay(i)}s`;
-
           return (
             <g key={dest.label}>
-              {/* Static path line */}
-              <path d={fanPath} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-
-              {/* Animated dot along the fan path */}
-              <circle r={3.5} fill="#C9A96E" opacity={0}>
-                <animate attributeName="opacity" values="0;1;1;0"
-                  dur={`${fanDur}s`} begin={begin} fill="remove" />
-                <animateMotion dur={`${fanDur}s`} begin={begin} fill="remove"
-                  path={fanPath} />
-              </circle>
-
-              {/* ── DESTINATION BOX ── */}
-              <rect x={dstX1} y={dy - 26} width={dstX2 - dstX1} height={52}
-                fill="none" stroke="var(--color-rule)" strokeWidth={1}
-                style={{ borderTop: i > 0 ? "none" : undefined }} />
+              <path d={fanPath(dy)} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
+              <rect x={dstX1} y={dy - 26} width={dstX2 - dstX1} height={52} rx={8}
+                fill="none" stroke="var(--color-rule)" strokeWidth={1} />
               <text x={(dstX1 + dstX2) / 2} y={dy - 8} textAnchor="middle"
                 fontSize={8} fontFamily="Inter,monospace" letterSpacing={2}
                 fill="var(--color-ink)" opacity={0.4}>
@@ -126,6 +125,21 @@ function PayoutFlowDiagram() {
             </g>
           );
         })}
+
+        {/* ── TRAVELLING DOT: funding account → stop at the brand mark ── */}
+        <circle cx={srcX2} cy={hubY} r={4} fill="#C9A96E" opacity={0} style={loop("wx-dot")} />
+        <circle cx={pauseX} cy={hubY} r={9} fill="#C9A96E" opacity={0} style={loop("wx-halo")} />
+
+        {/* ── SPLIT DOTS + GOLD FLASH PER DESTINATION ── */}
+        {destinations.map((dest, i) => (
+          <circle key={`fan-${dest.label}`} cx={hubX2} cy={hubY} r={3.5}
+            fill="#C9A96E" opacity={0} style={loop(`wx-fan-${i}`)} />
+        ))}
+        {destinations.map((dest, i) => (
+          <rect key={`flash-${dest.label}`} x={dstX1} y={destYs[i] - 26}
+            width={dstX2 - dstX1} height={52} rx={8} fill="#C9A96E" stroke="#C9A96E"
+            opacity={0} style={loop(`wx-flash-${i}`)} />
+        ))}
       </svg>
     </div>
   );
@@ -137,15 +151,16 @@ function MobilePayoutFlow() {
   const [phase, setPhase] = useState(0); // 0=idle 1=dot-down 2=fan-in
 
   useEffect(() => {
+    let fanTimer, resetTimer;
     const run = () => {
       setAnimKey(k => k + 1);
       setPhase(1);
-      setTimeout(() => setPhase(2), 700);
-      setTimeout(() => setPhase(0), 1800);
+      fanTimer = setTimeout(() => setPhase(2), 700);
+      resetTimer = setTimeout(() => setPhase(0), 1800);
     };
     run();
     const id = setInterval(run, 3000);
-    return () => clearInterval(id);
+    return () => { clearInterval(id); clearTimeout(fanTimer); clearTimeout(resetTimer); };
   }, []);
 
   // SVG for the vertical connector (source → hub)
@@ -224,8 +239,13 @@ function MobilePayoutFlow() {
               borderBottom: i < 4 ? "1px solid var(--color-rule)" : "none",
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: phase >= 2 ? 1 : 0.3 }}
-            transition={{ duration: 0.3, delay: i * 0.08 }}
+            animate={{
+              opacity: phase >= 2 ? 1 : 0.3,
+              backgroundColor: phase >= 2
+                ? ["rgba(201,169,110,0.22)", "rgba(201,169,110,0)"]
+                : "rgba(201,169,110,0)",
+            }}
+            transition={{ duration: 0.45, delay: i * 0.08 }}
           >
             <p className="text-[8px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-1">
               {dest.label}
