@@ -292,14 +292,6 @@ export default function OnboardingFlow() {
 
         </div>{/* end grid */}
 
-        {/* Bottom note */}
-        <div style={{ marginTop: 32, paddingTop: 24, borderTop: `1px solid ${D.rule}` }}>
-          <p style={{ fontSize: 11, fontFamily: 'Inter, monospace', color: D.faint, lineHeight: 1.7 }}>
-            <span style={{ color: D.bronze, marginRight: 8 }}>Note —</span>
-            WIRROX coordinates provider-side onboarding on behalf of approved clients.
-            The client-facing journey remains WIRROX-branded throughout.
-          </p>
-        </div>
       </div>
     </section>
   );

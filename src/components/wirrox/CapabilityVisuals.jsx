@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { FlowMark, FlowDot, flowFrames, fanFrames, flowAnimation } from "./FlowMotion";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 import BrandIcon from "./BrandIcon";
@@ -23,53 +24,26 @@ function PayoutFlowDiagram() {
 
   const srcMidX = (srcX1 + srcX2) / 2;
   const hubMidX = (hubX1 + hubX2) / 2;
-  const pauseX  = hubMidX + 21;    // right edge of the brand mark
+  const pauseX  = hubMidX + 14;    // right edge of the brand mark
 
   const destYs = destinations.map((_, i) => i * ROW + ROW / 2);
   const fanPath = (dy) =>
     `M ${hubX2} ${hubY} C ${hubX2 + 40} ${hubY}, ${dstX1 - 40} ${dy}, ${dstX1} ${dy}`;
 
-  // One 4s cycle, as percentages:
-  //   0–17.5   dot travels funding account → brand mark
-  //  17.5–35   short stop at the mark (dot swells, halo pulses)
-  //  35–52.5   dot splits down every connecting line (staggered 1.4% apart)
-  //  on arrival each destination square flashes gold
-  const css = React.useMemo(() => {
-    const pct = (n) => `${Math.round(n * 1000) / 1000}%`;
-    const point = (t, dy) => {
-      const P = [[hubX2, hubY], [hubX2 + 40, hubY], [dstX1 - 40, dy], [dstX1, dy]];
-      const m = 1 - t;
-      return [0, 1].map((k) =>
-        m * m * m * P[0][k] + 3 * m * m * t * P[1][k] + 3 * m * t * t * P[2][k] + t * t * t * P[3][k]
-      );
-    };
-    const out = [
-      `@keyframes wx-dot { 0% { cx:${srcX2}px; r:4px; opacity:1 } 17.5% { cx:${pauseX}px; r:4px; opacity:1 } 26% { cx:${pauseX}px; r:5.6px; opacity:1 } 34.9% { cx:${pauseX}px; r:4px; opacity:1 } 35%,100% { cx:${pauseX}px; r:4px; opacity:0 } }`,
-      `@keyframes wx-halo { 0%,17.5% { opacity:0 } 26% { opacity:0.3 } 35%,100% { opacity:0 } }`,
-    ];
-    destYs.forEach((dy, i) => {
-      const a = 35 + i * 1.4, b = a + 17.5;
-      const frames = [
-        `0% { cx:${hubX2}px; cy:${hubY}px; opacity:0 }`,
-        `${pct(a - 0.1)} { cx:${hubX2}px; cy:${hubY}px; opacity:0 }`,
-      ];
-      for (let k = 0; k <= 10; k++) {
-        const [x, y] = point(k / 10, dy);
-        frames.push(`${pct(a + (b - a) * (k / 10))} { cx:${x.toFixed(1)}px; cy:${y.toFixed(1)}px; opacity:1 }`);
-      }
-      frames.push(`${pct(b + 0.1)} { opacity:0 }`, `100% { opacity:0 }`);
-      out.push(`@keyframes wx-fan-${i} { ${frames.join(" ")} }`);
-      out.push(`@keyframes wx-flash-${i} { 0%,${pct(b - 0.5)} { opacity:0 } ${pct(b + 1.5)} { opacity:0.22 } ${pct(b + 7)} { opacity:0.06 } ${pct(b + 12)},100% { opacity:0 } }`);
-    });
-    return out.join("\n");
-  }, []);
-
-  const loop = (name) => ({ animation: `${name} 4s linear infinite` });
+  const css = [
+    flowFrames("payout-entry", [
+      [0, srcX2, hubY, 0], [5, srcX2, hubY, 0], [5.01, srcX2, hubY],
+      [20, pauseX, hubY], [50, pauseX, hubY], [59.99, hubX2, hubY],
+      [60, hubX2, hubY, 0], [100, hubX2, hubY, 0],
+    ]),
+    ...destYs.map((dy, i) => fanFrames(`payout-fan-${i}`,
+      [[hubX2, hubY], [hubX2 + 40, hubY], [dstX1 - 40, dy], [dstX1, dy]])),
+  ].join("\n");
 
   return (
     <div className="w-full overflow-x-auto">
       <style>{css}</style>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
+      <svg data-flow="payout-desktop" viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ minWidth: 480, maxHeight: 360 }}>
 
         {/* ── SOURCE BOX ── */}
         <rect x={srcX1} y={hubY - 52} width={srcX2 - srcX1} height={104} rx={8}
@@ -95,10 +69,7 @@ function PayoutFlowDiagram() {
         {/* ── WIRROX HUB BOX ── */}
         <rect x={hubX1} y={hubY - 40} width={hubX2 - hubX1} height={80} rx={8}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <image className="brand-svg-icon--light" href="/favicon.svg"
-          x={hubMidX - 18} y={hubY - 23} width={36} height={36} />
-        <image className="brand-svg-icon--dark" href="/brand/WIRROX_Favicon_Platform_Dark.svg"
-          x={hubMidX - 18} y={hubY - 23} width={36} height={36} />
+        <FlowMark x={hubMidX - 18} y={hubY - 23} size={36} />
         <text x={hubMidX} y={hubY + 28} textAnchor="middle"
           fontSize={7.5} fontFamily="Inter,monospace" letterSpacing={2} fill="#C9A96E">
           ROUTING · COMPLIANCE
@@ -127,18 +98,16 @@ function PayoutFlowDiagram() {
         })}
 
         {/* ── TRAVELLING DOT: funding account → stop at the brand mark ── */}
-        <circle cx={srcX2} cy={hubY} r={4} fill="#C9A96E" opacity={0} style={loop("wx-dot")} />
-        <circle cx={pauseX} cy={hubY} r={9} fill="#C9A96E" opacity={0} style={loop("wx-halo")} />
+        <FlowDot name="payout-entry" />
 
         {/* ── SPLIT DOTS + GOLD FLASH PER DESTINATION ── */}
         {destinations.map((dest, i) => (
-          <circle key={`fan-${dest.label}`} cx={hubX2} cy={hubY} r={3.5}
-            fill="#C9A96E" opacity={0} style={loop(`wx-fan-${i}`)} />
+          <FlowDot key={dest.label} name={`payout-fan-${i}`} kind="branch" />
         ))}
         {destinations.map((dest, i) => (
           <rect key={`flash-${dest.label}`} x={dstX1} y={destYs[i] - 26}
             width={dstX2 - dstX1} height={52} rx={8} fill="#C9A96E" stroke="#C9A96E"
-            opacity={0} style={loop(`wx-flash-${i}`)} />
+            opacity={0} style={flowAnimation("payout-flash")} />
         ))}
       </svg>
     </div>
@@ -147,115 +116,41 @@ function PayoutFlowDiagram() {
 
 /* ─── Mobile Payout Flow (stacked + animated) ───────────────────── */
 function MobilePayoutFlow() {
-  const [animKey, setAnimKey] = useState(0);
-  const [phase, setPhase] = useState(0); // 0=idle 1=dot-down 2=fan-in
-
-  useEffect(() => {
-    let fanTimer, resetTimer;
-    const run = () => {
-      setAnimKey(k => k + 1);
-      setPhase(1);
-      fanTimer = setTimeout(() => setPhase(2), 700);
-      resetTimer = setTimeout(() => setPhase(0), 1800);
-    };
-    run();
-    const id = setInterval(run, 3000);
-    return () => { clearInterval(id); clearTimeout(fanTimer); clearTimeout(resetTimer); };
-  }, []);
-
-  // SVG for the vertical connector (source → hub)
-  const lineH = 40;
-
-  return (
-    <div className="flex flex-col items-center w-full">
-
-      {/* Source box */}
-      <div className="border border-rule rounded-lg p-4 text-center w-full bg-card shadow-panel">
-        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-bronze mb-1">
-          Funding Account
-        </p>
-        <p className="text-2xl font-semibold text-ink">$250,000</p>
-        <p className="text-[9px] font-mono text-muted-foreground opacity-50 mt-1">
-          USD · Available
-        </p>
-      </div>
-
-      {/* Animated vertical line: source → hub */}
-      <svg key={`top-${animKey}`} width={40} height={lineH} viewBox={`0 0 40 ${lineH}`}
-        style={{ display: "block" }}>
-        <line x1={20} y1={0} x2={20} y2={lineH} stroke="var(--color-rule)" strokeWidth={1} />
-        {phase >= 1 && (
-          <circle r={3.5} fill="#C9A96E" opacity={0}>
-            <animate attributeName="opacity" values="0;1;1;0"
-              dur="0.55s" begin="0s" fill="remove" />
-            <animateMotion dur="0.55s" begin="0s" fill="remove"
-              path={`M 20 0 L 20 ${lineH}`} />
-          </circle>
-        )}
-      </svg>
-
-      {/* WIRROX hub — WX icon */}
-      <div className="border border-bronze rounded-lg bg-bronze-subtle px-8 py-4 text-center w-full flex flex-col items-center gap-2">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">
-          Infrastructure
-        </p>
-        <BrandIcon className="h-10 w-10 rounded-md" />
-        <p className="text-[8px] font-mono uppercase tracking-[0.18em] text-bronze">
-          Routing · Compliance
-        </p>
-      </div>
-
-      {/* Fan SVG: hub → 5 destinations */}
-      <svg key={`fan-${animKey}`} width="100%" viewBox="0 0 300 80"
-        style={{ display: "block", height: 80 }}>
-        {/* 5 lines fanning out to bottom */}
-        {destinations.map((_, i) => {
-          const destX = 30 + i * 60;
-          const path = `M 150 0 C 150 40, ${destX} 40, ${destX} 80`;
-          return (
-            <g key={i}>
-              <path d={path} fill="none" stroke="var(--color-rule)" strokeWidth={1} />
-              {phase >= 2 && (
-                <circle r={3} fill="#C9A96E" opacity={0}>
-                  <animate attributeName="opacity" values="0;1;1;0"
-                    dur="0.65s" begin={`${i * 0.1}s`} fill="remove" />
-                  <animateMotion dur="0.65s" begin={`${i * 0.1}s`} fill="remove"
-                    path={path} />
-                </circle>
-              )}
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* Destination grid */}
-      <div className="w-full grid grid-cols-2 border border-rule rounded-lg overflow-hidden bg-card" style={{ marginTop: -1 }}>
-        {destinations.map((dest, i) => (
-          <motion.div
-            key={dest.label}
-            className="p-3 text-center"
-            style={{
-              borderRight: i % 2 === 0 ? "1px solid var(--color-rule)" : "none",
-              borderBottom: i < 4 ? "1px solid var(--color-rule)" : "none",
-            }}
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: phase >= 2 ? 1 : 0.3,
-              backgroundColor: phase >= 2
-                ? ["rgba(201,169,110,0.22)", "rgba(201,169,110,0)"]
-                : "rgba(201,169,110,0)",
-            }}
-            transition={{ duration: 0.45, delay: i * 0.08 }}
-          >
-            <p className="text-[8px] font-mono uppercase tracking-[0.15em] text-muted-foreground mb-1">
-              {dest.label}
-            </p>
-            <p className="text-sm font-semibold text-ink">{dest.amount}</p>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
+  const boxes = [[20,330], [190,330], [20,425], [190,425], [105,520]];
+  const routes = [
+    [[180,260],[95,285],[95,315],[95,330]],
+    [[180,260],[265,285],[265,315],[265,330]],
+    [[180,260],[5,260],[5,460],[20,460]],
+    [[180,260],[355,260],[355,460],[340,460]],
+    [[180,260],[180,345],[180,440],[180,520]],
+  ];
+  const css = [
+    flowFrames("payout-mobile-entry", [[0,180,90,0],[5,180,90,0],[5.01,180,90],
+      [20,194,191],[50,194,191],[55,180,230],[59.99,180,260],[60,180,260,0],[100,180,260,0]]),
+    ...routes.map((route,i) => flowFrames(`payout-mobile-fan-${i}`,
+      [[0,...route[0],0],[59.99,...route[0],0],...route.map((p,k)=>[60+k*25/3,...p]),[85.01,...route[3],0],[100,...route[3],0]])),
+  ].join("\n");
+  return <svg viewBox="0 0 360 600" className="w-full" role="img" aria-label="Funding account routed through WIRROX to five destinations" data-flow="payout-mobile">
+    <style>{css}</style>
+    <rect x="10" y="0" width="340" height="90" rx="8" fill="var(--color-surface)" stroke="var(--color-rule)" />
+    <text x="180" y="25" textAnchor="middle" fontSize="9" letterSpacing="2" fill="#C9A96E">FUNDING ACCOUNT</text>
+    <text x="180" y="54" textAnchor="middle" fontSize="24" fontWeight="600" fill="var(--color-ink)">$250,000</text>
+    <text x="180" y="74" textAnchor="middle" fontSize="9" fill="var(--color-ink)" opacity=".5">USD · Available</text>
+    <path d="M180 90 V130 M180 230 V260" stroke="var(--color-rule)" fill="none" />
+    <rect x="10" y="130" width="340" height="100" rx="8" fill="var(--color-bronze-subtle)" stroke="#C9A96E" />
+    <text x="180" y="151" textAnchor="middle" fontSize="8" letterSpacing="2" fill="#C9A96E">INFRASTRUCTURE</text>
+    <FlowMark x={160} y={165} />
+    <text x="180" y="215" textAnchor="middle" fontSize="8" letterSpacing="2" fill="#C9A96E">ROUTING · COMPLIANCE</text>
+    {routes.map((route,i)=><path key={i} d={route.map((p,k)=>(k?'L':'M')+p.join(' ')).join(' ')} fill="none" stroke="var(--color-rule)" />)}
+    {destinations.map((dest,i)=><g key={dest.label}>
+      <rect x={boxes[i][0]} y={boxes[i][1]} width="150" height="70" rx="8" fill="var(--color-surface)" stroke="var(--color-rule)" />
+      <rect x={boxes[i][0]} y={boxes[i][1]} width="150" height="70" rx="8" fill="#C9A96E" opacity="0" style={flowAnimation('payout-flash')} />
+      <text x={boxes[i][0]+75} y={boxes[i][1]+25} textAnchor="middle" fontSize="8" letterSpacing="1" fill="var(--color-ink)" opacity=".55">{dest.label.toUpperCase()}</text>
+      <text x={boxes[i][0]+75} y={boxes[i][1]+48} textAnchor="middle" fontSize="14" fontWeight="600" fill="var(--color-ink)">{dest.amount}</text>
+    </g>)}
+    <FlowDot name="payout-mobile-entry" />
+    {destinations.map((dest,i)=><FlowDot key={dest.label} name={`payout-mobile-fan-${i}`} kind="branch" />)}
+  </svg>;
 }
 
 /* ─── Compliance Checklist ───────────────────────────────────────── */
@@ -360,10 +255,10 @@ const navItems = [
 ];
 
 const recentPayouts = [
-  { ref: "WRX-00441", dest: "London, UK",    amount: "£12,400", status: "Settled"    },
-  { ref: "WRX-00440", dest: "Amsterdam, NL", amount: "€8,750",  status: "Settled"    },
+  { ref: "WRX-00441", dest: "London, UK",    amount: "£12,400", status: "Completed"    },
+  { ref: "WRX-00440", dest: "Amsterdam, NL", amount: "€8,750",  status: "Completed"    },
   { ref: "WRX-00439", dest: "New York, US",  amount: "$21,000", status: "Processing" },
-  { ref: "WRX-00438", dest: "Dubai, AE",     amount: "$9,800",  status: "Settled"    },
+  { ref: "WRX-00438", dest: "Dubai, AE",     amount: "$9,800",  status: "Completed"    },
 ];
 
 function DashboardPreview() {
@@ -458,7 +353,7 @@ function DashboardPreview() {
                 <div className="flex items-center gap-3">
                   <span className="text-[11px] font-mono font-medium text-ink">{p.amount}</span>
                   <span className={`text-[8px] font-mono rounded-full px-2 py-0.5 ${
-                    p.status === "Settled"
+                    p.status === "Completed"
                       ? "bg-green-50 text-green-700"
                       : "bg-bronze/10 text-bronze"
                   }`}>{p.status}</span>

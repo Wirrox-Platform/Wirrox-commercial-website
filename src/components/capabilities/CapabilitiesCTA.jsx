@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { RequestAccessTrigger } from "../wirrox/RequestAccessContext";
-import { platformDestination } from "../../lib/platform-destination";
 
 export default function CapabilitiesCTA() {
   return (
@@ -41,10 +40,7 @@ export default function CapabilitiesCTA() {
               Contact Us
             </a>
           </div>
-          <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
-            {platformDestination.statusLabel}
-          </p>
+
         </motion.div>
       </div>
     </section>

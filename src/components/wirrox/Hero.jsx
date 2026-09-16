@@ -109,13 +109,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        <motion.p
-          className="mt-4 flex items-center gap-2 text-xs text-muted-foreground"
-          {...fadeUp(0.7)}
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
-          {platformDestination.statusLabel} · {platformDestination.hostLabel}
-        </motion.p>
+
 
         {/* Trust points */}
         <motion.div

@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
-import BrandIcon from "./BrandIcon";
+import { FlowMark, FlowDot, flowFrames } from "./FlowMotion";
 
 const steps = [
   {
@@ -31,45 +31,22 @@ const steps = [
 ];
 
 function MobileArchDiagram() {
-  return (
-    <div className="sm:hidden flex flex-col items-center py-10 px-6">
-      {/* Client */}
-      <div className="text-center">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Client</p>
-        <p className="text-base font-medium text-ink">Your Business</p>
-        <p className="text-xs text-muted-foreground">WIRROX-branded journey</p>
-      </div>
-
-      {/* Animated line down: client → hub */}
-      <svg width={40} height={48} viewBox="0 0 40 48"
-        style={{ display: "block" }}>
-        <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
-        <circle cx={20} cy={0} r={3.5} fill="#C9A96E" opacity={0}
-          className="architecture-mobile-entry" />
-      </svg>
-
-      {/* WIRROX hub */}
-      <div className="border border-bronze rounded-lg bg-bronze-subtle px-10 py-4 text-center flex flex-col items-center gap-1">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-bronze">Infrastructure</p>
-        <BrandIcon className="h-9 w-9 rounded-md" />
-      </div>
-
-      {/* Animated line down: hub → providers */}
-      <svg width={40} height={48} viewBox="0 0 40 48"
-        style={{ display: "block" }}>
-        <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
-        <circle cx={20} cy={0} r={3.5} fill="#C9A96E" opacity={0}
-          className="architecture-mobile-exit" />
-      </svg>
-
-      {/* Providers */}
-      <div className="text-center">
-        <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-1">Execution</p>
-        <p className="text-base font-medium text-ink">Licensed Providers</p>
-        <p className="text-xs text-muted-foreground">Regulated financial institutions</p>
-      </div>
-    </div>
-  );
+  const css=flowFrames("architecture-mobile", [[0,180,90,0],[5,180,90,0],[5.01,180,90],
+    [20,194,183],[50,194,183],[60,180,225],[80,180,280],[80.01,180,280,0],[100,180,280,0]]);
+  return <svg viewBox="0 0 360 365" className="sm:hidden block w-full" data-flow="architecture-mobile" role="img" aria-label="Your business through WIRROX to licensed providers">
+    <style>{css}</style>
+    <text x="180" y="30" textAnchor="middle" fontSize="9" fill="var(--color-ink)" opacity=".5">CLIENT</text>
+    <text x="180" y="54" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--color-ink)">Your Business</text>
+    <text x="180" y="74" textAnchor="middle" fontSize="11" fill="var(--color-ink)" opacity=".5">WIRROX-branded journey</text>
+    <path d="M180 90 V135 M180 225 V280" stroke="var(--color-rule)" fill="none" />
+    <rect x="80" y="135" width="200" height="90" rx="8" fill="var(--color-bronze-subtle)" stroke="#C9A96E" />
+    <FlowMark x={160} y={157} />
+    <text x="180" y="212" textAnchor="middle" fontSize="8" letterSpacing="2" fill="#C9A96E">INFRASTRUCTURE</text>
+    <text x="180" y="300" textAnchor="middle" fontSize="9" fill="var(--color-ink)" opacity=".5">EXECUTION</text>
+    <text x="180" y="324" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--color-ink)">Licensed Providers</text>
+    <text x="180" y="345" textAnchor="middle" fontSize="11" fill="var(--color-ink)" opacity=".5">Regulated financial institutions</text>
+    <FlowDot name="architecture-mobile" />
+  </svg>;
 }
 
 function ArchitectureDiagram() {
@@ -83,6 +60,9 @@ function ArchitectureDiagram() {
   const dstX1 = 680;
 
   const hubMidX = (hubX1 + hubX2) / 2;
+  const css=flowFrames("architecture-desktop", [[0,srcX2,midY,0],[5,srcX2,midY,0],[5.01,srcX2,midY],
+    [20,hubMidX+14,midY],[50,hubMidX+14,midY],[60,hubX2,midY],[80,dstX1,midY],
+    [80.01,dstX1,midY,0],[100,dstX1,midY,0]]);
 
   return (
     <motion.div
@@ -92,11 +72,12 @@ function ArchitectureDiagram() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
+      <style>{css}</style>
       {/* Mobile stacked animated version */}
       <MobileArchDiagram />
 
       {/* Desktop SVG version */}
-      <svg viewBox={`0 0 ${W} ${H}`}
+      <svg data-flow="architecture-desktop" viewBox={`0 0 ${W} ${H}`}
         className="hidden sm:block w-full" style={{ maxHeight: 160 }}>
 
         {/* ── CLIENT label + text ── */}
@@ -125,23 +106,14 @@ function ArchitectureDiagram() {
         {/* ── WIRROX hub box ── */}
         <rect x={hubX1} y={midY - 38} width={hubX2 - hubX1} height={76} rx={8}
           fill="var(--color-bronze-subtle)" stroke="#C9A96E" strokeWidth={1} />
-        <image className="brand-svg-icon--light" href="/favicon.svg"
-          x={hubMidX - 18} y={midY - 23} width={36} height={36} />
-        <image className="brand-svg-icon--dark" href="/brand/WIRROX_Favicon_Platform_Dark.svg"
-          x={hubMidX - 18} y={midY - 23} width={36} height={36} />
+        <FlowMark x={hubMidX - 18} y={midY - 23} size={36} />
         <text x={hubMidX} y={midY + 30} textAnchor="middle"
           fontSize={8} fontFamily="Inter,monospace" letterSpacing={2}
           fill="#C9A96E">
           INFRASTRUCTURE
         </text>
 
-        {/* CSS loops keep the brand-mark pause running without remounting SVGs. */}
-        <circle cx={srcX2} cy={midY} r={3.5} fill="#C9A96E" opacity={0}
-          className="architecture-dot" />
-        <circle cx={hubMidX + 21} cy={midY} r={9} fill="#C9A96E" opacity={0}
-          className="architecture-halo" />
-        <circle cx={hubX2} cy={midY} r={3.5} fill="#C9A96E" opacity={0}
-          className="architecture-exit" />
+        <FlowDot name="architecture-desktop" />
 
         {/* ── EXECUTION label + text ── */}
         <text x={rightX} y={midY - 18} textAnchor="end" fontSize={8.5}
