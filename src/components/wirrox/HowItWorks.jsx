@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 import BrandIcon from "./BrandIcon";
@@ -30,7 +30,7 @@ const steps = [
   },
 ];
 
-function MobileArchDiagram({ animKey }) {
+function MobileArchDiagram() {
   return (
     <div className="sm:hidden flex flex-col items-center py-10 px-6">
       {/* Client */}
@@ -41,15 +41,11 @@ function MobileArchDiagram({ animKey }) {
       </div>
 
       {/* Animated line down: client → hub */}
-      <svg key={`mob-top-${animKey}`} width={40} height={48} viewBox="0 0 40 48"
+      <svg width={40} height={48} viewBox="0 0 40 48"
         style={{ display: "block" }}>
         <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="0.15s" fill="remove" />
-          <animateMotion dur="0.55s" begin="0.15s" fill="remove"
-            path="M 20 0 L 20 48" />
-        </circle>
+        <circle cx={20} cy={0} r={3.5} fill="#C9A96E" opacity={0}
+          className="architecture-mobile-entry" />
       </svg>
 
       {/* WIRROX hub */}
@@ -59,15 +55,11 @@ function MobileArchDiagram({ animKey }) {
       </div>
 
       {/* Animated line down: hub → providers */}
-      <svg key={`mob-bot-${animKey}`} width={40} height={48} viewBox="0 0 40 48"
+      <svg width={40} height={48} viewBox="0 0 40 48"
         style={{ display: "block" }}>
         <line x1={20} y1={0} x2={20} y2={48} stroke="var(--color-rule)" strokeWidth={1} />
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="0.8s" fill="remove" />
-          <animateMotion dur="0.55s" begin="0.8s" fill="remove"
-            path="M 20 0 L 20 48" />
-        </circle>
+        <circle cx={20} cy={0} r={3.5} fill="#C9A96E" opacity={0}
+          className="architecture-mobile-exit" />
       </svg>
 
       {/* Providers */}
@@ -81,12 +73,6 @@ function MobileArchDiagram({ animKey }) {
 }
 
 function ArchitectureDiagram() {
-  const [animKey, setAnimKey] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setAnimKey(k => k + 1), 2800);
-    return () => clearInterval(id);
-  }, []);
-
   const W = 900, H = 160;
   const leftX = 20, rightX = W - 20;
   const midY = H / 2;
@@ -107,10 +93,10 @@ function ArchitectureDiagram() {
       transition={{ duration: 0.6 }}
     >
       {/* Mobile stacked animated version */}
-      <MobileArchDiagram animKey={animKey} />
+      <MobileArchDiagram />
 
       {/* Desktop SVG version */}
-      <svg key={animKey} viewBox={`0 0 ${W} ${H}`}
+      <svg viewBox={`0 0 ${W} ${H}`}
         className="hidden sm:block w-full" style={{ maxHeight: 160 }}>
 
         {/* ── CLIENT label + text ── */}
@@ -149,26 +135,13 @@ function ArchitectureDiagram() {
           INFRASTRUCTURE
         </text>
 
-        {/* ── Dots rendered LAST so they appear on top of hub box ── */}
-        {/* Step 1: dot travels from client to right side of W letter */}
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            keyTimes="0;0.1;0.85;1" dur="0.75s" begin="0.1s" fill="remove" />
-          <animateMotion dur="0.7s" begin="0.1s" fill="remove"
-            path={`M ${srcX2} ${midY} L ${hubMidX + 21} ${midY}`} />
-        </circle>
-        {/* Step 2: dot sits at right side of W — W. logo moment */}
-        <circle cx={hubMidX + 21} cy={midY} r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            keyTimes="0;0.05;0.92;1" dur="1.2s" begin="0.8s" fill="remove" />
-        </circle>
-        {/* Step 3: dot exits to providers */}
-        <circle r={3.5} fill="#C9A96E" opacity={0}>
-          <animate attributeName="opacity" values="0;1;1;0"
-            dur="0.55s" begin="2.0s" fill="remove" />
-          <animateMotion dur="0.55s" begin="2.0s" fill="remove"
-            path={`M ${hubX2} ${midY} L ${dstX1} ${midY}`} />
-        </circle>
+        {/* CSS loops keep the brand-mark pause running without remounting SVGs. */}
+        <circle cx={srcX2} cy={midY} r={3.5} fill="#C9A96E" opacity={0}
+          className="architecture-dot" />
+        <circle cx={hubMidX + 21} cy={midY} r={9} fill="#C9A96E" opacity={0}
+          className="architecture-halo" />
+        <circle cx={hubX2} cy={midY} r={3.5} fill="#C9A96E" opacity={0}
+          className="architecture-exit" />
 
         {/* ── EXECUTION label + text ── */}
         <text x={rightX} y={midY - 18} textAnchor="end" fontSize={8.5}

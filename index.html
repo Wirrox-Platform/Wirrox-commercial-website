@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="WIRROX — Compliance-first financial infrastructure for global B2B payment operations." />
     <title>WIRROX — Financial Infrastructure Platform</title>
+    <script>
+      // Restore the saved theme before the first paint, including direct page visits.
+      try {
+        document.documentElement.classList.toggle("dark", localStorage.getItem("wirrox-theme") === "dark");
+      } catch { /* Render the default light theme when storage is unavailable. */ }
+    </script>
   </head>
   <body>
     <div id="root"></div>
