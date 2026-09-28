@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { RequestAccessTrigger } from "../wirrox/RequestAccessContext";
-import { platformDestination } from "../../lib/platform-destination";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 18 },
@@ -59,10 +58,7 @@ export default function CapabilitiesHero() {
             Contact Sales
           </a>
         </motion.div>
-        <motion.p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground" {...fadeUp(0.58)}>
-          <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
-          {platformDestination.statusLabel}
-        </motion.p>
+
       </div>
     </section>
   );

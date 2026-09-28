@@ -46,7 +46,6 @@ export function RequestAccessTrigger({ children, className = "", onClick, ...pro
       onClick={handleClick}
       data-platform-environment={destination.environment}
       data-access-mode={destination.accessMode}
-      title={`${destination.statusLabel} · ${destination.hostLabel}`}
       {...props}
     >
       {children}

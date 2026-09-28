@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BrandWordmark from "./BrandWordmark";
 import { RequestAccessTrigger } from "./RequestAccessContext";
-import { platformDestination } from "../../lib/platform-destination";
 
 const navCols = [
   {
@@ -58,10 +57,7 @@ export default function Footer() {
             >
               Request Access
             </RequestAccessTrigger>
-            <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-              <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
-              {platformDestination.statusLabel}
-            </p>
+
           </div>
 
           {/* Nav cols */}
