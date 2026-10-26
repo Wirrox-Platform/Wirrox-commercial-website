@@ -50,6 +50,7 @@ export default function Navbar() {
     { label: "Security", href: "/security" },
     { label: "For Businesses", href: "/for-businesses" },
     { label: "About", href: "/about" },
+    { label: "Partners", href: "/partners" },
   ];
 
   const linkClass = "whitespace-nowrap text-[9px] xl:text-[11px] font-mono uppercase tracking-[0.12em] xl:tracking-[0.18em] text-muted-foreground hover:text-ink transition-colors duration-300";
