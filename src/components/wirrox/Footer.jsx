@@ -11,6 +11,7 @@ const navCols = [
       { label: "For Businesses", href: "/for-businesses" },
       { label: "Security", href: "/security" },
       { label: "About", href: "/about" },
+      { label: "Partners", href: "/partners" },
     ],
   },
   {
