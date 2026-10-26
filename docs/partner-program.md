@@ -111,8 +111,25 @@ verification, not a real EspoCRM end-to-end test.
 The inherited Browserslist data-age warning does not fail the build; the lockfile
 was preserved rather than mixing an unrelated dependency update into this feature.
 The Pages Function itself has unit/adapter coverage but has not run in workerd or
-a hosted Pages deployment. Native EspoCRM Docker installation, full API/UI permissions,
-MFA/invitation concurrency and restore acceptance remain separate CRM release gates.
+a hosted Pages deployment. Native local HTTP integration was subsequently executed
+as described below; full native browser and edge-case acceptance remain release gates.
+
+## Real local EspoCRM integration — 2026-10-26
+
+Run `node scripts/partner-native-smoke.mjs` on Windows with the isolated
+WirroxAffiliateDocker WSL stack running on port 8180. This explicitly calls the real
+Pages handler and real local EspoCRM, creates an invented example.invalid applicant,
+reads its private local mail sink through Docker, verifies the token and rejects
+reuse and a changed notice. The script passed; no email or hosted service is called.
+It has no configurable external target and prints no tokens or credentials.
+
+The companion CRM passed native install/0.1.1 upgrade, thirteen HTTP scenario groups,
+TOTP/password lifecycle, two-account isolation, simultaneous import/allocation,
+restart and coherent restore into separate volumes. See its
+docs/AFFILIATE-NATIVE-TEST-RESULTS.md for exact evidence and remaining acceptance.
+Introduction/code-evidence API-user integration remains disabled and was not exercised
+by this smoke test. Neither real Turnstile/SMTP nor hosted Pages was tested.
+Both PRs remain draft; commits retain [CF-Pages-Skip]. No deployment is authorized.
 
 ## Release review
 
