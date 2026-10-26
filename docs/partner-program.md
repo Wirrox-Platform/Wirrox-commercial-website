@@ -18,6 +18,13 @@ at that skipped commit, rather than first creating a branch at an ordinary main 
 Do not merge/deploy or change branch controls without explicit approval.
 Cloudflare reference: https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/#skipping-a-build-via-a-commit-message
 
+Publication readback confirmed `is_skipped: true`, `skip_reason: commit_message` for
+feature/partner-program. The production deployment remained the successful
+2026-10-20 deployment. Those recent live/preview deployment records have no Git
+commit hash; the named privacy-review branch is not present in GitHub. This does
+not establish what code changed, but it prevents attesting live/source parity.
+Reconcile the live source before merging/releasing this main-based PR.
+
 ## Implemented
 
 * /partners: branded program explanation, application and invited-login entry,
