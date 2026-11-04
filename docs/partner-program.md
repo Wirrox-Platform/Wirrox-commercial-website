@@ -140,3 +140,26 @@ approved hosted preview, then run the full native two-affiliate scenarios. Verif
 Functions routing alongside the existing static redirects. Only after acceptance
 and explicit approval should the production site and CRM be configured/released.
 Never infer deployment approval from a Git commit, PR or the word pilot.
+
+## Closed pilot gateway — 2026-11-04
+
+Native CRM package 0.1.28 supports a closed pilot email cohort and a separate
+server-to-server apply/verify gateway. Nonlocal website configuration now requires
+`PARTNER_GATEWAY_SECRET` (64 lowercase hex characters), supplied only as a Pages
+server-side encrypted secret. It must match native `affiliateIntakeGatewaySecret`
+with `affiliateAdmissionMode=closed` and an approved `affiliatePilotEmails` list.
+Caller-provided gateway headers are ignored; only the configured value is sent to
+native apply/verify after the existing challenge checks. It is not a CRM APIUser key,
+login credential or financial permission. Introduction intake retains its separate
+scoped identity. Local mode may omit the key for existing synthetic walkthroughs.
+
+28 tests, lint/build and actual handler/native 8185 integration pass, including
+missing/forged gateway rejection, outside-cohort no-record/no-mail, exact verification,
+single-use replay and non-disclosure in public config. No hosted key/settings were
+provisioned. Verify both native CRM origins, real Turnstile and mail delivery before
+live intake. Native secret and pilot list are excluded from Settings/App responses.
+
+Owner will self-test with admin@wirrox.com, handling all roles; proposed client is
+Swiss Fintech Forum, with exact record/ownership/data scope pending. No live identity,
+client assignment, deployment, real email or transfer is authorized. Both PRs stay
+draft. All feature commits must retain `[CF-Pages-Skip]`.

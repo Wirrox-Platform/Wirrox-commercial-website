@@ -29,7 +29,7 @@ test('Public configuration never reveals credentials or CRM target',async()=>{
 });
 test('Preview and local hosts cannot be pointed at the known live CRM',()=>{
   const e={...env(),PARTNER_SITE_ORIGIN:'https://preview.pages.dev',PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_CRM_ORIGIN:'https://crm.wirrox.com',
-    PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value'};
+    PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value',PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
   assert.equal(configuration(new Request('https://preview.pages.dev/api/partners/config'),e),null);
   assert.equal(configuration(request('config',null,{method:'GET'}),{...env(),PARTNER_CRM_ORIGIN:'https://crm.wirrox.com'}),null);
 });
@@ -98,7 +98,7 @@ test('Streaming request limits reject an untrusted or missing content length',as
 test('Challenge result must match hostname and operation',async()=>{
   const e={...env(),PARTNER_LOCAL_TEST:'false',PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_SITE_ORIGIN:'https://preview.pages.dev',
     PARTNER_CRM_ORIGIN:'https://synthetic-crm.example.test',PARTNER_PORTAL_URL:'https://synthetic-crm.example.test/portal/synthetic/',
-    PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value'};
+    PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value',PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
   for(const result of [{success:false},{success:true,hostname:'other.example.test',action:'partner-apply'},
     {success:true,hostname:'preview.pages.dev',action:'partner-introduction'}]){
     let calls=0;const response=await handlePartner(request('apply',{...applicationInput(),challengeToken:'synthetic-token'},{origin:'https://preview.pages.dev'}),e,
@@ -108,7 +108,7 @@ test('Challenge result must match hostname and operation',async()=>{
 });
 test('Valid server challenge precedes the narrow CRM call',async()=>{
   const e={...env(),PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_SITE_ORIGIN:'https://preview.pages.dev',PARTNER_CRM_ORIGIN:'https://synthetic-crm.example.test',
-    PARTNER_PORTAL_URL:'https://synthetic-crm.example.test/portal/synthetic/',PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value'};
+    PARTNER_PORTAL_URL:'https://synthetic-crm.example.test/portal/synthetic/',PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value',PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
   const urls=[];const response=await handlePartner(request('apply',{...applicationInput(),challengeToken:'synthetic-token'},{origin:'https://preview.pages.dev'}),e,async(url,options)=>{
     urls.push(url);if(url.includes('siteverify')){assert.equal(JSON.parse(options.body).secret,e.PARTNER_TURNSTILE_SECRET);return Response.json({success:true,hostname:'preview.pages.dev',action:'partner-apply'});}
     assert.equal(options.headers['X-Api-Key'],undefined);return Response.json({});
@@ -126,4 +126,25 @@ test('An introduction retry retains its source identity across reloads without s
   const values=new Map();const storage={getItem:key=>values.get(key),setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};
   const first=introductionAttemptId(storage);assert.equal(introductionAttemptId(storage),first);assert.equal(values.size,1);
   assert.equal(values.values().next().value,first);clearIntroductionAttempt(storage);assert.notEqual(introductionAttemptId(storage),first);
+});
+
+test('Gateway credential is server-only and caller headers cannot override it',async()=>{
+  const e={...env(),PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
+  const result=await (await handlePartner(request('config',null,{method:'GET'}),e,noFetch)).json();
+  assert.equal(JSON.stringify(result).includes(e.PARTNER_GATEWAY_SECRET),false);
+  for(const action of ['apply','verify']){
+    const input=action==='apply'?applicationInput():{token:'b'.repeat(64)};
+    const response=await handlePartner(request(action,input,{headers:{'X-Wirrox-Partner-Gateway':'caller-injected'}}),e,async(url,options)=>{
+      assert.equal(options.headers['X-Wirrox-Partner-Gateway'],e.PARTNER_GATEWAY_SECRET);assert.equal(options.headers['X-Api-Key'],undefined);return Response.json({});
+    });assert.equal(response.status,200);
+  }
+});
+test('Nonlocal intake refuses a missing or malformed gateway credential before any network call',async()=>{
+  const e={...env(),PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_SITE_ORIGIN:'https://preview.pages.dev',
+    PARTNER_CRM_ORIGIN:'https://synthetic-crm.example.test',PARTNER_PORTAL_URL:'https://synthetic-crm.example.test/portal/synthetic/',
+    PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value'};
+  for(const secret of [undefined,'short','A'.repeat(64)]){
+    const response=await handlePartner(request('apply',applicationInput(),{origin:e.PARTNER_SITE_ORIGIN}),{...e,PARTNER_GATEWAY_SECRET:secret},noFetch);
+    assert.equal(response.status,503);
+  }
 });

@@ -43,6 +43,9 @@ export function configuration(request, env) {
         (!production && crm.hostname === 'crm.wirrox.com')) return null;
     if (!env.PARTNER_NOTICE_VERSION || !env.PARTNER_NOTICE_TEXT || env.PARTNER_EMAIL_READY !== 'true') return null;
     if (!local && (!env.PARTNER_TURNSTILE_SITE_KEY || !env.PARTNER_TURNSTILE_SECRET)) return null;
+    // Nonlocal intake must use the CRM-side gateway guard as well as Turnstile.
+    if (!local && !/^[a-f0-9]{64}$/u.test(env.PARTNER_GATEWAY_SECRET || '')) return null;
+    if (env.PARTNER_GATEWAY_SECRET && !/^[a-f0-9]{64}$/u.test(env.PARTNER_GATEWAY_SECRET)) return null;
     let portal = null;
     if (env.PARTNER_PORTAL_URL) {
       const value = new URL(env.PARTNER_PORTAL_URL);
@@ -113,6 +116,7 @@ export async function handlePartner(request, env, fetcher = fetch) {
     await challenge(request, input, config, env, fetcher, action);
     const crmAction = action === 'introduction' ? 'introduction-evidence' : action;
     const headers = {'Content-Type': 'application/json', Accept: 'application/json'};
+    if (action !== 'introduction' && env.PARTNER_GATEWAY_SECRET) headers['X-Wirrox-Partner-Gateway'] = env.PARTNER_GATEWAY_SECRET;
     if (action === 'introduction') headers['X-Api-Key'] = env.PARTNER_INTAKE_API_KEY;
     const upstream = await fetcher(`${config.crmOrigin}/api/v1/AffiliateProgram/${crmAction}`, {
       method: 'POST', headers, body: JSON.stringify(payload), redirect: 'error', signal: AbortSignal.timeout(10000),
