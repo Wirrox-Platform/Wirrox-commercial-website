@@ -1,0 +1,22 @@
+{
+  "approvedOn": "2026-11-06",
+  "approvalSource": "Owner instruction in this chat: I approve the final partner documents. Go ahead with the controlled pilot deployment and restricted Google Workspace relay setup. Keep both PRs draft; don’t send emails, transfer money or delete real data.",
+  "agreementVersion": "WIRROX-PARTNER-PUBLICATION-2026-11-06-v5",
+  "privacyVersion": "WIRROX-PARTNER-PRIVACY-2026-11-06-v7",
+  "documentSha256": {
+    "privacy": "b8d3597fe52f5356bd06724bc8850687c2087d2faa29c77d416c4cb2e5b19199",
+    "terms": "bfc0cbfac41d6f77ac7744ac6bf336da62eba3198a510852f42ac3ab3c0f6257",
+    "providers": "731e0e96e910220c4da9007a8a00f144a79178c2025c3083c318b68a060222ff",
+    "cookies": "0afa714c6a47f535e60bcae8974fdb999815547142dd6f4558c3270fe972b2c8"
+  },
+  "permissions": {
+    "controlledPilotDeployment": true,
+    "restrictedGoogleRelay": true,
+    "mergePRs": false,
+    "sendEmail": false,
+    "transferMoney": false,
+    "deleteRealData": false
+  },
+  "intake": "paused",
+  "externalMailEnabled": false
+}

@@ -24,8 +24,12 @@ test('Published source recovered exactly; unpublished legal additions stay outsi
   assert.equal(baseline.liveJavaScriptSha256,'10cfb806939b98638400e2d65fdd65127cf88564e3404d7a907fd9fa21a29818');
   assert.equal(existsSync(new URL('src/legal/additional-website-notices.js',root)),false);
 });
-test('Partner documents have stable routes and agreement hash; publication authority stays closed',()=>{
-  assert.equal(partner.approved,false);
+test('Partner documents have stable routes and agreement hash; owner approval matches every exact published document',()=>{
+  assert.equal(partner.approved,true);
+  const approval=JSON.parse(read(partner.approvalRecord));
+  assert.equal(approval.permissions.sendEmail,false);
+  assert.equal(approval.permissions.mergePRs,false);
+  for(const [key,value] of Object.entries(partner.documents))assert.equal(createHash('sha256').update(value.text).digest('hex'),approval.documentSha256[key]);
   assert.deepEqual(Object.keys(partner.documents),['privacy','terms','providers','cookies']);
   assert.equal(createHash('sha256').update(partner.documents.terms.text).digest('hex'),partner.agreementSha256);
   assert.doesNotMatch(partner.documents.privacy.text,/walapay|\bKYC\b|\bKYB\b/iu);

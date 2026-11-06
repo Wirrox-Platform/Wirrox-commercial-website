@@ -1,6 +1,6 @@
 {
-  "kind": "publication-review",
-  "approved": false,
+  "kind": "owner-approved-publication",
+  "approved": true,
   "privacyVersion": "WIRROX-PARTNER-PRIVACY-2026-11-06-v7",
   "agreementVersion": "WIRROX-PARTNER-PUBLICATION-2026-11-06-v5",
   "agreementSha256": "bfc0cbfac41d6f77ac7744ac6bf336da62eba3198a510852f42ac3ab3c0f6257",
@@ -21,5 +21,7 @@
       "title": "Partner Cookies and Storage",
       "text": "## Sessions and storage\n\n| Technology | Purpose and duration |\n| --- | --- |\n| Portal authentication cookies | Essential sign-in and security. Session cookies; the server limits portal sessions to at most one hour and 15 minutes idle, with stricter applicable limits preserved. Logout invalidates the session |\n| Tab-session credential storage | Supports the signed-in portal in that tab; cleared through native logout. Browser session restoration may restore tab state, so server expiry remains authoritative |\n| Local browser preferences and metadata | Theme choices and application cache/last-user metadata may remain until cleared. They do not themselves grant authenticated access |\n| Introduction attempt identifier | Session storage helps recognise retries; contact details and the referral code are not stored in that identifier. Cleared after a successful introduction |\n| Cloudflare Turnstile | Security verification for application and verification forms. Challenge tokens are short-lived and single-use. Cloudflare processes relevant request/security information; its provider information explains locations |\n\nNo optional advertising analytics or session replay is enabled in the reviewed partner release. Required security processing is distinguished from optional tracking. We obtain any required choice before adding non-essential tracking. You can clear browser storage through browser controls; doing so may sign you out or reset preferences.\n\n## Questions and source access\n\nFor programme support and access to the corresponding source of the portal software, contact support@wirrox.com. For privacy or storage questions, contact compliance@wirrox.com. Source requests do not require an active partner membership.\n"
     }
-  }
+  },
+  "approvedOn": "2026-11-06",
+  "approvalRecord": "docs/PARTNER-PILOT-OWNER-APPROVAL-20261106.json"
 }
