@@ -40,7 +40,7 @@ export default function CapabilitiesHero() {
           {...fadeUp(0.4)}
         >
           WIRROX provides the onboarding, account management, payment, and reporting
-          infrastructure that B2B operators need — connected to licensed providers
+          infrastructure that B2B operators need — connected to financial providers
           through a compliance-first access layer.
         </motion.p>
 

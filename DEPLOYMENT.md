@@ -1,5 +1,11 @@
 # WIRROX Website — Deployment Guide
 
+Partner Program changes are a closed-by-default pre-release. See
+[partner build and environment instructions](docs/partner-program.md). Use
+`[CF-Pages-Skip]` on feature commits while deployment is not authorized; the current
+Pages project automatically deploys previews from all branches. Partner Functions
+and environment values were not deployed/configured by this implementation.
+
 ## Local Development
 
 ```bash

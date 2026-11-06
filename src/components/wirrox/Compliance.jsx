@@ -23,14 +23,14 @@ const protocols = [
     tag: "SOURCE OF FUNDS",
     title: "Source of Funds & Wealth",
     description:
-      "Clients are required to provide source of funds and source of wealth documentation as part of the compliance review. This is assessed prior to account activation.",
+      "Provide source-of-funds information and additional evidence appropriate to the application, including source of wealth where required. Review precedes activation.",
   },
   {
     icon: BookOpen,
     tag: "AUDIT TRAIL",
-    title: "Immutable Audit Records",
+    title: "Review Records",
     description:
-      "Every onboarding step, review action, and status change is logged with a timestamped, immutable audit trail — available for internal review and regulatory purposes.",
+      "Relevant application and review information supports case handling and operational records. The platform does not promise that every event is captured in an immutable record.",
   },
   {
     icon: Clock,
@@ -63,8 +63,8 @@ export default function Compliance() {
             </h2>
             <p className="mt-7 text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
               WIRROX supports structured compliance workflows and operational controls throughout
-              the onboarding and access lifecycle. Final regulated services are performed by
-              licensed providers where applicable.
+              the onboarding and access lifecycle. Underlying financial services are supplied
+              by the relevant providers under their applicable terms and authorisations.
             </p>
           </div>
 
@@ -75,10 +75,10 @@ export default function Compliance() {
             </p>
             <p className="text-sm text-muted-foreground leading-[1.8]">
               WIRROX supports compliance workflows and operational controls throughout the
-              client onboarding journey. Final regulated services — including account
-              opening, payment execution, and FX — may be performed by licensed providers
-              where applicable. WIRROX does not hold client funds or execute regulated
-              financial transactions on its own account.
+              client onboarding journey. Providers supply the underlying account, payment
+              and FX services. SFF supplies the interface and coordination layer; provider
+              review and final approval remain separate. Dashboard information reflects
+              provider records and does not represent funds deposited with SFF.
             </p>
             <div className="mt-6 pt-6 border-t border-rule">
               <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ export default function Compliance() {
               <div className="flex items-center gap-2 mt-2">
                 <span className="w-[4px] h-[4px] bg-bronze flex-shrink-0" />
                 <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-                  Zero custody architecture
+                  Provider-held funds model
                 </span>
               </div>
             </div>

@@ -26,14 +26,14 @@ const steps = [
     number: "04",
     title: "Operational Access",
     description:
-      "After full approval and 2FA setup, your team gains access to accounts, payouts, FX, and reporting through the WIRROX dashboard.",
+      "After the relevant approvals, contract acceptance and security setup, your team can use the specifically enabled provider-supported workflows. View-only status access does not permit transactions.",
   },
 ];
 
 function MobileArchDiagram() {
   const css=flowFrames("architecture-mobile", [[0,180,90,0],[5,180,90,0],[5.01,180,90],
     [20,194,183],[50,194,183],[60,180,225],[80,180,280],[80.01,180,280,0],[100,180,280,0]]);
-  return <svg viewBox="0 0 360 365" className="sm:hidden block w-full" data-flow="architecture-mobile" role="img" aria-label="Your business through WIRROX to licensed providers">
+  return <svg viewBox="0 0 360 365" className="sm:hidden block w-full" data-flow="architecture-mobile" role="img" aria-label="Your business through WIRROX to financial providers">
     <style>{css}</style>
     <text x="180" y="30" textAnchor="middle" fontSize="9" fill="var(--color-ink)" opacity=".5">CLIENT</text>
     <text x="180" y="54" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--color-ink)">Your Business</text>
@@ -43,8 +43,8 @@ function MobileArchDiagram() {
     <FlowMark x={160} y={157} />
     <text x="180" y="212" textAnchor="middle" fontSize="8" letterSpacing="2" fill="#C9A96E">INFRASTRUCTURE</text>
     <text x="180" y="300" textAnchor="middle" fontSize="9" fill="var(--color-ink)" opacity=".5">EXECUTION</text>
-    <text x="180" y="324" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--color-ink)">Licensed Providers</text>
-    <text x="180" y="345" textAnchor="middle" fontSize="11" fill="var(--color-ink)" opacity=".5">Regulated financial institutions</text>
+    <text x="180" y="324" textAnchor="middle" fontSize="16" fontWeight="500" fill="var(--color-ink)">Financial Providers</text>
+    <text x="180" y="345" textAnchor="middle" fontSize="11" fill="var(--color-ink)" opacity=".5">Service-specific approval applies</text>
     <FlowDot name="architecture-mobile" />
   </svg>;
 }
@@ -123,11 +123,11 @@ function ArchitectureDiagram() {
         </text>
         <text x={rightX} y={midY + 6} textAnchor="end" fontSize={15}
           fontFamily="Inter,sans-serif" fontWeight={500} fill="var(--color-ink)">
-          Licensed Providers
+          Financial Providers
         </text>
         <text x={rightX} y={midY + 24} textAnchor="end" fontSize={9.5}
           fontFamily="Inter,sans-serif" fill="var(--color-ink)" opacity={0.4}>
-          Regulated financial institutions
+          Service-specific approval applies
         </text>
       </svg>
     </motion.div>
