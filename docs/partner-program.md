@@ -1,3 +1,22 @@
+## Controlled pilot release — 6 November 2026
+
+The owner approved final partner agreement v5, privacy v7 and controlled publication.
+Exact body hashes are in docs/PARTNER-PILOT-OWNER-APPROVAL-20261106.json. Both PRs stay
+draft. Earlier preparation-only/no-deployment notes below are historical.
+
+The release keeps programme and email flags false. Production bindings and encrypted
+secrets are separate from unchanged preview bindings. No real partner registration,
+email delivery, money movement or client linkage is a deployment test. The first
+challenge, received-email/header and authenticated session checks belong to the
+owner rehearsal after separate email enablement.
+
+For a manual Pages upload, run the normal Vite build, then
+`node scripts/build-pilot-pages.mjs`. Include its `_worker.js`, `_routes.json`,
+`_headers` and `_redirects` alongside the exact assets. This bundles the same API
+handler used by Git builds and refuses unexpected additional Functions routes.
+Default Git builds still use the Functions directory. Feature commits retain
+`[CF-Pages-Skip]`; do not merge either draft PR to trigger a release.
+
 # Partner Program build — 2026-10-26
 
 ## Pilot preparation update — 6 November 2026
