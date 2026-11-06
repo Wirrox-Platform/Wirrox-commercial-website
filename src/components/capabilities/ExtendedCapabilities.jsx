@@ -7,19 +7,19 @@ const sections = [
     tag: "A",
     title: "Digital & Fiat Flow Management",
     description:
-      "WIRROX enables businesses to operate across both traditional and digital financial systems through a unified orchestration layer. Instructions can be routed across asset types and jurisdictions without requiring direct custody or infrastructure management.",
+      "Provider-supported funding and payout flows depend on the customer service configuration. Any digital-asset flow requires specific asset, network and service approval and carries additional custody, transfer and conversion risks.",
   },
   {
     tag: "B",
-    title: "Partner Routing Engine",
+    title: "Supported Payment Workflows",
     description:
-      "Our routing engine evaluates each instruction in real time based on compliance rules, partner capabilities, cost structures, and jurisdictional requirements to determine the optimal execution path.",
+      "Instructions use supported provider workflows. Available rails and destinations depend on the approved service. WIRROX does not promise automated best-price routing or independent execution.",
   },
   {
     tag: "C",
     title: "Infrastructure Abstraction",
     description:
-      "WIRROX abstracts the complexity of financial integrations, allowing businesses to operate through a single interface while interacting with multiple licensed financial institutions behind the scenes.",
+      "WIRROX provides one operational interface for the services enabled for each customer. The number of available providers depends on the agreed service; multiple provider options are not guaranteed.",
   },
 ];
 

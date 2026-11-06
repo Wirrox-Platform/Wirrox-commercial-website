@@ -11,6 +11,7 @@ import Compliance from "../components/wirrox/Compliance";
 import UseCases from "../components/wirrox/UseCases";
 import CTASection from "../components/wirrox/CTASection";
 import Footer from "../components/wirrox/Footer";
+import ServiceFAQ from "../components/wirrox/ServiceFAQ";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <WhyWirrox />
         <Compliance />
         <UseCases />
+        <ServiceFAQ />
         <CTASection />
       </main>
 

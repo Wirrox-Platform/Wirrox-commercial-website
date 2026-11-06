@@ -17,12 +17,12 @@ const capabilities = [
   {
     icon: RefreshCw,
     title: "FX & Payment Operations",
-    description: "FX quote visibility, payment initiation workflows, and payout management — connected to licensed provider infrastructure with real-time status synchronisation.",
+    description: "FX quote visibility, payment initiation workflows, and payout management — connected to provider infrastructure with provider-reported status updates.",
   },
   {
     icon: ShieldCheck,
     title: "Compliance Controls",
-    description: "2FA enforcement, role-based access controls, document collection workflows, and immutable audit logs covering every onboarding action and operational event.",
+    description: "Document collection and review workflows support controlled activation. Required authentication and approval steps apply to enabled operations.",
   },
   {
     icon: BarChart2,
@@ -31,8 +31,8 @@ const capabilities = [
   },
   {
     icon: Webhook,
-    title: "Webhooks & API Connectivity",
-    description: "API-ready infrastructure with webhook delivery for payment status updates, account events, and onboarding status changes — enabling integration with your own systems.",
+    title: "Provider Integration Layer",
+    description: "The platform uses provider integrations for operational information. A customer-facing API or outbound webhook service requires separate confirmation and agreement; it is not promised by standard access.",
   },
 ];
 

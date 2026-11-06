@@ -9,22 +9,22 @@ const reasons = [
     title: "Compliance Before Access",
     description:
       "Every client goes through structured KYB/KYC review before gaining access to any operational feature. No self-service account opening. No unreviewed access.",
-    stat: "100%",
+    stat: "Review",
     statLabel: "Reviewed Onboarding",
   },
   {
     icon: BarChart2,
     title: "Operational Visibility",
     description:
-      "Real-time account status, payment tracking, FX quotes, and reconciliation data — all in one dashboard. Audit-ready records at every step.",
-    stat: "Full",
-    statLabel: "Audit Trail Coverage",
+      "Provider-reported account status, payment tracking, quotes and reporting are brought together in one dashboard. Updates may lag and should be reconciled with the relevant records.",
+    stat: "Status",
+    statLabel: "Operational Visibility",
   },
   {
     icon: Globe,
     title: "Provider-Backed Infrastructure",
     description:
-      "Accounts, payouts, and FX are backed by licensed financial providers. WIRROX coordinates provider access as part of the onboarding process — no direct integration required.",
+      "Accounts, payouts, and FX are backed by third-party financial providers. WIRROX coordinates provider access as part of the onboarding process — no direct integration required.",
     stat: "B2B",
     statLabel: "Focused Infrastructure",
   },

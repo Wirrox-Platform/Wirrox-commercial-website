@@ -18,7 +18,7 @@ export default function CapabilitiesCTA() {
             Get Started
           </p>
           <h2 className="text-[clamp(1.9rem,3.5vw,3rem)] font-semibold tracking-[-0.02em] text-ink leading-[1.12] mb-6">
-            Access compliant financial
+            Access provider-supported financial
             <br />infrastructure for your business.
           </h2>
           <p className="text-[0.9375rem] text-muted-foreground leading-[1.75] mb-12 max-w-md">
