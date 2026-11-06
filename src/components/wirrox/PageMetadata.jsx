@@ -14,6 +14,7 @@ const labels = {
   '/partners/privacy': 'Partner Privacy Notice',
   '/partners/terms': 'Partner Agreement',
   '/partners/providers': 'Partner Providers and Transfers',
+  '/partners/cookies': 'Partner Cookies and Storage',
 };
 
 export default function PageMetadata() {

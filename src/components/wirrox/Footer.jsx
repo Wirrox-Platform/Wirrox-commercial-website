@@ -29,6 +29,8 @@ const navCols = [
       { label: "Privacy Notice", href: "/legal/privacy-notice" },
       { label: "Cookie Policy", href: "/legal/cookie-policy" },
       { label: "Company Information", href: "/legal/legal-notice" },
+      { label: "Partner Privacy", href: "/partners/privacy" },
+      { label: "Partner Agreement", href: "/partners/terms" },
     ],
   },
 ];

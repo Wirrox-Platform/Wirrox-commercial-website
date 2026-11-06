@@ -8,6 +8,7 @@ import Partners from './pages/Partners';
 import PartnerApply from './pages/PartnerApply';
 import PartnerVerify from './pages/PartnerVerify';
 import PartnerIntroduction from './pages/PartnerIntroduction';
+import PartnerDocument from './pages/PartnerDocument';
 import PageNotFound from './lib/PageNotFound';
 import ScrollToTop from './components/wirrox/ScrollToTop';
 import PageMetadata from './components/wirrox/PageMetadata';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/partners/apply" element={<PartnerApply />} />
           <Route path="/partners/verify" element={<PartnerVerify />} />
           <Route path="/partners/introduction" element={<PartnerIntroduction />} />
+          <Route path="/partners/:document" element={<PartnerDocument />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/legal/:slug" element={<Legal />} />
           <Route path="*" element={<PageNotFound />} />

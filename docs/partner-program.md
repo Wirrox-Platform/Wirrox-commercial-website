@@ -1,5 +1,46 @@
 # Partner Program build — 2026-10-26
 
+## Pilot preparation update — 6 November 2026
+
+Live/source parity is resolved. Recovered baseline commit `ff5b409` rebuilds the
+exact current public JavaScript bundle, SHA256
+`10cfb806939b98638400e2d65fdd65127cf88564e3404d7a907fd9fa21a29818`.
+The recovered public website pages and existing privacy content are preserved.
+Later unpublished website-terms, complaints and AML additions are excluded.
+`WEBSITE-LIVE-BASELINE-20261106.json` records the public source hashes.
+
+Partner privacy, agreement, provider-transfer and cookie/storage publication
+candidates now have stable `/partners/privacy`, `/partners/terms`,
+`/partners/providers` and `/partners/cookies` routes, linked from the application
+and document navigation. They are labelled as inactive publication-review copies.
+They use escaped React text, not raw HTML injection. The privacy body/retention
+periods are preserved from CRM notice v6; clean agreement v5 remains for final
+release review and does not rewrite approved/accepted older versions.
+
+32 tests, full lint and production build pass. Desktop and 390px browser review
+passes, including tables, navigation and no horizontal page overflow. Native
+0.1.34 exact-text acceptance tests pass separately under full rollback, with all
+public database-table counts/value hashes unchanged. The native ZIP is unchanged.
+
+A dedicated managed Turnstile widget is prepared for www.wirrox.com only, with
+no pre-clearance. Its secret and a separate gateway credential are encrypted
+outside Git and review pages; no website/CRM bindings were applied. Google Admin
+shows no configured SMTP relay rule. The CRM has no SMTP transport configured;
+Railway is Pro but both Gmail SMTP ports timed out, and static outbound IPs are
+disabled. The CRM execution packet proposes a TLS/IP-restricted Google relay
+for the authorised release; no message was sent or networking changed.
+
+The initial owner pilot covers registration through portal access and staff
+validation/linkage of Swiss Fintech Forum. Production progress/export automation
+is not part of these two PRs. Keep first-pilot attribution non-earning, with no
+commission/payout rows, so existing reversible cleanup remains available. Real
+transaction reconciliation remains required before publishing commissions.
+
+Keep both PRs draft and every website commit prefixed `[CF-Pages-Skip]`. No
+deployment, real email, hosted client assignment or real-data deletion occurred.
+Remaining execution gates are final document/release review, approved target
+configuration and live mail/challenge/session checks during that release.
+
 ## Source and delivery boundary
 
 Based on main `6071c0a5dbf39be7020bb5f1b3f6b5e2267863a5`. The existing commercial
@@ -23,7 +64,7 @@ feature/partner-program. The production deployment remained the successful
 2026-10-20 deployment. Those recent live/preview deployment records have no Git
 commit hash; the named privacy-review branch is not present in GitHub. This does
 not establish what code changed, but it prevents attesting live/source parity.
-Reconcile the live source before merging/releasing this main-based PR.
+This historical source gate is closed by the 6 November recovery above.
 
 ## Implemented
 
