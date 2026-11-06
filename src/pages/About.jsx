@@ -42,7 +42,7 @@ export default function About() {
             {...fadeUp(0.4)}
           >
             WIRROX is built as a B2B financial technology infrastructure platform — designed
-            to connect businesses to licensed financial services through a compliance-first
+            to connect businesses to provider-supported financial services through a compliance-first
             onboarding layer and structured operational workflows.
           </motion.p>
         </div>
@@ -58,27 +58,27 @@ export default function About() {
                 Infrastructure, not a product
               </h2>
               <p className="text-[0.9375rem] text-muted-foreground leading-[1.75] mb-6">
-                WIRROX is not a bank, payment institution, or consumer financial product.
+                WIRROX is operated by Swiss Fintech Forum AG in Zug, Switzerland.
                 It is a technology infrastructure platform that connects B2B clients to
-                licensed financial providers through a structured onboarding and operational
+                third-party financial providers through a structured onboarding and operational
                 access layer.
               </p>
               <p className="text-[0.9375rem] text-muted-foreground leading-[1.75]">
                 The platform manages the compliance review process, coordinates provider
                 onboarding, and provides the operational dashboard through which approved
-                clients manage accounts, payouts, FX, and reporting.
+                clients access provider-supported accounts, payouts, FX and reporting.
               </p>
             </div>
 
             <div className="space-y-8">
               {[
                 {
-                  title: "B2B-only",
+                  title: "Business focus",
                   body: "WIRROX serves businesses — fintech platforms, payment companies, global operators, and digital asset businesses. It is not designed for individual consumer use.",
                 },
                 {
                   title: "Provider-backed",
-                  body: "Account opening, payment execution, and FX are performed by licensed financial providers. WIRROX manages access to these services, not the services themselves.",
+                  body: "Account opening, payment execution, and FX are performed by third-party financial providers. WIRROX manages access to these services, not the services themselves.",
                 },
                 {
                   title: "Compliance-first",

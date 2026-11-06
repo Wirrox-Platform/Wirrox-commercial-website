@@ -6,6 +6,7 @@ import { platformDestination } from "../../lib/platform-destination";
 export default function RequestAccessModal({ open, onClose }) {
   const closeButtonRef = useRef(null);
   const previousFocusRef = useRef(null);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -16,6 +17,13 @@ export default function RequestAccessModal({ open, onClose }) {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "Tab") {
+        const controls = Array.from(dialogRef.current?.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex="0"]') || []).filter(el => el.getClientRects().length);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -48,7 +56,8 @@ export default function RequestAccessModal({ open, onClose }) {
 
           {/* Modal */}
           <motion.div
-            className="relative w-full max-w-md mx-5 bg-white border border-rule rounded-lg shadow-pop p-8 lg:p-12"
+            ref={dialogRef}
+            className="relative w-full max-w-md max-h-[90dvh] overflow-y-auto mx-5 bg-card border border-rule rounded-lg shadow-pop p-8 lg:p-12"
             initial={{ opacity: 0, y: 16, scale: 0.99 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.99 }}
@@ -104,7 +113,10 @@ export default function RequestAccessModal({ open, onClose }) {
             </a>
 
             <p className="mt-6 text-[11px] text-muted-foreground text-center leading-[1.6]">
-              Opens the WIRROX application in a new tab.
+              Opens the WIRROX application in a new tab. Read the{' '}
+              <a href="/legal/privacy-notice" className="underline">Privacy Notice</a>{' '}
+              before submitting personal information. A request does not guarantee approval
+              or activate services. No contractual acceptance is collected in this dialog.
             </p>
           </motion.div>
         </motion.div>

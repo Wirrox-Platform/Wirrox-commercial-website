@@ -18,12 +18,12 @@ export default function CTASection() {
             Get Started
           </p>
           <h2 className="text-[clamp(1.9rem,3.5vw,3rem)] font-semibold tracking-[-0.02em] text-ink leading-[1.12] mb-6">
-            Ready to build on compliant
+            Ready to discuss your business
             <br />financial infrastructure?
           </h2>
           <p className="text-[0.9375rem] text-muted-foreground leading-[1.75] mb-12 max-w-md">
-            Submit an access request to begin structured onboarding. Our team reviews
-            each application and coordinates provider access for approved businesses.
+            Contact our team about your business requirements. Production access is
+            invitation-only, with application review and provider coordination before activation.
           </p>
 
           <div className="flex flex-wrap gap-4">

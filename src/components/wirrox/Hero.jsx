@@ -51,7 +51,7 @@ export default function Hero() {
           className="text-[10px] font-mono uppercase tracking-[0.4em] text-bronze mb-10"
           {...fadeUp(0.15)}
         >
-          Financial Infrastructure Platform
+          Technology Infrastructure Platform
         </motion.p>
 
         {/* Headline */}
@@ -61,7 +61,7 @@ export default function Hero() {
         >
           Financial infrastructure
           <br />
-          <span className="text-muted-foreground font-light">for compliant global operations</span>
+          <span className="text-muted-foreground font-light">for business payment operations</span>
         </motion.h1>
 
         {/* Supporting line */}
@@ -69,7 +69,7 @@ export default function Hero() {
           className="mt-5 text-base font-mono tracking-[0.04em] text-muted-foreground"
           {...fadeUp(0.45)}
         >
-          Compliance-first onboarding. Provider-backed payment rails. API-ready infrastructure.
+          Business onboarding. Provider-supported payment access. Operational visibility.
         </motion.p>
 
         {/* Sub */}
@@ -77,9 +77,9 @@ export default function Hero() {
           className="mt-6 max-w-lg text-[1.0625rem] text-muted-foreground leading-[1.7] font-light"
           {...fadeUp(0.55)}
         >
-          WIRROX connects businesses to licensed financial infrastructure through structured
-          onboarding, controlled access workflows, and operational dashboards — without
-          custody or execution risk.
+          WIRROX, operated by Swiss Fintech Forum AG in Zug, connects business clients
+          to provider-supported financial services through structured onboarding and an
+          operational dashboard. Access is subject to review and provider approval.
         </motion.p>
 
         {/* CTAs */}
@@ -120,7 +120,7 @@ export default function Hero() {
             "Compliance-first onboarding",
             "Provider-backed rails",
             "Operational dashboard",
-            "API-ready infrastructure",
+            "Provider status visibility",
           ].map((point) => (
             <div key={point} className="flex items-center gap-2">
               <span className="w-[4px] h-[4px] rounded-full bg-bronze flex-shrink-0" />
@@ -138,8 +138,8 @@ export default function Hero() {
         >
           {[
             { value: "B2B", label: "Infrastructure Focus" },
-            { value: "100%", label: "Audit Coverage" },
-            { value: "0×", label: "Fund Custody" },
+            { value: "Review", label: "Before Activation" },
+            { value: "SFF", label: "Swiss Operator" },
           ].map((s) => (
             <div key={s.label}>
               <p className="text-2xl font-semibold text-ink tracking-tight">{s.value}</p>

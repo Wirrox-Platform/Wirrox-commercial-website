@@ -10,6 +10,8 @@ import PartnerVerify from './pages/PartnerVerify';
 import PartnerIntroduction from './pages/PartnerIntroduction';
 import PageNotFound from './lib/PageNotFound';
 import ScrollToTop from './components/wirrox/ScrollToTop';
+import PageMetadata from './components/wirrox/PageMetadata';
+import Legal from './pages/Legal';
 import { RequestAccessProvider } from './components/wirrox/RequestAccessContext';
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
     <Router>
       <RequestAccessProvider>
         <ScrollToTop />
+        <PageMetadata />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/capabilities" element={<Capabilities />} />
@@ -27,6 +30,8 @@ function App() {
           <Route path="/partners/apply" element={<PartnerApply />} />
           <Route path="/partners/verify" element={<PartnerVerify />} />
           <Route path="/partners/introduction" element={<PartnerIntroduction />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/legal/:slug" element={<Legal />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </RequestAccessProvider>

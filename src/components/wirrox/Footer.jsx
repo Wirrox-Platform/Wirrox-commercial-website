@@ -25,9 +25,10 @@ const navCols = [
   {
     label: "Legal",
     links: [
-      { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
-      { label: "Compliance Notice", href: "#" },
+      { label: "Website information", href: "/legal" },
+      { label: "Privacy Notice", href: "/legal/privacy-notice" },
+      { label: "Cookie Policy", href: "/legal/cookie-policy" },
+      { label: "Company Information", href: "/legal/legal-notice" },
     ],
   },
 ];
@@ -51,7 +52,8 @@ export default function Footer() {
               <BrandWordmark className="w-[138px]" />
             </Link>
             <p className="text-sm text-muted-foreground leading-[1.7] max-w-xs mb-6">
-              Compliance-first financial infrastructure for global B2B payment operations.
+              WIRROX is operated by Swiss Fintech Forum AG, Zug, Switzerland.
+              Technology and operational access for business clients.
             </p>
             <RequestAccessTrigger
               className="inline-block rounded-md text-[10px] font-mono uppercase tracking-[0.18em] px-5 py-2.5 bg-ink text-canvas hover:bg-bronze hover:text-ink transition-colors duration-300"
@@ -97,20 +99,22 @@ export default function Footer() {
         <div className="border border-rule rounded-lg p-5 mb-10 bg-card shadow-panel">
           <p className="text-[11px] font-mono text-muted-foreground leading-[1.75]">
             <span className="text-bronze uppercase tracking-[0.18em] mr-2">Notice:</span>
-            WIRROX operates as a technology infrastructure provider. It does not hold client funds,
-            execute regulated payments, or provide financial services directly. Final regulated services
-            are performed by licensed providers where applicable. WIRROX is not a bank, payment institution,
-            or investment firm.
+            Swiss Fintech Forum AG supplies the interface, onboarding coordination and support.
+            Underlying financial services are supplied by the relevant third-party providers,
+            subject to their requirements and approval. SFF does not itself hold or safeguard
+            client funds, provide bank accounts, execute payments or act as the FX counterparty
+            under this service model. Dashboard balances reflect provider information, not
+            deposits with SFF. Provider involvement does not remove SFF's own responsibilities.
           </p>
         </div>
 
         {/* Bottom bar */}
         <div className="border-t border-rule pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} WIRROX. All rights reserved.
+            © {new Date().getFullYear()} Swiss Fintech Forum AG · CHE-406.093.019
           </p>
           <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-            Financial Infrastructure Provider
+            Gubelstrasse 24 · 6300 Zug · Switzerland
           </p>
         </div>
       </div>

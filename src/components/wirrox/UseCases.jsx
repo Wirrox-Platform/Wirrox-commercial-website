@@ -8,7 +8,7 @@ const useCases = [
     icon: Building2,
     title: "Fintech Platforms",
     description:
-      "Fintech companies requiring licensed banking infrastructure — accounts, payouts, and FX — without building direct provider relationships or holding regulated licences themselves.",
+      "Fintech companies requiring provider-supported payment infrastructure — accounts, payouts, and FX — through coordinated onboarding. Customers remain responsible for any permissions required for their own activities.",
     details: [
       "Provider-backed account access",
       "Compliance-first onboarding",
@@ -41,7 +41,7 @@ const useCases = [
     icon: ArrowRightLeft,
     title: "Digital Asset Businesses",
     description:
-      "Businesses operating at the intersection of digital assets and traditional finance that need fiat onboarding, account access, and interoperability with regulated institutions.",
+      "Businesses operating at the intersection of digital assets and traditional finance that need fiat onboarding, account access, and interoperability with financial providers.",
     details: [
       "Fiat / digital asset interoperability",
       "Structured compliance review",
@@ -52,10 +52,10 @@ const useCases = [
     icon: Banknote,
     title: "Payment Companies",
     description:
-      "Payment service providers and processors that need additional banking infrastructure, provider-backed account access, or compliance-grade onboarding for their own clients.",
+      "Payment service providers and processors seeking provider-supported accounts and payment access for their own approved business. Any service for other clients requires separate review.",
     details: [
       "B2B infrastructure layer",
-      "API-ready integration",
+      "Coordinated provider access",
       "Status synchronisation",
     ],
   },

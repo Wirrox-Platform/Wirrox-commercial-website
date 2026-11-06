@@ -20,9 +20,9 @@ const capabilities = [
   },
   {
     icon: Zap,
-    title: "API-Ready Infrastructure",
+    title: "Coordinated Provider Access",
     description:
-      "Webhooks, status synchronisation, and API connectivity for businesses that need to integrate payment workflows, reporting, and account data into their own systems.",
+      "Provider information is presented through the dashboard for approved workflows. Customer API access is not included by default and requires separate confirmation and agreement.",
     tag: "API & INTEGRATION",
   },
 ];
