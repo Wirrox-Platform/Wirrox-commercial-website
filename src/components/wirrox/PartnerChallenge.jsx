@@ -9,7 +9,7 @@ export default function PartnerChallenge({siteKey, action, onToken, resetKey = 0
     const mount = () => {
       if (removed || !window.turnstile || !container.current) return;
       widget = window.turnstile.render(container.current, {sitekey: siteKey, action: `partner-${action}`,
-        callback: onToken, 'expired-callback': () => onToken(''),
+        'response-field': false, callback: onToken, 'expired-callback': () => onToken(''),
         'error-callback': () => {onToken(''); setFailed(true);}});
     };
     let script = document.querySelector('script[data-partner-challenge]');
