@@ -64,7 +64,7 @@ async function challenge(request, input, config, env, fetcher, action) {
     throw new PartnerInputError('Please complete the verification check.');
   }
   const response = await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST', headers: {'Content-Type': 'application/json'}, redirect: 'error', signal: AbortSignal.timeout(10000),
+    method: 'POST', headers: {'Content-Type': 'application/json'}, redirect: 'manual', signal: AbortSignal.timeout(10000),
     body: JSON.stringify({secret: env.PARTNER_TURNSTILE_SECRET, response: input.challengeToken,
       remoteip: request.headers.get('CF-Connecting-IP') || undefined}),
   });
@@ -119,12 +119,13 @@ export async function handlePartner(request, env, fetcher = fetch) {
     if (action !== 'introduction' && env.PARTNER_GATEWAY_SECRET) headers['X-Wirrox-Partner-Gateway'] = env.PARTNER_GATEWAY_SECRET;
     if (action === 'introduction') headers['X-Api-Key'] = env.PARTNER_INTAKE_API_KEY;
     const upstream = await fetcher(`${config.crmOrigin}/api/v1/AffiliateProgram/${crmAction}`, {
-      method: 'POST', headers, body: JSON.stringify(payload), redirect: 'error', signal: AbortSignal.timeout(10000),
+      method: 'POST', headers, body: JSON.stringify(payload), redirect: 'manual', signal: AbortSignal.timeout(10000),
     });
     // No automatic retry: native source/app IDs provide idempotency for an explicit retry.
     await upstream.body?.cancel();
     if (!upstream.ok) return json({message: action === 'verify' ? 'This verification link is invalid or expired.' :
-      'We could not confirm this submission. Please check your details or contact the partner team.'}, upstream.status < 500 ? 400 : 503);
+      'We could not confirm this submission. Please check your details or contact the partner team.'},
+      upstream.status >= 400 && upstream.status < 500 ? 400 : 503);
     return json({message: action === 'apply' ? genericApplication : action === 'introduction' ? genericIntroduction :
       'Your email is verified. The partner team will review your application.'});
   } catch (error) {

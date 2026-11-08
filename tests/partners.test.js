@@ -56,7 +56,7 @@ test('Application proxy forwards only safe fields and no credential',async()=>{
   let calls=0;
   const response=await handlePartner(request('apply',applicationInput()),env(),async(url,options)=>{
     calls++;assert.equal(url,'http://127.0.0.1:8180/api/v1/AffiliateProgram/apply');assert.equal(options.headers['X-Api-Key'],undefined);
-    assert.equal(options.redirect,'error');assert.deepEqual(JSON.parse(options.body),application(applicationInput()));
+    assert.equal(options.redirect,'manual');assert.deepEqual(JSON.parse(options.body),application(applicationInput()));
     return Response.json({id:'private-record',internalNotes:'private',exists:true});
   });
   const text=await response.text();assert.equal(calls,1);assert.equal(response.status,200);assert.equal(text.includes('private'),false);assert.equal(text.includes('exists'),false);
@@ -109,10 +109,29 @@ test('Challenge result must match hostname and operation',async()=>{
 test('Valid server challenge precedes the narrow CRM call',async()=>{
   const e={...env(),PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_SITE_ORIGIN:'https://preview.pages.dev',PARTNER_CRM_ORIGIN:'https://synthetic-crm.example.test',
     PARTNER_PORTAL_URL:'https://synthetic-crm.example.test/portal/synthetic/',PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value',PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
-  const urls=[];const response=await handlePartner(request('apply',{...applicationInput(),challengeToken:'synthetic-token'},{origin:'https://preview.pages.dev'}),e,async(url,options)=>{
+  const input={...applicationInput(),challengeToken:'synthetic-token'};
+  delete input.audience;
+  const urls=[];const response=await handlePartner(request('apply',input,{origin:e.PARTNER_SITE_ORIGIN}),e,async(url,options)=>{
+    assert.equal(options.redirect,'manual');
     urls.push(url);if(url.includes('siteverify')){assert.equal(JSON.parse(options.body).secret,e.PARTNER_TURNSTILE_SECRET);return Response.json({success:true,hostname:'preview.pages.dev',action:'partner-apply'});}
-    assert.equal(options.headers['X-Api-Key'],undefined);return Response.json({});
+    assert.equal(options.headers['X-Api-Key'],undefined);assert.equal(JSON.parse(options.body).audience,'Not provided');return Response.json({});
   });assert.equal(response.status,200);assert.equal(urls.length,2);
+});
+test('A redirect from the challenge or CRM fails closed',async()=>{
+  const e={...env(),PARTNER_TARGET_ENVIRONMENT:'sandbox',PARTNER_SITE_ORIGIN:'https://preview.pages.dev',PARTNER_CRM_ORIGIN:'https://synthetic-crm.example.test',
+    PARTNER_PORTAL_URL:'',PARTNER_TURNSTILE_SITE_KEY:'synthetic-site-key',PARTNER_TURNSTILE_SECRET:'synthetic-challenge-value',PARTNER_GATEWAY_SECRET:'a'.repeat(64)};
+  for(const redirectAt of ['challenge','crm']){
+    const calls=[];
+    const response=await handlePartner(request('apply',{...applicationInput(),challengeToken:'synthetic-token'},{origin:e.PARTNER_SITE_ORIGIN}),e,async(url,options)=>{
+      assert.equal(options.redirect,'manual');
+      const stage=url.includes('siteverify')?'challenge':'crm';
+      calls.push(stage);
+      if(stage===redirectAt)return Response.redirect('https://unexpected.example.test/');
+      return Response.json({success:true,hostname:'preview.pages.dev',action:'partner-apply'});
+    });
+    assert.equal(response.status,503);
+    assert.deepEqual(calls,redirectAt==='challenge'?['challenge']:['challenge','crm']);
+  }
 });
 test('Opaque code capture is explicit and validates the complete value',()=>{
   assert.equal(codeFromSearch('?partner='+'a'.repeat(36)),'a'.repeat(36));assert.equal(codeFromSearch('?partner=someone@example.test'),'');

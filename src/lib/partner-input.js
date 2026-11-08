@@ -38,7 +38,9 @@ export function application(input) {
   only(input, APPLICATION_FIELDS);
   return {name: text(input.name), email: email(input.email), company: text(input.company || '', 255, false),
     website: website(input.website), country: text(input.country, 100), partnerType: text(input.partnerType, 100),
-    audience: text(input.audience, 2000), introduction: text(input.introduction, 4000), noticeVersion: text(input.noticeVersion, 100)};
+    // Preserve the required CRM field for applications from the shorter form.
+    audience: text(input.audience ?? 'Not provided', 2000),
+    introduction: text(input.introduction, 4000), noticeVersion: text(input.noticeVersion, 100)};
 }
 
 export function introduction(input) {
