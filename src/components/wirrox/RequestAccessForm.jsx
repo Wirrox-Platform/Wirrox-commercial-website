@@ -80,8 +80,11 @@ export default function RequestAccessForm() {
         <input className={input} name="email" type="email" maxLength={254} autoComplete="email" required />
       </label>
       <label className="text-sm font-medium">Partner referral code <span className="font-normal text-muted-foreground">(optional)</span>
-        <input className={input} name="referralCode" maxLength={36} autoComplete="off" spellCheck={false} />
+        <input className={input} name="referralCode" maxLength={36} autoComplete="off" spellCheck={false} aria-describedby="access-enquiry-code-hint" />
       </label>
+      <p id="access-enquiry-code-hint" className="-mt-2 text-xs text-muted-foreground">
+        If we can match your referral, the partner can see your business name and referral status.
+      </p>
       <div hidden aria-hidden="true"><label>Company fax<input name="companyFax" tabIndex={-1} autoComplete="off" /></label></div>
       <p className="text-xs leading-relaxed text-muted-foreground">
         We use your details to review and respond to this enquiry. See the <a href="/legal/privacy-notice" className="underline">Privacy Notice</a>.
