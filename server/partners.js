@@ -1,4 +1,4 @@
-import { accessEnquiry, ACCESS_ENQUIRY_FIELDS, application, introduction, only, PartnerInputError } from '../src/lib/partner-input.js';
+import { accessEnquiry, ACCESS_ENQUIRY_FIELDS, APPLICATION_FIELDS, application, introduction, only, PartnerInputError } from '../src/lib/partner-input.js';
 
 const productionHosts = new Set(['wirrox.com', 'www.wirrox.com']);
 const loopbackHosts = new Set(['localhost', '127.0.0.1', '[::1]']);
@@ -112,7 +112,7 @@ export async function handlePartner(request, env, fetcher = fetch) {
   try {
     const input = await boundedJson(request.body);
     const allowed = isEnquiry ? [...ACCESS_ENQUIRY_FIELDS, 'challengeToken', 'companyFax'] : action === 'verify' ? ['token','challengeToken','companyFax'] : action === 'apply' ?
-      ['name','email','company','website','country','partnerType','audience','introduction','noticeVersion','challengeToken','companyFax'] :
+      [...APPLICATION_FIELDS,'challengeToken','companyFax'] :
       ['applicationId','referralCode','businessName','website','contactName','contactEmail','introduction','challengeToken','companyFax'];
     only(input, allowed);
     if (input.companyFax) return json({message: isEnquiry ? genericEnquiry :
@@ -147,7 +147,7 @@ export async function handlePartner(request, env, fetcher = fetch) {
       'We could not confirm this submission. Please check your details or contact the partner team.'},
       upstream.status >= 400 && upstream.status < 500 ? 400 : 503);
     return json({message: isEnquiry ? genericEnquiry : action === 'apply' ? genericApplication : action === 'introduction' ? genericIntroduction :
-      'Your email is verified. The partner team will review your application.'});
+      'Your email has been verified. Your partner application is pending review. Look for an email from the partner team with the outcome or next steps.'});
   } catch (error) {
     if (error instanceof PartnerInputError) return json({message: error.message}, 400);
     // Do not log request bodies, tokens, contact details, credentials or upstream errors.

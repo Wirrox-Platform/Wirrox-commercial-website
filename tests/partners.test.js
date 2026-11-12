@@ -9,7 +9,7 @@ const env=()=>({PARTNER_PROGRAM_ENABLED:'true',PARTNER_TARGET_ENVIRONMENT:'local
   PARTNER_NOTICE_VERSION:'synthetic-notice-v1',PARTNER_NOTICE_TEXT:'Synthetic test notice, not an approved privacy notice.',
   PARTNER_PORTAL_URL:'http://127.0.0.1:8180/portal/synthetic-partners/',PARTNER_INTAKE_API_KEY:'synthetic-intake-value'});
 const applicationInput=()=>({name:'Synthetic Applicant',email:'synthetic@example.test',country:'Test Country',
-  partnerType:'Consultant',audience:'Synthetic businesses',introduction:'Synthetic introductions',noticeVersion:'synthetic-notice-v1'});
+  partnerType:'Consultant',audience:'Synthetic businesses',introduction:'Synthetic introductions',noticeVersion:'synthetic-notice-v1',noticeAcknowledged:true});
 const introInput=()=>({applicationId:'11111111-1111-4111-8111-111111111111',referralCode:'a'.repeat(36),
   businessName:'Synthetic Business',contactEmail:'synthetic@example.test',introduction:'Synthetic introduction'});
 const request=(action,body,options={})=>new Request(`${options.origin||origin}/api/partners/${action}`,{
@@ -63,6 +63,7 @@ test('Application proxy forwards only safe fields and no credential',async()=>{
 });
 test('Changed notice and honeypot cannot create an application',async()=>{
   assert.equal((await handlePartner(request('apply',{...applicationInput(),noticeVersion:'old'}),env(),noFetch)).status,400);
+  assert.equal((await handlePartner(request('apply',{...applicationInput(),noticeAcknowledged:false}),env(),noFetch)).status,400);
   assert.equal((await handlePartner(request('apply',{...applicationInput(),companyFax:'bot'}),env(),noFetch)).status,200);
 });
 test('GET verification does not consume a token',async()=>{

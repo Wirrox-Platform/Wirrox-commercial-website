@@ -11,7 +11,7 @@ const env = {PARTNER_PROGRAM_ENABLED:'true',PARTNER_TARGET_ENVIRONMENT:'local',P
   PARTNER_NOTICE_VERSION:'synthetic-notice-v1',PARTNER_NOTICE_TEXT:'Synthetic native integration test only.'};
 const email = `website-native-${crypto.randomUUID()}@example.invalid`;
 const payload = {name:'Synthetic website native test',email,country:'CH',partnerType:'Consultant',
-  audience:'Synthetic audience',introduction:'Synthetic local integration test',noticeVersion:'synthetic-notice-v1'};
+  audience:'Synthetic audience',introduction:'Synthetic local integration test',noticeVersion:'synthetic-notice-v1',noticeAcknowledged:true};
 const send = (action, data) => handlePartner(new Request(`${origin}/api/partners/${action}`,{
   method:'POST',headers:{'Content-Type':'application/json',Origin:origin},body:JSON.stringify(data)}),env);
 const first = await send('apply',payload);

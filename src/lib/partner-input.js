@@ -1,6 +1,6 @@
 export class PartnerInputError extends Error {}
 
-export const APPLICATION_FIELDS = Object.freeze(['name','email','company','website','country','partnerType','audience','introduction','noticeVersion']);
+export const APPLICATION_FIELDS = Object.freeze(['name','email','company','website','country','partnerType','audience','introduction','noticeVersion','noticeAcknowledged']);
 export const ACCESS_ENQUIRY_FIELDS = Object.freeze(['requestId','businessName','firstName','lastName','email','referralCode']);
 const uuidV4 = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/iu;
 const introductionKey = 'wirrox-partner-introduction-attempt';
@@ -40,11 +40,12 @@ export function website(value = '') {
 
 export function application(input) {
   only(input, APPLICATION_FIELDS);
+  if (input.noticeAcknowledged !== true) throw new PartnerInputError('Confirm that you have read the partner privacy notice.');
   return {name: text(input.name), email: email(input.email), company: text(input.company || '', 255, false),
     website: website(input.website), country: text(input.country, 100), partnerType: text(input.partnerType, 100),
     // Preserve the required CRM field for applications from the shorter form.
     audience: text(input.audience ?? 'Not provided', 2000),
-    introduction: text(input.introduction, 4000), noticeVersion: text(input.noticeVersion, 100)};
+    introduction: text(input.introduction, 4000), noticeVersion: text(input.noticeVersion, 100), noticeAcknowledged: true};
 }
 
 export function introduction(input) {
