@@ -17,11 +17,11 @@ const segments = [
     icon: Building2,
     title: "Fintech Platforms",
     description:
-      "Fintech companies requiring licensed banking infrastructure — fiat accounts, payment rails, and FX — without building or maintaining direct provider relationships.",
+      "Fintech companies requiring provider-supported payment infrastructure — fiat accounts, payment rails, and FX — without building or maintaining direct provider relationships.",
     requirements: [
       "Provider-backed fiat accounts",
       "Compliance-reviewed onboarding",
-      "API integration for payment flows",
+      "Provider-supported payment workflows",
       "Operational dashboard access",
     ],
   },
@@ -65,10 +65,10 @@ const segments = [
     icon: Banknote,
     title: "Payment Companies",
     description:
-      "Payment service providers and processors that need additional banking infrastructure, coverage for additional corridors, or a compliance-grade access layer for their own clients.",
+      "Payment companies seeking provider-supported payment access for their own approved business. Processing for other clients requires separate agreement and review.",
     requirements: [
       "B2B infrastructure layer",
-      "Webhook and API integration",
+      "Operational status information",
       "Status synchronisation",
       "Provider onboarding coordination",
     ],
@@ -92,7 +92,7 @@ const requirements = [
   "KYB documentation is required — including company registration, directors, and UBO disclosure.",
   "Source of funds and intended use of the platform must be documented.",
   "At least one authorised individual must complete KYC as part of the onboarding process.",
-  "Access is granted only after internal review and approval by the WIRROX compliance team.",
+  "Operational access requires WIRROX and relevant provider approval, contract acceptance and security setup.",
   "2FA is required for all operational access after approval.",
 ];
 
@@ -126,9 +126,10 @@ export default function ForBusinesses() {
             className="text-[1.0625rem] text-muted-foreground leading-[1.75] font-light max-w-lg mb-12"
             {...fadeUp(0.4)}
           >
-            WIRROX serves businesses that need credible, structured financial infrastructure —
-            not a mass-market consumer tool. Access is by application, with a compliance
-            review required before any operational feature is unlocked.
+            WIRROX supports business payment operations through provider-supported services.
+            The examples below describe business needs, not automatic eligibility or a
+            commitment to offer every service. Review, provider approval, contract acceptance
+            and security setup are required before operational activation.
           </motion.p>
           <motion.div className="flex flex-wrap gap-4" {...fadeUp(0.52)}>
             <RequestAccessTrigger

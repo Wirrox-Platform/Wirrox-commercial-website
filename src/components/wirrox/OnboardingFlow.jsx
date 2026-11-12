@@ -36,7 +36,7 @@ const steps = [
   {
     tag: "04",
     title: "Source of Funds",
-    desc: "Source of funds and source of wealth documented and submitted. Supporting evidence reviewed by the WIRROX compliance team.",
+    desc: "Provide source-of-funds information and additional evidence, including source of wealth where required for the assessment. WIRROX reviews the information before activation.",
     details: [
       { label: "SOF document",  val: "Uploaded",      highlight: false },
       { label: "SOW declaration", val: "Signed",      highlight: true  },
@@ -56,7 +56,7 @@ const steps = [
   {
     tag: "06",
     title: "Access Granted",
-    desc: "2FA setup required before any operational access is activated. Role-based dashboard access enabled for approved accounts.",
+    desc: "Operational access follows WIRROX and provider approval, acceptance of the customer agreement and incorporated documents, and required security setup. Status-only access does not permit transactions.",
     details: [
       { label: "2FA",       val: "Enforced",    highlight: true  },
       { label: "Dashboard", val: "Active",      highlight: true  },

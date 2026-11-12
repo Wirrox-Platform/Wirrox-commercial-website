@@ -1,5 +1,11 @@
 # WIRROX Website — Deployment Guide
 
+Partner Program changes are a closed-by-default pre-release. See
+[partner build and environment instructions](docs/partner-program.md). Use
+`[CF-Pages-Skip]` on feature commits while deployment is not authorized; the current
+Pages project automatically deploys previews from all branches. Partner Functions
+and environment values were not deployed/configured by this implementation.
+
 ## Local Development
 
 ```bash
@@ -55,7 +61,7 @@ This ensures all routes (e.g. `/capabilities`, `/security`) are correctly handle
 
 ## Environment Variables
 
-The site is static, but Request Access and Login destinations are environment-aware.
+The application and login destinations are environment-aware.
 
 | Variable | Values | Behavior |
 |---|---|---|
@@ -65,8 +71,18 @@ With `auto`, `wirrox.com` and `www.wirrox.com` resolve to production. Localhost,
 Cloudflare `*.pages.dev` previews, and other preview hosts resolve to sandbox.
 Set the variable explicitly when a deployment uses a custom hostname.
 
-Production Request Access remains invitation-only. This website setting only selects
-the destination; it does not enable registration or change onboarding approval gates.
+## Public access enquiries
+
+Platform onboarding remains invitation-only. Before enabling the website form, enable
+`accessEnquiryIntakeEnabled` in the target CRM and verify the CRM job runner and
+approved mail transport. Use the existing partner site-origin, CRM environment,
+server-only gateway secret and Turnstile bindings. Then set
+`WIRROX_ACCESS_ENQUIRY_ENABLED=true` on the website. Both feature flags default to
+disabled.
+
+Review incoming enquiries under **CRM → Leads**. The Lead includes the applicant’s
+contact details and any referral code for review. The onboarding mailbox receives
+a link to the Lead. Staff send the invitation and application details separately.
 
 ## Key URLs
 

@@ -21,7 +21,7 @@ const DESTINATIONS = Object.freeze({
     statusLabel: "Production access · Invitation only",
     modalTitle: "Request reviewed production access",
     modalDescription:
-      "Production onboarding remains invitation-only. Submitting a request starts WIRROX compliance review; it does not automatically open or activate an account.",
+      "Production access is invitation-only. Continue to the WIRROX application for access information, or contact onboarding@wirrox.com. This website does not submit an application or activate an account.",
   }),
 });
 

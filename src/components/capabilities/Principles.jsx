@@ -5,15 +5,15 @@ import SectionLabel from "../wirrox/SectionLabel";
 const principles = [
   {
     title: "No Custody",
-    description: "WIRROX never holds or stores client funds at any point.",
+    description: "Under the described service model, funds are held within the relevant provider arrangements, not by SFF. The specific legal holder must be identified for the service.",
   },
   {
     title: "No Execution",
-    description: "All financial execution is performed exclusively by licensed financial institutions.",
+    description: "The relevant provider executes the financial service. SFF coordinates platform access and remains responsible for its own duties.",
   },
   {
-    title: "Full Separation",
-    description: "A strict architectural boundary separates orchestration from execution.",
+    title: "Separate Responsibilities",
+    description: "Provider approval is separate from WIRROX review. A technology label does not determine legal responsibilities.",
   },
 ];
 

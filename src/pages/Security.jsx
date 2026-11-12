@@ -17,7 +17,7 @@ const controls = [
     tag: "AUTHENTICATION",
     title: "Two-Factor Authentication",
     description:
-      "2FA is enforced for all client accounts after onboarding approval. Access to the operational dashboard requires verified identity at every session.",
+      "Users must complete the authentication required for their access and transaction approval. Protect authentication devices and report suspected compromise promptly.",
   },
   {
     icon: Shield,
@@ -29,30 +29,30 @@ const controls = [
   {
     icon: Eye,
     tag: "AUDIT",
-    title: "Immutable Audit Logs",
+    title: "Operational Records",
     description:
-      "Every login, onboarding action, payment instruction, and administrative operation is logged with a timestamped audit record that cannot be modified or deleted.",
+      "Application, access and transaction information supports operational review. No claim of immutable or complete event capture is made.",
   },
   {
     icon: Server,
     tag: "INFRASTRUCTURE",
     title: "Secrets & Environment Isolation",
     description:
-      "API keys, provider credentials, and service secrets are stored in isolated environment configurations — never exposed in client interfaces or source code.",
+      "Provider integrations use server-side credentials. Users should never supply passwords, authentication codes or private keys in support messages. Specific control assurances require an agreed security review.",
   },
   {
     icon: Lock,
     tag: "COMMUNICATION",
     title: "Encrypted Communication",
     description:
-      "All client-server communication is encrypted in transit. Provider webhook payloads are validated using cryptographic signatures to prevent tampering.",
+      "Use the official HTTPS website and application. Report unexpected certificate or connection warnings before submitting sensitive information.",
   },
   {
     icon: AlertTriangle,
     tag: "OPERATIONS",
     title: "Controlled Admin Operations",
     description:
-      "Sensitive administrative operations — including account activation, provider status updates, and access grants — require internal authorisation and are fully logged.",
+      "Activation and permissions are subject to internal approval. Contact support promptly if access or activity appears inconsistent with your authority.",
   },
 ];
 
@@ -80,15 +80,15 @@ export default function Security() {
             {...fadeUp(0.25)}
           >
             Security controls<br />
-            <span className="text-muted-foreground font-light">built into every layer</span>
+            <span className="text-muted-foreground font-light">and safe platform use</span>
           </motion.h1>
           <motion.p
             className="text-[1.0625rem] text-muted-foreground leading-[1.75] font-light max-w-lg"
             {...fadeUp(0.4)}
           >
-            WIRROX is designed with security and operational integrity as foundational
-            requirements — not add-ons. Every layer of the platform incorporates controls
-            that protect client data, provider credentials, and operational workflows.
+            Secure use is a shared responsibility. Protect user access, check instructions
+            before approval and report concerns promptly. These descriptions do not claim
+            certification or guarantee that incidents cannot occur.
           </motion.p>
         </div>
       </section>

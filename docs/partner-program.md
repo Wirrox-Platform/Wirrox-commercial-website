@@ -1,0 +1,225 @@
+## Controlled pilot release — 6 November 2026
+
+The owner approved final partner agreement v5, privacy v7 and controlled publication.
+Exact body hashes are in docs/PARTNER-PILOT-OWNER-APPROVAL-20261106.json. Both PRs stay
+draft. Earlier preparation-only/no-deployment notes below are historical.
+
+The release keeps programme and email flags false. Production bindings and encrypted
+secrets are separate from unchanged preview bindings. No real partner registration,
+email delivery, money movement or client linkage is a deployment test. The first
+challenge, received-email/header and authenticated session checks belong to the
+owner rehearsal after separate email enablement.
+
+For a manual Pages upload, run the normal Vite build, then
+`node scripts/build-pilot-pages.mjs`. Include its `_worker.js`, `_routes.json`,
+`_headers` and `_redirects` alongside the exact assets. This bundles the same API
+handler used by Git builds and refuses unexpected additional Functions routes.
+Default Git builds still use the Functions directory. Feature commits retain
+`[CF-Pages-Skip]`; do not merge either draft PR to trigger a release.
+
+# Partner Program build — 2026-10-26
+
+## Pilot preparation update — 6 November 2026
+
+Live/source parity is resolved. Recovered baseline commit `ff5b409` rebuilds the
+exact current public JavaScript bundle, SHA256
+`10cfb806939b98638400e2d65fdd65127cf88564e3404d7a907fd9fa21a29818`.
+The recovered public website pages and existing privacy content are preserved.
+Later unpublished website-terms, complaints and AML additions are excluded.
+`WEBSITE-LIVE-BASELINE-20261106.json` records the public source hashes.
+
+Partner privacy, agreement, provider-transfer and cookie/storage publication
+candidates now have stable `/partners/privacy`, `/partners/terms`,
+`/partners/providers` and `/partners/cookies` routes, linked from the application
+and document navigation. They are labelled as inactive publication-review copies.
+They use escaped React text, not raw HTML injection. The privacy body/retention
+periods are preserved from CRM notice v6; clean agreement v5 remains for final
+release review and does not rewrite approved/accepted older versions.
+
+32 tests, full lint and production build pass. Desktop and 390px browser review
+passes, including tables, navigation and no horizontal page overflow. Native
+0.1.34 exact-text acceptance tests pass separately under full rollback, with all
+public database-table counts/value hashes unchanged. The native ZIP is unchanged.
+
+A dedicated managed Turnstile widget is prepared for www.wirrox.com only, with
+no pre-clearance. Its secret and a separate gateway credential are encrypted
+outside Git and review pages; no website/CRM bindings were applied. Google Admin
+shows no configured SMTP relay rule. The CRM has no SMTP transport configured;
+Railway is Pro but both Gmail SMTP ports timed out, and static outbound IPs are
+disabled. The CRM execution packet proposes a TLS/IP-restricted Google relay
+for the authorised release; no message was sent or networking changed.
+
+The initial owner pilot covers registration through portal access and staff
+validation/linkage of Swiss Fintech Forum. Production progress/export automation
+is not part of these two PRs. Keep first-pilot attribution non-earning, with no
+commission/payout rows, so existing reversible cleanup remains available. Real
+transaction reconciliation remains required before publishing commissions.
+
+Keep both PRs draft and every website commit prefixed `[CF-Pages-Skip]`. No
+deployment, real email, hosted client assignment or real-data deletion occurred.
+Remaining execution gates are final document/release review, approved target
+configuration and live mail/challenge/session checks during that release.
+
+## Source and delivery boundary
+
+Based on main `6071c0a5dbf39be7020bb5f1b3f6b5e2267863a5`. The existing commercial
+repository was retrieved through the connected GitHub app into a separate local
+working directory. All 119 text files and four public font/icon files were recovered;
+the four public assets match the Git blob hashes exactly. The unused root Favicon.png
+was not retrievable as text; it remains preserved in the upstream tree. Local initial
+snapshot history differs from upstream; publication uses an upstream-based Git tree,
+not an unrelated-history push. No treasury or CRM code is copied into this repository.
+
+Read-only Cloudflare metadata confirmed the existing project wirrox-commercial-website,
+domain www.wirrox.com, production branch main, and automatic preview deployments for
+all branches. No configuration was changed. Every published feature commit must start
+with `[CF-Pages-Skip]` so Pages omits the deployment. Create the feature ref directly
+at that skipped commit, rather than first creating a branch at an ordinary main commit.
+Do not merge/deploy or change branch controls without explicit approval.
+Cloudflare reference: https://developers.cloudflare.com/pages/configuration/git-integration/github-integration/#skipping-a-build-via-a-commit-message
+
+Publication readback confirmed `is_skipped: true`, `skip_reason: commit_message` for
+feature/partner-program. The production deployment remained the successful
+2026-10-20 deployment. Those recent live/preview deployment records have no Git
+commit hash; the named privacy-review branch is not present in GitHub. This does
+not establish what code changed, but it prevents attesting live/source parity.
+This historical source gate is closed by the 6 November recovery above.
+
+## Implemented
+
+* /partners: branded program explanation, application and invited-login entry,
+  steps, partner fit and statement expectations. No draft rates or timing promises.
+* /partners/apply: separate application, current notice, bounded fields, challenge,
+  neutral duplicate-safe confirmation. No payout data and no customer Request Access change.
+* /partners/verify: opaque fragment token, removed from address history after load,
+  explicit POST confirmation, expired/error states. GET never consumes the token.
+* /partners/introduction: explicit referral code from ?partner=... or typed input,
+  business introduction, separate customer-onboarding notice, stable per-attempt ID
+  persisted in sessionStorage across reloads. No contact information/code is stored
+  in browser storage. With storage disabled the ID survives only the current page;
+  staff must reconcile any resubmitted introduction after an uncertain reload.
+* Pages Functions: narrow same-origin JSON endpoints under /api/partners/*; server-only
+  configured CRM destination and optional dedicated evidence API credential. Applications
+  and email verification never need an administrator key.
+* Nonlocal submissions require server-validated Turnstile hostname and action. Origin,
+  payload type, streaming byte limits, honeypot, field allowlists, bounded upstream
+  results, timeout, no redirects/retries, generic errors and no-store/referrer headers.
+* Unknown/unconfigured environments fail closed. Preview/local hosts cannot use the
+  known live CRM. Login exists only for an explicitly configured native Portal URL.
+* Partner navigation in the existing header/footer. Current customer onboarding/login
+  destinations and invitation-only gate remain unchanged.
+
+The CRM native extension is maintained separately in Wirrox-Platform/wirrox-crm,
+draft PR https://github.com/Wirrox-Platform/wirrox-crm/pull/1. It owns membership,
+approval, invitation, agreement/MFA, attribution, financial statements and payouts.
+
+## Configuration (not applied to any hosted environment)
+
+| Server-side value | Purpose |
+|---|---|
+| PARTNER_PROGRAM_ENABLED | Exact string true to enable; absent means closed |
+| PARTNER_TARGET_ENVIRONMENT | local, sandbox or production; must match the serving hostname |
+| PARTNER_SITE_ORIGIN | Exact serving origin, including scheme and port |
+| PARTNER_CRM_ORIGIN | Explicit CRM origin, no path/query/credentials; HTTPS outside local tests |
+| PARTNER_NOTICE_VERSION / PARTNER_NOTICE_TEXT | Approved public application/privacy notice; version must match CRM affiliateNoticeVersion |
+| PARTNER_EMAIL_READY | Exact true only after native delivery is configured and tested |
+| PARTNER_PORTAL_URL | Actual URL returned by the native Portal, with /portal/ path; no invented partner subdomain |
+| PARTNER_TURNSTILE_SITE_KEY | Public widget key, scoped to approved hostnames |
+| PARTNER_TURNSTILE_SECRET | Secret server-side validation key |
+| PARTNER_INTAKE_API_KEY | Secret dedicated CRM API-user key for introduction-evidence only |
+| PARTNER_LOCAL_TEST | Loopback-only test bypass; never effective on deployed hosts |
+
+Set the CRM's affiliateWebsiteIntakeUserId and affiliateWebsiteIntakeEnabled only in
+the authorized environment. The configured API user must have no generic CRM access;
+the endpoint explicitly checks the dedicated user ID and API type. No administrator
+key or secret belongs in a VITE_ variable, browser bundle, committed env file or chat.
+Configure CRM affiliateProspectUrl to the approved site /partners/introduction URL
+after deployment so native partners can copy a tracked link as well as their code.
+
+No Turnstile widget or secret was created. Widget provisioning, Pages runtime settings,
+approved notices, native portal URL and external mail are release work requiring
+the specific hosted actions to be approved. Cloudflare types were inspected at
+@cloudflare/workers-types 5.20261026.1; the handler uses Web APIs without Node dependencies.
+Set/verify compatibility date 2026-10-26 in the approved Functions environment and
+apply the edge rate/abuse policy before external launch. Do not enable solely because
+the client-side widget renders; native CRM counters are an additional conservative cap.
+
+## Local verification
+
+```
+npm ci --ignore-scripts
+npm test
+npm run lint
+npm run build
+npm run preview:partners
+```
+
+Actual results: build and full repository lint pass; 26 tests pass (20 new partner
+adapter/input tests, 6 existing destination tests). Verified request tampering,
+preview/live isolation, credential placement, challenge validation, verification
+POST-only consumption, error redaction, byte limits, explicit code capture and
+stable retry identity. Gitleaks source scan is run before publication.
+
+Browser QA: desktop landing and application; synthetic application submission and
+email-verification confirmation against the mock CRM; mobile 390x844 landing/form
+and no horizontal overflow. Confirmation receives focus and scrolls into view.
+The local preview binds only http://127.0.0.1:5173 and never calls real CRM, email,
+Turnstile or hosted services. Its synthetic verification link prints in the local
+terminal. All preview data is in memory and must be invented. This is UI/adapter
+verification, not a real EspoCRM end-to-end test.
+
+The inherited Browserslist data-age warning does not fail the build; the lockfile
+was preserved rather than mixing an unrelated dependency update into this feature.
+The Pages Function itself has unit/adapter coverage but has not run in workerd or
+a hosted Pages deployment. Native local HTTP integration was subsequently executed
+as described below; full native browser and edge-case acceptance remain release gates.
+
+## Real local EspoCRM integration — 2026-10-26
+
+Run `node scripts/partner-native-smoke.mjs` on Windows with the isolated
+WirroxAffiliateDocker WSL stack running on port 8180. This explicitly calls the real
+Pages handler and real local EspoCRM, creates an invented example.invalid applicant,
+reads its private local mail sink through Docker, verifies the token and rejects
+reuse and a changed notice. The script passed; no email or hosted service is called.
+It has no configurable external target and prints no tokens or credentials.
+
+The companion CRM passed native install/0.1.1 upgrade, thirteen HTTP scenario groups,
+TOTP/password lifecycle, two-account isolation, simultaneous import/allocation,
+restart and coherent restore into separate volumes. See its
+docs/AFFILIATE-NATIVE-TEST-RESULTS.md for exact evidence and remaining acceptance.
+Introduction/code-evidence API-user integration remains disabled and was not exercised
+by this smoke test. Neither real Turnstile/SMTP nor hosted Pages was tested.
+Both PRs remain draft; commits retain [CF-Pages-Skip]. No deployment is authorized.
+
+## Release review
+
+Keep monthly finance review and payment evidence manual. Finalize commercial terms,
+attribution/existing-opportunity rules and privacy/retention text before enabling
+applications. Configure sandbox-only CRM, mail and challenge values for an explicitly
+approved hosted preview, then run the full native two-affiliate scenarios. Verify
+Functions routing alongside the existing static redirects. Only after acceptance
+and explicit approval should the production site and CRM be configured/released.
+Never infer deployment approval from a Git commit, PR or the word pilot.
+
+## Closed pilot gateway — 2026-11-04
+
+Native CRM package 0.1.28 supports a closed pilot email cohort and a separate
+server-to-server apply/verify gateway. Nonlocal website configuration now requires
+`PARTNER_GATEWAY_SECRET` (64 lowercase hex characters), supplied only as a Pages
+server-side encrypted secret. It must match native `affiliateIntakeGatewaySecret`
+with `affiliateAdmissionMode=closed` and an approved `affiliatePilotEmails` list.
+Caller-provided gateway headers are ignored; only the configured value is sent to
+native apply/verify after the existing challenge checks. It is not a CRM APIUser key,
+login credential or financial permission. Introduction intake retains its separate
+scoped identity. Local mode may omit the key for existing synthetic walkthroughs.
+
+28 tests, lint/build and actual handler/native 8185 integration pass, including
+missing/forged gateway rejection, outside-cohort no-record/no-mail, exact verification,
+single-use replay and non-disclosure in public config. No hosted key/settings were
+provisioned. Verify both native CRM origins, real Turnstile and mail delivery before
+live intake. Native secret and pilot list are excluded from Settings/App responses.
+
+Owner will self-test with admin@wirrox.com, handling all roles; proposed client is
+Swiss Fintech Forum, with exact record/ownership/data scope pending. No live identity,
+client assignment, deployment, real email or transfer is authorized. Both PRs stay
+draft. All feature commits must retain `[CF-Pages-Skip]`.

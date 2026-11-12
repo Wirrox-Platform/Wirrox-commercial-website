@@ -381,9 +381,9 @@ export default function CapabilityVisuals() {
             <span className="text-muted-foreground font-light">to global distribution</span>
           </h2>
           <p className="text-[0.9375rem] text-muted-foreground leading-[1.75] max-w-md">
-            Fund one account. WIRROX routes payments to multiple destinations
-            across jurisdictions — each instruction compliance-checked, provider-routed,
-            and fully tracked in real time.
+            Use the funding instructions for your enabled provider service. Payout
+            availability depends on the customer and destination. All balances and
+            flows illustrated below are sample data, not a live transaction feed.
           </p>
         </div>
 
@@ -396,7 +396,7 @@ export default function CapabilityVisuals() {
           transition={{ duration: 0.7 }}
         >
           <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-bronze mb-8 lg:mb-10">
-            Payout Distribution — Live Flow
+            Payout Distribution — Illustration
           </p>
 
           {/* Desktop SVG diagram */}

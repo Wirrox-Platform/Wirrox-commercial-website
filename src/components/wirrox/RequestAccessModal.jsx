@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight } from "lucide-react";
-import { platformDestination } from "../../lib/platform-destination";
+import { X } from "lucide-react";
+import RequestAccessForm from "./RequestAccessForm";
 
 export default function RequestAccessModal({ open, onClose }) {
   const closeButtonRef = useRef(null);
   const previousFocusRef = useRef(null);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -16,6 +17,13 @@ export default function RequestAccessModal({ open, onClose }) {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") onClose();
+      if (event.key === "Tab") {
+        const controls = Array.from(dialogRef.current?.querySelectorAll('a[href], button:not(:disabled), input:not(:disabled), iframe, [tabindex="0"]') || []).filter(el => el.getClientRects().length);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -27,8 +35,6 @@ export default function RequestAccessModal({ open, onClose }) {
       previousFocusRef.current?.focus?.();
     };
   }, [open, onClose]);
-
-  const isProduction = platformDestination.environment === "production";
 
   return (
     <AnimatePresence>
@@ -48,7 +54,8 @@ export default function RequestAccessModal({ open, onClose }) {
 
           {/* Modal */}
           <motion.div
-            className="relative w-full max-w-md mx-5 bg-white border border-rule rounded-lg shadow-pop p-8 lg:p-12"
+            ref={dialogRef}
+            className="relative w-full max-w-md max-h-[90dvh] overflow-y-auto mx-5 bg-card border border-rule rounded-lg shadow-pop p-8 lg:p-12"
             initial={{ opacity: 0, y: 16, scale: 0.99 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.99 }}
@@ -71,41 +78,16 @@ export default function RequestAccessModal({ open, onClose }) {
               Request Access
             </p>
             <h3 id="request-access-title" className="text-xl font-semibold text-ink mb-3">
-              {platformDestination.modalTitle}
+              Tell us about your business
             </h3>
             <p
               id="request-access-description"
               className="text-sm text-muted-foreground mb-6 leading-[1.7]"
             >
-              {platformDestination.modalDescription}
+              WIRROX access is by invitation. Our onboarding team will review your enquiry and contact you if it can proceed.
             </p>
 
-            <div className="mb-8 rounded-md border border-rule bg-canvas px-4 py-3">
-              <p className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.16em] text-ink">
-                <span className="h-1.5 w-1.5 rounded-full bg-bronze" aria-hidden="true" />
-                {platformDestination.statusLabel}
-              </p>
-              <p className="mt-1.5 text-xs text-muted-foreground">
-                Destination: {platformDestination.hostLabel}
-              </p>
-            </div>
-
-            <a
-              href={platformDestination.requestAccessUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onClose}
-              data-platform-environment={platformDestination.environment}
-              data-access-mode={platformDestination.accessMode}
-              className="flex items-center justify-center gap-2 w-full rounded-md py-4 bg-ink text-canvas text-[11px] font-mono uppercase tracking-[0.18em] hover:bg-bronze hover:text-ink transition-colors duration-300"
-            >
-              {isProduction ? "Continue to Request" : "Continue to Sandbox"}
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-
-            <p className="mt-6 text-[11px] text-muted-foreground text-center leading-[1.6]">
-              Opens the WIRROX application in a new tab.
-            </p>
+            <RequestAccessForm />
           </motion.div>
         </motion.div>
       )}
