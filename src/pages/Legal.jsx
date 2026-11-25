@@ -15,7 +15,8 @@ export default function Legal() {
     <main className="max-w-4xl mx-auto px-6 pt-36 pb-24">
       {!slug ? <>
         <h1 className="text-4xl font-semibold mb-6">Website information</h1>
-        <p className="mb-8">Company details and information about this website. Customer agreements are handled separately.</p>
+        <p className="mb-8">Company and website information, plus the separately applicable customer platform terms. Customer agreements and fee annexes are handled separately.</p>
+        <p className="mb-6"><Link className="underline text-bronze" to="/legal/platform-terms">Platform Terms and Conditions · version 1.2</Link></p>
         <ul className="space-y-4">{legalDocuments.map(d => <li key={d.slug}>
           <Link className="underline" to={`/legal/${d.slug}`}>{d.title}</Link>
         </li>)}</ul>

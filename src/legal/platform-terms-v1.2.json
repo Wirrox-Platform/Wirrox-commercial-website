@@ -1,0 +1,939 @@
+{
+  "version": "1.2",
+  "publicationDate": "2026-11-25",
+  "sourceSha256": "032c87fa854b3d19d14678a0f8eafba17793bcf7ad9ef6e464309edbd0917fce",
+  "blocks": [
+    {
+      "type": "title",
+      "text": "WIRROX Platform Terms and Conditions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Version 1.2 | Effective for each Customer upon acceptance through platform use after clear notice"
+    },
+    {
+      "type": "paragraph",
+      "text": "These General Terms govern access to and use of the WIRROX platform and the services identified in a Customer Agreement or Service Schedule. They are entered into between Swiss Fintech Forum AG, CHE-406.093.019, of Gubelstrasse 24, 6300 Zug, Switzerland (\"WIRROX\") and the business customer identified in the Customer Agreement (\"Customer\")."
+    },
+    {
+      "type": "paragraph",
+      "text": "Customer Agreement means the signed WIRROX Master Service Agreement with its completed Fees Annex. Service and provider particulars are supplied before the affected service is activated and recorded in the applicable customer documentation."
+    },
+    {
+      "type": "heading",
+      "text": "1 Contract documents and precedence"
+    },
+    {
+      "type": "subheading",
+      "text": "1.1 Contract"
+    },
+    {
+      "type": "paragraph",
+      "text": "The contract consists of:"
+    },
+    {
+      "type": "paragraph",
+      "text": "the Customer Agreement or signed commercial agreement;"
+    },
+    {
+      "type": "paragraph",
+      "text": "each Service and Provider Schedule;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the Fees, Limits and FX Schedule;"
+    },
+    {
+      "type": "paragraph",
+      "text": "these General Terms;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the Acceptable Use Policy;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the Risk Disclosure;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the Electronic Communications and E-Sign Consent;"
+    },
+    {
+      "type": "paragraph",
+      "text": "a Data Processing Addendum only where the actual processor activity has been legally assessed and a completed DPA is expressly incorporated;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the API Terms and SLA, where applicable;"
+    },
+    {
+      "type": "paragraph",
+      "text": "specific Provider terms only where they are expressly identified, supplied or made accessible before acceptance and incorporated into the contract or separately accepted."
+    },
+    {
+      "type": "subheading",
+      "text": "1.2 Precedence"
+    },
+    {
+      "type": "paragraph",
+      "text": "A negotiated Customer Agreement or commercial agreement signed by both parties prevails over standard documents. It is followed by the applicable Service/Provider Schedule and subject-specific annexes, including the customer-specific Fees Schedule, Data Processing Addendum, API Terms or SLA where specifically agreed. These General Terms then prevail over incorporated contractual policies. A subject-specific annex governs its subject. Provider conditions govern only to the extent expressly incorporated. Use of a Provider by WIRROX does not by itself make that Provider a direct contracting party or bind the Customer to undisclosed terms. Mandatory law and the expressly allocated WIRROX and Provider responsibilities remain unaffected."
+    },
+    {
+      "type": "subheading",
+      "text": "1.3 Platform use and acceptance"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Master Service Agreement takes effect by its agreed execution process. These separate General Terms are accepted by platform use after clear notice: before first use, WIRROX presents the version and date, provides a link allowing the Customer to read and save the terms, and states that proceeding to use the platform signifies acceptance. By knowingly proceeding after that notice, an authorised representative accepts the presented version for the Customer. Mere website browsing, silence or use before the notice does not constitute acceptance. WIRROX records the organisation, user, authority, timestamp, version and acceptance event. Signing the Master Service Agreement does not by itself accept an undisclosed or future version. The Privacy Notice is presented separately and specific consent or authorisation is obtained where required. Platform access or acceptance does not activate financial services: required compliance, operational and Provider approvals must be completed before action permissions are enabled. Transaction and fee approvals remain separate and explicit."
+    },
+    {
+      "type": "heading",
+      "text": "2 Definitions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Account Information means account identifiers, balances, status and related data supplied through a provider or displayed in the platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "Authorised User means an individual the Customer permits to access the platform."
+    },
+    {
+      "type": "paragraph",
+      "text": "Business Day means a day, other than Saturday, Sunday or an applicable public holiday, on which banks are generally open for business in Zug, Switzerland. A Service or Provider Schedule may specify a different calendar, cut-off time or relevant market for a particular currency, rail or service. This definition does not establish fixed support hours."
+    },
+    {
+      "type": "paragraph",
+      "text": "Customer Data means data submitted by or for the Customer, excluding WIRROX system data, compliance records and aggregated or anonymised data."
+    },
+    {
+      "type": "paragraph",
+      "text": "Instruction means a payment, payout, beneficiary, FX, API or other operational request submitted through an approved channel."
+    },
+    {
+      "type": "paragraph",
+      "text": "Provider means a bank, payment, e-money, FX, custody, digital-asset, identity or other third-party provider involved in a service."
+    },
+    {
+      "type": "paragraph",
+      "text": "Services means the WIRROX platform functions and any provider-backed services activated under a Service Schedule."
+    },
+    {
+      "type": "paragraph",
+      "text": "User Credentials means passwords, authentication factors, API keys, tokens, certificates and other access mechanisms."
+    },
+    {
+      "type": "heading",
+      "text": "3 Eligibility and business use"
+    },
+    {
+      "type": "subheading",
+      "text": "3.1 Business customer"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer is generally a duly organised legal entity or other approved business form acting for business purposes. WIRROX may exceptionally accept an individual customer only on a case-by-case basis after enhanced eligibility, compliance, provider, contractual and legal review. The accepting person confirms authority where acting for an organisation."
+    },
+    {
+      "type": "subheading",
+      "text": "3.2 No entitlement to service"
+    },
+    {
+      "type": "paragraph",
+      "text": "Application, compliance review, technical integration or payment of a setup fee does not guarantee activation. WIRROX and each Provider may apply separate legal, country, product, credit, compliance and risk criteria."
+    },
+    {
+      "type": "subheading",
+      "text": "3.3 Permitted scope"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer may use the Services only for its approved business, countries, currencies, payment rails, networks, counterparties and expected activity. It must obtain written approval before a material change in use case or risk profile."
+    },
+    {
+      "type": "heading",
+      "text": "4 Service structure"
+    },
+    {
+      "type": "subheading",
+      "text": "4.1 Platform and Provider roles"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX supplies the technology, onboarding, compliance, orchestration, reporting and support functions described in the applicable Service Schedule. A Provider may supply account issuance or maintenance, asset holding or safeguarding, payment execution or settlement, FX conversion, custody or other regulated performance."
+    },
+    {
+      "type": "paragraph",
+      "text": "The applicable contract documents describe, at the level relevant to the activated service:"
+    },
+    {
+      "type": "paragraph",
+      "text": "the WIRROX legal entity and the relevant Provider category and role; a specific Provider or banking partner identity is supplied privately upon a relevant Customer request or where required by law, the contract or the service;"
+    },
+    {
+      "type": "paragraph",
+      "text": "who holds or controls assets and in whose name;"
+    },
+    {
+      "type": "paragraph",
+      "text": "who receives and legally executes Instructions;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the allocated AML, sanctions, privacy, security, support and complaint responsibilities;"
+    },
+    {
+      "type": "paragraph",
+      "text": "any safeguarding, segregation or deposit-protection status only after verification for the specific Provider, product, account structure and jurisdiction;"
+    },
+    {
+      "type": "paragraph",
+      "text": "the applicable Provider conditions and regulator information, without incorporating an undisclosed Provider contract."
+    },
+    {
+      "type": "subheading",
+      "text": "4.2 No bank representation"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX is not a bank. WIRROX does not accept public deposits or hold or control Customer funds. Digital-asset custody, where activated, is performed by the Provider identified in the applicable Service Schedule. Account Information displayed in the platform may be supplied by a Provider and is subject to reconciliation and Provider records."
+    },
+    {
+      "type": "subheading",
+      "text": "4.3 No fiduciary or advisory duty"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX does not act as trustee, investment adviser, tax adviser, legal adviser or fiduciary. Operational support is not advice on the suitability, legality or economic merits of a transaction."
+    },
+    {
+      "type": "heading",
+      "text": "5 Onboarding due diligence and continuing information"
+    },
+    {
+      "type": "subheading",
+      "text": "5.1 Information duties"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must provide complete, accurate and current information and documents requested by WIRROX or a Provider, including information about identity, registration, ownership, control, directors, authorised persons, licences, business, customers, counterparties, source of funds, source of wealth, transaction purpose and expected activity."
+    },
+    {
+      "type": "subheading",
+      "text": "5.2 Beneficial ownership and authority"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must disclose every relevant ultimate beneficial owner and control person and provide evidence of authority for each Authorised User and signatory. It must not use nominees, intermediaries or structures to conceal ownership or the person for whom activity is conducted."
+    },
+    {
+      "type": "subheading",
+      "text": "5.3 Changes"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must notify WIRROX before or, where impossible, promptly after any material change, including change of name, address, ownership, control, directors, authorised users, licences, business model, countries, products, expected volumes, source of funds, insolvency, regulatory action or sanctions exposure."
+    },
+    {
+      "type": "subheading",
+      "text": "5.4 Verification and monitoring"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX and Providers may verify information, screen relevant persons, monitor activity, conduct enhanced due diligence, request evidence and refresh records. The Customer authorises lawful checks and disclosures described in the Privacy Notice and applicable contract documents, with specific consent obtained where consent is the required legal basis."
+    },
+    {
+      "type": "subheading",
+      "text": "5.5 Refusal and confidentiality"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX or a Provider may decline, delay, restrict or end an application or service where permitted by the contract or required by law or risk controls. Detailed reasons may be withheld where disclosure would reveal confidential controls, prejudice an investigation, violate a no-tipping-off rule or breach a third-party duty."
+    },
+    {
+      "type": "heading",
+      "text": "6 Authorised Users and access security"
+    },
+    {
+      "type": "subheading",
+      "text": "6.1 Administration"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer appoints at least one administrator and is responsible for assigning roles according to least privilege, reviewing access regularly and removing access immediately when no longer required."
+    },
+    {
+      "type": "subheading",
+      "text": "6.2 Credentials"
+    },
+    {
+      "type": "paragraph",
+      "text": "Credentials are personal to the assigned user and must not be shared. The Customer must use strong unique passwords, secure devices, protected email accounts and reasonable network controls. Multi-factor authentication is mandatory for platform access and each transaction approval."
+    },
+    {
+      "type": "subheading",
+      "text": "6.3 Reliance on authenticated activity"
+    },
+    {
+      "type": "paragraph",
+      "text": "Subject to mandatory law and WIRROX's security duties, WIRROX may treat activity completed using valid Credentials, the required multi-factor authentication and configured approvals as authorised unless WIRROX knows or reasonably suspects compromise. The Customer is responsible for loss caused by its users, shared or inadequately protected Credentials, compromised Customer systems or failure to report a known compromise promptly. WIRROX remains responsible to the extent loss is caused by its own breach, security failure or liability that cannot lawfully be excluded. WIRROX may suspend and contact the Customer to verify suspicious activity."
+    },
+    {
+      "type": "subheading",
+      "text": "6.4 Segregation of duties"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer may configure available roles, limits and approval workflows. WIRROX does not impose two-person approval by default: one authorised person may create and approve a transaction unless the Customer configuration, Customer Agreement, Service Schedule, Provider rule or mandatory law requires otherwise. The Customer is responsible for maintaining its selected controls."
+    },
+    {
+      "type": "heading",
+      "text": "7 Instructions beneficiaries and payments"
+    },
+    {
+      "type": "subheading",
+      "text": "7.1 Approved channels"
+    },
+    {
+      "type": "paragraph",
+      "text": "Instructions must be submitted through the authenticated platform, approved API or another channel expressly agreed in writing. WIRROX is not obliged to act on ordinary email, messaging, telephone or social-media instructions."
+    },
+    {
+      "type": "subheading",
+      "text": "7.2 Accuracy"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer is responsible for the accuracy and completeness of beneficiary, account, wallet, amount, currency, reference, purpose and supporting information. WIRROX or a Provider may rely on an account number, IBAN, wallet address or other unique identifier even if a name is inconsistent, to the extent permitted by law and network rules."
+    },
+    {
+      "type": "subheading",
+      "text": "7.3 Review and rejection"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX or a Provider may validate, screen, queue, delay, reject, return, recall or request information about an Instruction. A displayed status is informational until the Provider confirms execution or settlement."
+    },
+    {
+      "type": "subheading",
+      "text": "7.4 Irrevocability"
+    },
+    {
+      "type": "paragraph",
+      "text": "An Instruction may become irrevocable once released to a Provider, payment network, correspondent, FX counterparty or blockchain. A cancellation or recall is a request only and is not guaranteed. Any recall charge or exchange effect is disclosed and approved under section 7.6; the Customer does not bear loss caused by WIRROX's breach."
+    },
+    {
+      "type": "subheading",
+      "text": "7.5 Cutoffs and timing"
+    },
+    {
+      "type": "paragraph",
+      "text": "Estimated processing times begin only after receipt of a complete, properly authorised and funded Instruction before the applicable cut-off. Weekends, holidays, compliance review, provider outages, intermediary banks, network congestion, beneficiary institutions and force-majeure events may delay completion."
+    },
+    {
+      "type": "subheading",
+      "text": "7.6 Total price approval and returned payments"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before any chargeable transaction or transaction-related action, WIRROX displays the consolidated total fee, total debit, applicable exchange rate and receipt amount, identifying any non-final receipt amount as an estimate. Applicable Provider and network charges passed on through WIRROX are included in that total. The Customer may decline the action. No undisclosed fee is added after approval and the approved total debit does not increase. If a quote expires or a fee, rate or debit changes before execution, WIRROX presents a new quote and obtains fresh approval with multi-factor authentication. If a required fee cannot be determined, the action does not proceed until the total is disclosed and approved. A standing on-ramp instruction does not waive these requirements. A final beneficiary amount remains fixed. Returned principal is refundable subject to the agreed contract; a return, recall or investigation charge requires disclosure and approval before that paid service is undertaken. Any reconversion rate and exchange effect must also be disclosed before approval. A network or Provider cost included in the total is not charged again."
+    },
+    {
+      "type": "subheading",
+      "text": "7.7 Unauthorised or incorrect transactions"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must notify WIRROX immediately and within any deadline in the Service Schedule. WIRROX will reasonably assist with investigation and recall, subject to legal and Provider constraints. Allocation of loss depends on cause, security compliance, notification timing, Provider rules, mandatory law and the liability provisions below."
+    },
+    {
+      "type": "heading",
+      "text": "8 Account Information funding and balances"
+    },
+    {
+      "type": "subheading",
+      "text": "8.1 Provider records"
+    },
+    {
+      "type": "paragraph",
+      "text": "Account Information may be obtained from Providers and can be delayed, provisional or subject to correction. The Provider's authoritative ledger or statement normally prevails if there is a discrepancy. The Customer must notify WIRROX promptly after discovery. WIRROX will investigate, correct a dashboard or integration error within its control and reasonably assist with reconciliation."
+    },
+    {
+      "type": "subheading",
+      "text": "8.2 Funding instructions"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must use only current funding instructions shown in the authenticated platform and must verify material changes through a known channel. Money or digital assets sent to an obsolete, fraudulent, unsupported or unverified destination may be irrecoverable."
+    },
+    {
+      "type": "subheading",
+      "text": "8.3 No interest or protection promise"
+    },
+    {
+      "type": "paragraph",
+      "text": "No interest, safeguarding, segregation, trust, priority or deposit-protection statement is made unless it has been verified and expressly supported for the relevant Provider, product, account structure and jurisdiction in an approved Service Schedule or private Customer response. The applicable Service Schedule records verified protections for that arrangement; absent an expressly supported statement, no such protection is promised."
+    },
+    {
+      "type": "subheading",
+      "text": "8.4 Negative balances and reserves"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX does not currently offer merchant acquiring/payment-processing services requiring reserves and does not currently require or hold customer reserves. Any future provider-required prefunding, reserve or collateral arrangement must be separately reviewed and documented before activation, including legal holder, segregation, release and insolvency treatment."
+    },
+    {
+      "type": "heading",
+      "text": "9 Foreign exchange"
+    },
+    {
+      "type": "subheading",
+      "text": "9.1 Quotes"
+    },
+    {
+      "type": "paragraph",
+      "text": "An FX indication is non-binding unless clearly labelled a firm quote. A firm quote is valid only for the displayed time, amount, currency pair and conditions. It may expire or be withdrawn before acceptance if the market, Provider or legal conditions require."
+    },
+    {
+      "type": "subheading",
+      "text": "9.2 Pricing"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer rate may include Provider rates, WIRROX fees or spread, market liquidity, amount, timing, currency, rail and risk. The Fees and FX Schedule explains the customer-specific pricing methodology and applicable total charge; no component breakdown is required unless law or express agreement requires it."
+    },
+    {
+      "type": "subheading",
+      "text": "9.3 Execution"
+    },
+    {
+      "type": "paragraph",
+      "text": "The applicable Service Schedule identifies the FX counterparty and when a conversion becomes binding. Any expired or changed quote requires fresh approval. Reconversion terms and exchange effects on a reversal or return must be disclosed before approval; loss caused by WIRROX's breach remains WIRROX's responsibility."
+    },
+    {
+      "type": "subheading",
+      "text": "9.4 No investment service"
+    },
+    {
+      "type": "paragraph",
+      "text": "FX is offered for approved payment or treasury operations, not speculation or investment advice, unless separately authorised and agreed."
+    },
+    {
+      "type": "heading",
+      "text": "10 Optional digital assets"
+    },
+    {
+      "type": "paragraph",
+      "text": "This section applies only if a Service Schedule activates a digital-asset function."
+    },
+    {
+      "type": "subheading",
+      "text": "10.1 Service description"
+    },
+    {
+      "type": "paragraph",
+      "text": "Before activation, the Schedule must identify each supported asset, network, wallet and custody model, wallet owner, transfer executor, Travel Rule process, conversion counterparty and territorial restriction. Display of an asset does not mean every transfer is supported. WIRROX will not activate the digital-asset module until the applicable legal, compliance, operational and Provider requirements are met and the wallet-provider and Travel Rule responsibilities are confirmed."
+    },
+    {
+      "type": "subheading",
+      "text": "10.2 Address and network risk"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must verify the asset, token contract, blockchain network, address, memo/tag and beneficiary. Transfers to an incorrect or unsupported address or network may be irreversible. WIRROX is not responsible for losses caused by Customer error, except to the extent WIRROX failed to apply an expressly agreed validation control."
+    },
+    {
+      "type": "subheading",
+      "text": "10.3 Protocol events"
+    },
+    {
+      "type": "paragraph",
+      "text": "Forks, airdrops, staking rewards, governance rights, token migrations and network changes are unsupported unless the Schedule states otherwise. WIRROX or a Provider may suspend activity during a protocol event."
+    },
+    {
+      "type": "subheading",
+      "text": "10.4 No price or redemption guarantee"
+    },
+    {
+      "type": "paragraph",
+      "text": "Digital assets can lose value, depeg, become illiquid or be frozen. Neither WIRROX nor a Provider guarantees redemption at par, network availability or issuer solvency unless expressly assumed in a signed Schedule."
+    },
+    {
+      "type": "heading",
+      "text": "11 Fees taxes and payment"
+    },
+    {
+      "type": "subheading",
+      "text": "11.1 Fees"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer pays the agreed fees recorded in the signed Fees Annex: Transfer / Off-ramp, Swap, On-ramp, Fixed Maintenance Fee and any expressly agreed virtual-account or other fixed fee, only where selected and approved. A blank fee field imposes no charge. Other paid services require a separate prior written agreement or recorded platform acceptance. The total transaction fee includes the WIRROX service fee and applicable provider or network charges. Provider costs and rates may vary by Provider, currency, asset, network, route, transaction size and market conditions and may affect future quotes. Section 7.6 governs advance disclosure, the Customer's right to decline and approval of the consolidated total. No undisclosed or retrospective charge is authorised. Components need not be split unless law or express agreement requires it, but no included cost is charged twice."
+    },
+    {
+      "type": "subheading",
+      "text": "11.2 Invoicing and collection"
+    },
+    {
+      "type": "paragraph",
+      "text": "Transaction charges follow the displayed approved all-in total. Maintenance, virtual-account and any other agreed fixed fees are invoiced separately from transaction charges. The amount, currency, frequency or one-off trigger and payment terms must be agreed before the relevant service starts. Recurring fixed fees do not require fresh transaction approval for each invoice. Monthly maintenance is invoiced and collected manually in the agreed USD or EUR amount. The first active month is prorated by remaining UTC calendar days, including the activation day. Subsequent months use the agreed fee effective at month start; an agreed later change applies next month. Invoices identify the amount, currency, billing period, tax where applicable and due date. Other separately agreed charges are invoiced on their agreed basis. WIRROX does not independently debit Customer funds and these terms create no separate balance-deduction authority."
+    },
+    {
+      "type": "subheading",
+      "text": "11.3 Taxes"
+    },
+    {
+      "type": "paragraph",
+      "text": "Any applicable tax must be disclosed before the relevant action is approved or recurring fee is agreed. Unless expressly included in the disclosed price, fees exclude VAT, withholding and similar taxes. The Customer is responsible for its taxes and reporting, except taxes imposed on WIRROX's net income. If withholding is required, the Customer must provide evidence and, where agreed, gross up the payment."
+    },
+    {
+      "type": "subheading",
+      "text": "11.4 Disputed invoices"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must notify a good-faith invoice dispute within 15 calendar days after receiving the invoice, identifying the disputed amount and reasons. Undisputed amounts remain payable by the due date. WIRROX will review the dispute in good faith. A later complaint may still be considered but does not automatically suspend payment unless WIRROX agrees or mandatory law requires otherwise."
+    },
+    {
+      "type": "subheading",
+      "text": "11.5 Late payment"
+    },
+    {
+      "type": "paragraph",
+      "text": "Overdue undisputed amounts accrue interest at 5% per annum, subject to mandatory law, together with reasonable recovery costs. WIRROX may suspend non-critical service after notice."
+    },
+    {
+      "type": "heading",
+      "text": "12 Customer warranties and obligations"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer represents on acceptance and throughout the term that:"
+    },
+    {
+      "type": "paragraph",
+      "text": "it is validly existing and authorised to enter and perform the contract;"
+    },
+    {
+      "type": "paragraph",
+      "text": "information supplied is accurate and not misleading;"
+    },
+    {
+      "type": "paragraph",
+      "text": "it and its activity comply with applicable law, licences, sanctions and this contract;"
+    },
+    {
+      "type": "paragraph",
+      "text": "it has lawful rights and notices for Customer Data;"
+    },
+    {
+      "type": "paragraph",
+      "text": "each Instruction has a legitimate business purpose and lawful source and destination;"
+    },
+    {
+      "type": "paragraph",
+      "text": "it is not using WIRROX for undisclosed third parties or regulated activity without approval;"
+    },
+    {
+      "type": "paragraph",
+      "text": "it maintains adequate security, fraud, financial, tax and compliance controls;"
+    },
+    {
+      "type": "paragraph",
+      "text": "it will not interfere with the platform or Provider systems."
+    },
+    {
+      "type": "heading",
+      "text": "13 Acceptable use and sanctions"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Acceptable Use Policy is incorporated into the contract. The Customer must not transact for a sanctioned person or evade restrictions. WIRROX and Providers may apply Swiss sanctions and additional restrictions relevant to currencies, clearing systems, Providers and countries."
+    },
+    {
+      "type": "heading",
+      "text": "14 Platform changes maintenance and support"
+    },
+    {
+      "type": "subheading",
+      "text": "14.1 Changes"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may improve or modify the platform, provided it does not materially remove contracted core functionality during a committed term without a reasonable alternative, price adjustment or termination right, except where a change is required by law, security or a Provider."
+    },
+    {
+      "type": "subheading",
+      "text": "14.2 Maintenance"
+    },
+    {
+      "type": "paragraph",
+      "text": "Planned maintenance will be notified where reasonably practicable. Emergency maintenance may occur without notice. Availability commitments apply only if an SLA is included."
+    },
+    {
+      "type": "subheading",
+      "text": "14.3 Support"
+    },
+    {
+      "type": "paragraph",
+      "text": "Standard support is available through approved WIRROX channels during operating/support hours communicated by WIRROX and may vary. No fixed contractual hours, uptime, response or incident commitments apply unless specifically agreed in the customer's Customer Agreement or separate SLA. Response targets are not resolution guarantees."
+    },
+    {
+      "type": "heading",
+      "text": "15 Providers and third parties"
+    },
+    {
+      "type": "subheading",
+      "text": "15.1 Appointment and change"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer authorises WIRROX to use Providers and subprocessors as described in the applicable documents. WIRROX will not publish a list of financial Providers, banks, correspondents or local-rail partners. Relevant identity and role information will be supplied privately upon a Customer request where applicable to that Customer's service, corridor or transaction, and where required by law or contract. Material Provider changes remain subject to applicable notice, consent and termination rights."
+    },
+    {
+      "type": "subheading",
+      "text": "15.2 Provider decisions"
+    },
+    {
+      "type": "paragraph",
+      "text": "A Provider may reject onboarding, restrict a transaction or terminate its service under its own legal and contractual duties. WIRROX is responsible for its own selection, integration and contractual duties but does not guarantee a Provider's independent acceptance or performance beyond obligations expressly assumed by WIRROX."
+    },
+    {
+      "type": "subheading",
+      "text": "15.3 Third party outages"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX will use reasonable efforts to manage and communicate material Provider incidents. Liability is allocated under Section 22 rather than automatically excluded merely because a third party is involved."
+    },
+    {
+      "type": "heading",
+      "text": "16 Data protection"
+    },
+    {
+      "type": "subheading",
+      "text": "16.1 Notices and roles"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Privacy Notice explains WIRROX's controller processing and is presented for acknowledgement; acknowledgement is not blanket consent to every processing purpose. WIRROX acts as independent controller for onboarding, AML, sanctions, fraud, security, contracting, legal and governance purposes. Providers may be independent controllers. Specific consent or authorisation is captured where required. Where WIRROX processes defined personal data solely on Customer instructions, the Data Processing Addendum applies. Current functionality allows Customers to download WIRROX-provided information and upload information requested by WIRROX. A DPA is not automatically incorporated merely because the Customer uploads or downloads documents. Any applicable processor scope must be specifically reviewed and agreed."
+    },
+    {
+      "type": "subheading",
+      "text": "16.2 Customer responsibilities"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer must provide required privacy notices, establish a lawful basis, minimise data and handle data-subject requests for its controller activities. It must not instruct unlawful processing."
+    },
+    {
+      "type": "subheading",
+      "text": "16.3 Security incidents"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each party will notify the other without undue delay of a confirmed incident materially affecting data processed under the contract, subject to security and legal restrictions. An expressly applicable DPA provides processor-specific timing only for its approved scope."
+    },
+    {
+      "type": "heading",
+      "text": "17 Confidentiality"
+    },
+    {
+      "type": "subheading",
+      "text": "17.1 Confidential Information"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each party must protect non-public business, technical, security, pricing, customer and compliance information disclosed by the other and use it only for the contract."
+    },
+    {
+      "type": "subheading",
+      "text": "17.2 Permitted disclosure"
+    },
+    {
+      "type": "paragraph",
+      "text": "Disclosure is allowed to personnel, Providers, professional advisers, auditors, insurers and authorities who need the information and are bound by appropriate duties, and where law, SRO rules or a court requires it."
+    },
+    {
+      "type": "subheading",
+      "text": "17.3 Exclusions"
+    },
+    {
+      "type": "paragraph",
+      "text": "Confidentiality does not cover information lawfully known without restriction, independently developed, publicly available without breach, or lawfully received from a third party."
+    },
+    {
+      "type": "subheading",
+      "text": "17.4 Compelled disclosure"
+    },
+    {
+      "type": "paragraph",
+      "text": "Where lawful, the receiving party will give prior notice and reasonable assistance. AML, sanctions, law-enforcement and no-tipping-off restrictions may prevent notice."
+    },
+    {
+      "type": "heading",
+      "text": "18 Intellectual property and data use"
+    },
+    {
+      "type": "subheading",
+      "text": "18.1 WIRROX IP"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX and its licensors retain all rights in the platform, documentation, APIs, designs, workflows, models and improvements. The Customer receives a limited, non-exclusive, non-transferable right during the term to use activated Services for its internal approved business."
+    },
+    {
+      "type": "subheading",
+      "text": "18.2 Customer Data"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer retains rights in Customer Data and grants WIRROX the rights necessary to provide, secure, support and comply with law for the Services."
+    },
+    {
+      "type": "subheading",
+      "text": "18.3 Feedback"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may use voluntarily provided feedback without restriction, provided it does not identify the Customer or disclose Confidential Information without permission."
+    },
+    {
+      "type": "subheading",
+      "text": "18.4 Aggregated data"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may create and use statistics that are aggregated and anonymised so no individual or Customer is reasonably identifiable, for security, capacity, product and benchmarking purposes. It must not attempt re-identification."
+    },
+    {
+      "type": "heading",
+      "text": "19 Records and audit evidence"
+    },
+    {
+      "type": "paragraph",
+      "text": "Electronic records, audit logs, Provider messages and platform confirmations are admissible evidence of activity, subject to correction of proven error. Each party must keep records required by law and its contract duties. The Customer may download records according to the Service Schedule and should maintain independent accounting and reconciliation records."
+    },
+    {
+      "type": "heading",
+      "text": "20 Warranties"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX warrants that it will provide its contracted Services with reasonable skill and care, maintain materially appropriate security controls, and substantially conform to current documentation. The Customer's exclusive remedies for a remediable warranty breach are re-performance, correction or, if not remedied within a reasonable time, termination of the materially affected Service and refund of prepaid unused WIRROX fees."
+    },
+    {
+      "type": "paragraph",
+      "text": "Except for express warranties and mandatory law, implied warranties are excluded to the extent permitted, including merchantability, fitness for a particular purpose and uninterrupted availability."
+    },
+    {
+      "type": "heading",
+      "text": "21 Indemnities"
+    },
+    {
+      "type": "subheading",
+      "text": "21.1 Customer indemnity"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer will indemnify WIRROX against third-party claims, direct regulatory costs and direct losses to the extent caused by the Customer's unlawful activity, fraud or wilful misconduct, material breach of the Acceptable Use Policy, infringement by Customer Data or unauthorised financial services for third parties. The indemnity does not cover loss caused by WIRROX's breach, negligence or misconduct."
+    },
+    {
+      "type": "subheading",
+      "text": "21.2 WIRROX IP indemnity"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX will defend a third-party claim that the unmodified WIRROX platform infringes an intellectual-property right enforceable in Switzerland, the United Kingdom or the European Economic Area and pay finally awarded damages or an approved settlement, provided the Customer promptly notifies and allows WIRROX control of the defence. WIRROX may modify, replace or terminate affected functionality. The indemnity excludes Customer modifications, combinations not supplied by WIRROX and continued use after notice."
+    },
+    {
+      "type": "subheading",
+      "text": "21.3 Procedure"
+    },
+    {
+      "type": "paragraph",
+      "text": "The indemnified party must provide reasonable cooperation. No settlement may admit its fault or impose non-monetary obligations on it without consent. The agreed liability provisions and cap apply unless the Customer Agreement expressly provides a separate cap or mandatory law requires otherwise."
+    },
+    {
+      "type": "heading",
+      "text": "22 Liability"
+    },
+    {
+      "type": "subheading",
+      "text": "22.1 Excluded loss"
+    },
+    {
+      "type": "paragraph",
+      "text": "To the maximum extent permitted by law, neither party is liable for indirect or consequential loss, or loss of profit, revenue, goodwill, opportunity or anticipated savings, except to the extent such amount forms part of a third-party claim covered by an indemnity."
+    },
+    {
+      "type": "subheading",
+      "text": "22.2 General cap"
+    },
+    {
+      "type": "paragraph",
+      "text": "Subject to liabilities that cannot lawfully be limited and any expressly agreed exceptions, WIRROX's aggregate liability for losses for which it is responsible is limited to the WIRROX fees paid or payable by the Customer during the 12 months preceding the event giving rise to the claim. Transaction value, payment volume and assets held or processed by providers do not determine the cap. A different cap may be expressly agreed in the Customer Agreement; there is no automatic minimum floor."
+    },
+    {
+      "type": "subheading",
+      "text": "22.3 Uncapped matters and separate caps"
+    },
+    {
+      "type": "paragraph",
+      "text": "No limitation applies to liability that cannot lawfully be limited, including intentional misconduct and gross negligence. Any separate cap for confidentiality, data protection, IP indemnity or payment misdirection applies only if expressly agreed in the Customer Agreement. Unpaid fees are not a damages claim subject to WIRROX's liability cap. Death or personal injury caused by negligence is not excluded where such exclusion is prohibited."
+    },
+    {
+      "type": "subheading",
+      "text": "22.4 Payment and Provider loss"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX is responsible for its own contractual obligations and direct loss caused by breach of duties expressly allocated to WIRROX. WIRROX does not hold or control customer funds and does not assume liability for provider custody, execution, settlement or other regulated services merely because a transaction is initiated, displayed or orchestrated through the platform. It is not responsible for third-party failures outside its reasonable control except to the extent caused by WIRROX's own breach. Mandatory liability remains unaffected."
+    },
+    {
+      "type": "subheading",
+      "text": "22.5 Mitigation and notice"
+    },
+    {
+      "type": "paragraph",
+      "text": "Each party must take reasonable steps to limit loss and promptly notify the other of a claim. A claim must be brought within the applicable statutory limitation period; the contract does not shorten mandatory limitation periods."
+    },
+    {
+      "type": "heading",
+      "text": "23 Suspension"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may suspend all or part of the Services immediately where reasonably necessary for law, sanctions, SRO or Provider requirements; suspected fraud or financial crime; security; unauthorised access; material payment default; material breach; insolvency risk; or protection of Customers, Providers or systems."
+    },
+    {
+      "type": "paragraph",
+      "text": "Where lawful and safe, WIRROX will give notice, explain the general reason and allow remediation. Suspension does not require WIRROX to execute a transaction that is unlawful or outside risk appetite."
+    },
+    {
+      "type": "heading",
+      "text": "24 Term and termination"
+    },
+    {
+      "type": "subheading",
+      "text": "24.1 Term"
+    },
+    {
+      "type": "paragraph",
+      "text": "Unless the Customer Agreement states otherwise, the contract starts on the Effective Date of the signed Master Service Agreement for an initial 12-month term and renews automatically for successive 12-month terms unless either party gives at least 30 days' written notice of non-renewal before the current term ends. Customer-specific terms and earlier termination rights under this contract remain unaffected."
+    },
+    {
+      "type": "subheading",
+      "text": "24.2 Termination for cause"
+    },
+    {
+      "type": "paragraph",
+      "text": "Either party may terminate for material breach if it is not cured within 30 days after written notice, or immediately for an irremediable material breach, insolvency, illegality or loss of an authorisation required to perform the service."
+    },
+    {
+      "type": "subheading",
+      "text": "24.3 Regulatory or Provider termination"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may terminate or discontinue an affected Service if required by law, an SRO direction, a Provider termination or a material change in regulatory feasibility. Where the Customer is not at fault, WIRROX will give reasonable notice where possible and refund prepaid unused WIRROX fees for the discontinued period. Where termination results only from a change in risk appetite or risk rules, WIRROX will generally aim to give one month's notice where reasonably practicable."
+    },
+    {
+      "type": "subheading",
+      "text": "24.4 Convenience"
+    },
+    {
+      "type": "paragraph",
+      "text": "The default non-renewal right is stated in Section 24.1. Any different convenience-termination right or notice period must be expressly stated in the Customer Agreement."
+    },
+    {
+      "type": "subheading",
+      "text": "24.5 Effects"
+    },
+    {
+      "type": "paragraph",
+      "text": "On termination, access ends; outstanding fees and obligations remain; pending transactions may complete or be returned; and data is retained, exported or deleted according to law and the contract. The Customer must provide alternative instructions where needed for Provider-held assets. Termination does not guarantee immediate closure of a Provider relationship."
+    },
+    {
+      "type": "subheading",
+      "text": "24.6 Survival"
+    },
+    {
+      "type": "paragraph",
+      "text": "Accrued rights and provisions on confidentiality, IP, data, fees, records, liability, disputes and any terms intended to survive remain effective."
+    },
+    {
+      "type": "heading",
+      "text": "25 Force majeure"
+    },
+    {
+      "type": "paragraph",
+      "text": "Neither party is liable for delay caused by events beyond reasonable control, including natural disaster, war, civil disorder, epidemic, government action, sanctions change, utility or telecommunications failure, cyberattack not caused by inadequate required controls, payment-network or blockchain disruption, or Provider failure beyond the party's reasonable control. The affected party must mitigate and communicate. Payment obligations for completed Services are not excused."
+    },
+    {
+      "type": "heading",
+      "text": "26 Notices"
+    },
+    {
+      "type": "paragraph",
+      "text": "Contract notices must be sent to the addresses in the Customer Agreement and, for WIRROX, to compliance@wirrox.com. Operational notices may be delivered in the platform or by email. A notice is effective according to the delivery rules in the Electronic Communications Consent. Each party must keep details current."
+    },
+    {
+      "type": "heading",
+      "text": "27 Changes to standard terms"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX may update standard terms or contractual policies for legal, security, Provider or product reasons. Material adverse changes require at least 30 days' notice unless law, sanctions, security, an authority/SRO or a Provider requires earlier effect. Before further use, WIRROX clearly presents the updated version, its effective date, the change notice and a link to read and save it, and states that proceeding signifies acceptance. Knowing use after that notice constitutes acceptance and is recorded. Silence or a website update alone does not constitute acceptance; view-only access to retrieve records may remain without acceptance. Transaction and fee approval remain separate. If the Customer does not accept, it must notify WIRROX promptly and may terminate the materially affected Service before the change takes effect, except where the change is mandatory and termination cannot lawfully avoid it."
+    },
+    {
+      "type": "paragraph",
+      "text": "New WIRROX service rates and maintenance charges require prior written agreement, including recorded platform acceptance, and cannot be imposed by a website or admin configuration change alone. Variable Provider costs may change future quotes, but the total must be displayed and expressly approved before an action under section 7.6. An approved fee or debit never increases retrospectively. The signed Master Service Agreement and Fees Annex prevail over conflicting standard terms. WIRROX will assess Provider-driven pricing changes with the Customer in good faith and seek a workable commercial outcome before using an applicable closure procedure."
+    },
+    {
+      "type": "heading",
+      "text": "28 Assignment and subcontracting"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Customer may not assign the contract without WIRROX consent, not unreasonably withheld for a solvent affiliate with equivalent compliance standing. WIRROX may assign to an affiliate or successor in a merger, reorganisation or sale, provided this does not materially reduce Customer rights. WIRROX may subcontract performance but remains responsible for contracted duties, subject to Provider allocations and the DPA."
+    },
+    {
+      "type": "heading",
+      "text": "29 General"
+    },
+    {
+      "type": "paragraph",
+      "text": "The contract is the entire agreement on its subject and replaces prior proposals, without excluding liability for fraudulent misrepresentation. Failure to enforce is not a waiver. Invalid terms are adjusted to the minimum extent needed and the remainder continues. No partnership, agency, employment or fiduciary relationship is created. Third parties have no rights except Providers or indemnified parties where expressly stated."
+    },
+    {
+      "type": "heading",
+      "text": "30 Governing law and disputes"
+    },
+    {
+      "type": "paragraph",
+      "text": "The contract is governed by substantive Swiss law, excluding conflict rules and the UN Convention on Contracts for the International Sale of Goods. The parties will first escalate a dispute to senior representatives for good-faith resolution during 20 Business Days. This process does not prevent urgent court relief, protective measures, regulatory action, compliance/security suspension or recovery of an undisputed debt."
+    },
+    {
+      "type": "paragraph",
+      "text": "The exclusive courts of Zug, Canton of Zug, Switzerland have jurisdiction, subject to mandatory law. Arbitration applies only where expressly negotiated in an enterprise Customer's Customer Agreement."
+    },
+    {
+      "type": "heading",
+      "text": "31 Language"
+    },
+    {
+      "type": "paragraph",
+      "text": "The English version controls unless the Customer Agreement states otherwise. A translation is for convenience and must be reviewed before publication."
+    },
+    {
+      "type": "heading",
+      "text": "32 Contacts"
+    },
+    {
+      "type": "paragraph",
+      "text": "WIRROX legal notice: compliance@wirrox.com Compliance: compliance@wirrox.com Support: support@wirrox.com Registered address: Gubelstrasse 24, 6300 Zug, Switzerland"
+    }
+  ]
+}

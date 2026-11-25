@@ -13,6 +13,7 @@ import PageNotFound from './lib/PageNotFound';
 import ScrollToTop from './components/wirrox/ScrollToTop';
 import PageMetadata from './components/wirrox/PageMetadata';
 import Legal from './pages/Legal';
+import PlatformTerms from './pages/PlatformTerms';
 import { RequestAccessProvider } from './components/wirrox/RequestAccessContext';
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
           <Route path="/partners/introduction" element={<PartnerIntroduction />} />
           <Route path="/partners/:document" element={<PartnerDocument />} />
           <Route path="/legal" element={<Legal />} />
+          <Route path="/legal/platform-terms" element={<PlatformTerms />} />
+          <Route path="/legal/platform-terms-v1-2" element={<PlatformTerms />} />
           <Route path="/legal/:slug" element={<Legal />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

@@ -258,3 +258,5 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.platform-terms article h2{font-size:1.35rem;font-weight:650;margin:2.5rem 0 1rem;scroll-margin-top:7rem}.platform-terms article h3{font-size:1.05rem;font-weight:600;margin:1.6rem 0 .75rem}.platform-terms article p{line-height:1.85;margin:0 0 1rem;overflow-wrap:anywhere}.platform-terms a:focus-visible,.platform-terms button:focus-visible{outline:2px solid #c9a96e;outline-offset:4px}@media print{body:has(.platform-terms) nav:not(.terms-toc),body:has(.platform-terms) footer,.platform-terms .terms-toc,.platform-terms .terms-downloads{display:none!important}.platform-terms{padding:0!important;max-width:none!important;color:#111!important;background:white!important}.platform-terms article h2,.platform-terms article h3{break-after:avoid}.platform-terms article p{line-height:1.45}.platform-terms header{break-after:avoid}}

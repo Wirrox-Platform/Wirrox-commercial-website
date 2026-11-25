@@ -23,7 +23,7 @@ export default function PageMetadata() {
     if (!pathname.startsWith('/legal')) document.title = `${labels[pathname] || 'Page not found'} | WIRROX`;
     const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.content = pathname.startsWith('/legal')
-      ? 'WIRROX website information, company details, privacy and browser storage.'
+      ? 'WIRROX legal information, customer platform terms, company details, privacy and browser storage.'
       : 'WIRROX, operated by Swiss Fintech Forum AG, coordinates B2B onboarding and access to provider-supported financial services. Availability is subject to approval.';
   }, [pathname]);
   return null;

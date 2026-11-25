@@ -26,6 +26,7 @@ const navCols = [
     label: "Legal",
     links: [
       { label: "Website information", href: "/legal" },
+      { label: "Platform Terms and Conditions", href: "/legal/platform-terms" },
       { label: "Privacy Notice", href: "/legal/privacy-notice" },
       { label: "Cookie Policy", href: "/legal/cookie-policy" },
       { label: "Company Information", href: "/legal/legal-notice" },
